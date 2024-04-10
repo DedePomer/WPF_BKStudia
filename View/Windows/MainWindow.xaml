@@ -21,7 +21,19 @@
             <DataTemplate DataType="{x:Type vmp:MenuPageViewModel}">
                 <vp:MenuPage/>
             </DataTemplate>
-            
+
+            <DataTemplate DataType="{x:Type vmp:CreateTestViewModel}">
+                <vp:CreateTestPage/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vmp:DeleteTestViewModel}">
+                <vp:DeleteTestPage/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vmp:GetTesttedMenuViewModel}">
+                <vp:GetTesttedMenuPage/>
+            </DataTemplate>
+
         </ContentControl.Resources>
     </ContentControl>
 </Window>

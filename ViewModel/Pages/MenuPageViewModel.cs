@@ -12,6 +12,11 @@ namespace WPF_BKStudia.ViewModel.Pages
 {
     internal class MenuPageViewModel: ViewModel.Base.ViewModel
     {
+        public ICommand CNavigateGetTesttedMenu { get; }
+        public ICommand CNavigateDeleteTest { get; }
+        public ICommand CNavigateCreateTest { get; }
+
+
         public ICommand CCloseApp { get;  }
         private bool CanCCloseAppExecuted(object p) => true;
         private void OnCCloseAppExecuted(object p)
@@ -22,7 +27,9 @@ namespace WPF_BKStudia.ViewModel.Pages
 
         public MenuPageViewModel(NavigationStore navigationStore)  
         {
-            //CNavigateGetTesttedMenuPage = new NavigationCommand<>
+            CNavigateGetTesttedMenu = new NavigationCommand<GetTesttedMenuViewModel>(navigationStore, () => new GetTesttedMenuViewModel(navigationStore));
+            CNavigateDeleteTest = new NavigationCommand<DeleteTestViewModel>(navigationStore, () => new DeleteTestViewModel(navigationStore));
+            CNavigateCreateTest = new NavigationCommand<CreateTestViewModel>(navigationStore, () => new CreateTestViewModel(navigationStore));
             CCloseApp = new LamdaCommand(OnCCloseAppExecuted, CanCCloseAppExecuted);
         }
     }
