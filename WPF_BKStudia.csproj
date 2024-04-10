@@ -9,9 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Infrastructure\Navigation\" />
-    <Folder Include="Infrastructure\Commands\" />
-    <Folder Include="ViewModel\Base\" />
     <Folder Include="View\Page\" />
     <Folder Include="Model\" />
     <Folder Include="Data\" />
