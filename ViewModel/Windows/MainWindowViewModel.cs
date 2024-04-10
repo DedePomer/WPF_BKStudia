@@ -11,8 +11,6 @@ namespace WPF_BKStudia.ViewModel.Windows
     internal class MainWindowViewModel : ViewModel.Base.ViewModel
     {
         NavigationStore navigationStore = new NavigationStore();
-
-        //NavigationStore navigationStore = new NavigationStore();
         public ViewModel.Base.ViewModel? CurrentViewModel => navigationStore.CurrentViewModel;
 
         public MainWindowViewModel()
