@@ -9,7 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="View\Page\" />
+    <Folder Include="ViewModel\Pages\" />
+    <Folder Include="View\Pages\" />
     <Folder Include="Model\" />
     <Folder Include="Data\" />
   </ItemGroup>

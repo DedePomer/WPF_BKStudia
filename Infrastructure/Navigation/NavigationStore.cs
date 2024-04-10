@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using WPF_BKStudia.ViewModel.Base;
 
 
-namespace WPF_SQL.Infrastructure.Navigation
+namespace WPF_BKStudia.Infrastructure.Navigation
 {
     internal class NavigationStore
     {
@@ -14,8 +14,8 @@ namespace WPF_SQL.Infrastructure.Navigation
         public event Action CurrentViewModelChanged;
 
         //Здесь хранится текущаяя ViewModel
-        private ViewModel? _currentViewModel;
-        public ViewModel? CurrentViewModel 
+        private ViewModel.Base.ViewModel? _currentViewModel;
+        public ViewModel.Base.ViewModel? CurrentViewModel 
         {             
             get => _currentViewModel;
             set

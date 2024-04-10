@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WPF_BKStudia.Infrastructure.Commands.Base;
-using WPF_SQL.Infrastructure.Navigation;
+using WPF_BKStudia.Infrastructure.Navigation;
 using WPF_BKStudia.ViewModel.Base;
 
 

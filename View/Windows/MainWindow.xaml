@@ -4,9 +4,18 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_BKStudia"
+        
+        xmlns:vmm="clr-namespace:WPF_BKStudia.ViewModel.Windows"
+        
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+    <Window.DataContext>
+        <vmm:MainWindowViewModel/>
+    </Window.DataContext>
+
+    <ContentControl Content="{Binding CurrentViewModel}">
+        <ContentControl.Resources>
+
+        </ContentControl.Resources>
+    </ContentControl>
 </Window>
