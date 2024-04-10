@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WPF_BKStudia.Infrastructure.Navigation;
+using WPF_BKStudia.ViewModel.Pages;
 
 
 namespace WPF_BKStudia.ViewModel.Windows
@@ -15,7 +16,7 @@ namespace WPF_BKStudia.ViewModel.Windows
 
         public MainWindowViewModel()
         {
-            //navigationStore.CurrentViewModel = new MenuPageViewModel(navigationStore);
+            navigationStore.CurrentViewModel = new MenuPageViewModel(navigationStore);
             navigationStore.CurrentViewModelChanged += () => OnCurrentViewChanged();
         }
 

@@ -6,6 +6,8 @@
         xmlns:local="clr-namespace:WPF_BKStudia"
         
         xmlns:vmm="clr-namespace:WPF_BKStudia.ViewModel.Windows"
+        xmlns:vmp="clr-namespace:WPF_BKStudia.ViewModel.Pages"
+        xmlns:vp="clr-namespace:WPF_BKStudia.View.Pages"
         
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
@@ -15,7 +17,11 @@
 
     <ContentControl Content="{Binding CurrentViewModel}">
         <ContentControl.Resources>
-
+            
+            <DataTemplate DataType="{x:Type vmp:MenuPageViewModel}">
+                <vp:MenuPage/>
+            </DataTemplate>
+            
         </ContentControl.Resources>
     </ContentControl>
 </Window>
