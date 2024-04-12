@@ -16,8 +16,8 @@ namespace WPF_BKStudia.ViewModel.Windows
 
         public MainWindowViewModel()
         {
-            navigationStore.CurrentViewModel = new MenuPageViewModel(navigationStore);           
-            //navigationStore.CurrentViewModel = new CreateTestViewModel(navigationStore);
+            //navigationStore.CurrentViewModel = new MenuPageViewModel(navigationStore);           
+            navigationStore.CurrentViewModel = new CreateTestViewModel(navigationStore);
             navigationStore.CurrentViewModelChanged += () => OnCurrentViewChanged();
         }
 
