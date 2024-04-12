@@ -4,9 +4,65 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WPF_BKStudia.View.Pages"
+             
+             xmlns:person="clr-namespace:WPF_BKStudia.ViewModel.Pages"
+             xmlns:person2="clr-namespace:WPF_BKStudia"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="Blue">
+    
+    <!--<UserControl.DataContext>
+        <person:CreateTestViewModel/>
+    </UserControl.DataContext>-->
+    
+    <Grid Background="White">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="39*"/>
+            <ColumnDefinition Width="121*"/>
+        </Grid.ColumnDefinitions>
+
+        <!--Панель функциями-->
+        
+        <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center">
+            <Label Margin="10"  Content="Название теста"/>
+            <TextBox />
+            <Button Command="{Binding CTest}" Content="Добавить вопрос" Style="{StaticResource ButtonStyle}"/>
+            <Button Content="Сохранить" Style="{StaticResource ButtonStyle}"/>
+            <Button Command="{Binding CNavigateMenuPageViewModel}" Content="Назад" Style="{StaticResource ButtonStyle}"/>
+        </StackPanel>
+
+        <!--Редактор вопросов-->
+
+        <StackPanel Grid.Column="1" Orientation="Vertical">
+
+            <!--<ListView Margin="0 20 0 0" ItemsSource="{Binding TetsPerson}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Name"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>-->
+
+            <ItemsControl Margin="0 20 0 0"  ItemsSource="{Binding TetsPerson}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                
+                                <TextBlock Grid.Row="0" Text="{Binding name}"/>
+                                <TextBlock Grid.Row="1" Text="{Binding age}"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
             
+        </StackPanel>
     </Grid>
+    
+    
 </UserControl>
