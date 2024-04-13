@@ -15,5 +15,10 @@ namespace WPF_BKStudia.Infrastructure.Services.DataType
         public QuestionEnum Type { get; set; }
 
         public string Answer { get; set; }
+
+        //public TextQuestion(int a, string b, QuestionEnum c, string d)
+        //{
+        //    Id = 
+        //}
     }
 }

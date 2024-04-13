@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using WPF_BKStudia.Infrastructure.Commands;
 using WPF_BKStudia.Infrastructure.Navigation;
+using WPF_BKStudia.Infrastructure.Services.DataType;
+using WPF_BKStudia.Model;
 
 
 namespace WPF_BKStudia.ViewModel.Pages
@@ -40,6 +42,12 @@ namespace WPF_BKStudia.ViewModel.Pages
         //    TetsPerson.Add(new Person("DDdsgsg", 19));
         //}
         ////Очень важно
+
+        //Поля
+        public TextQuestion teste = new TextQuestion();
+        
+
+        public TestModel Model = new TestModel() ;
 
 
 
