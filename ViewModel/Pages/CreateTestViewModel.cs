@@ -20,13 +20,13 @@ namespace WPF_BKStudia.ViewModel.Pages
         //{
         //    public string name { get; set; }
         //    public int age { get; set; }
-        //    public Person(string Name, int Age) 
+        //    public Person(string Name, int Age)
         //    {
-        //        name= Name;
-        //        age= Age;
-        //    } 
+        //        name = Name;
+        //        age = Age;
+        //    }
         //}
-        //private ObservableCollection<Person> _tetsPerson = new ObservableCollection<Person> { new Person("GG", 19)};
+        //private ObservableCollection<Person> _tetsPerson = new ObservableCollection<Person> { new Person("GG", 19) };
         //public ObservableCollection<Person> TetsPerson
         //{
         //    set { Set(ref _tetsPerson, value); }
@@ -36,8 +36,8 @@ namespace WPF_BKStudia.ViewModel.Pages
         //public ICommand CTest { get; }
         //private bool CanCCTestExecuted(object p) => true;
         //private void OnCCTestExecuted(object p)
-        //{         
-        //    TetsPerson.Add(new Person("DDdsgsg",19));
+        //{
+        //    TetsPerson.Add(new Person("DDdsgsg", 19));
         //}
         ////Очень важно
 

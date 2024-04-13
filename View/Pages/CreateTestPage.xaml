@@ -33,9 +33,25 @@
 
         <!--Редактор вопросов-->
 
-        <StackPanel Grid.Column="1" Orientation="Vertical">
+        <ItemsControl Grid.Column="1" Margin="0 20 0 0"  ItemsSource="{Binding TetsPerson}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
 
-            <!--<ListView Margin="0 20 0 0" ItemsSource="{Binding TetsPerson}">
+                            <TextBlock Grid.Row="0" Text="{Binding name}"/>
+                            <TextBlock Grid.Row="1" Text="{Binding age}"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <!--<ListView Margin="0 20 0 0" ItemsSource="{Binding TetsPerson}">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Name"/>
@@ -43,25 +59,8 @@
                 </ListView.View>
             </ListView>-->
 
-            <ItemsControl Margin="0 20 0 0"  ItemsSource="{Binding TetsPerson}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Border>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="auto"/>
-                                </Grid.RowDefinitions>
-                                
-                                <TextBlock Grid.Row="0" Text="{Binding name}"/>
-                                <TextBlock Grid.Row="1" Text="{Binding age}"/>
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
             
-        </StackPanel>
+        
     </Grid>
     
     
