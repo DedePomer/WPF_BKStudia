@@ -2,14 +2,26 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:template="clr-namespace:WPF_BKStudia.Infrastructure.Services.Templates">
 
-                    
 
 
 
+    <template:TemplateSelector x:Key="QuestionTemplateSelector"/>
     <DataTemplate x:Key="TextQuestionTemplate">
+        <StackPanel Orientation="Vertical">
+            <Border BorderBrush="Black">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Content="Напишите свой вопрос" Margin="10 10"/>
+                    <TextBox Grid.Column="0" Text="{Binding NameQuestion, Mode=TwoWay}" Height="30" TextAlignment="Left"/>
+                    <Label Grid.Column="0" Content="Напишите ответ" Margin="10 10"/>
+                    <TextBox Grid.Column="0" Text="{Binding Answer, Mode=TwoWay}" Height="30" TextAlignment="Left"/>
 
-        <StackPanel Orientation="Vertical" >
-            
+                    <Button Background="#bb4e44" Height="5" Width="5" Content="🞫" Grid.Column="1"/>
+                </Grid>
+            </Border >
         </StackPanel>
     </DataTemplate>
     

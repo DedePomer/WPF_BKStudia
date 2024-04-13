@@ -9,7 +9,7 @@ using WPF_BKStudia.Infrastructure.Interfaces;
 
 namespace WPF_BKStudia.Infrastructure.Services.Templates
 {
-    internal class TemplateSelector: DataTemplateSelector
+    public class TemplateSelector: DataTemplateSelector
     {
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
@@ -19,11 +19,11 @@ namespace WPF_BKStudia.Infrastructure.Services.Templates
             {
                 IQuestion question = item as IQuestion;
 
-                if (question.Enum.Equals(QuestionEnum.TextQuestion))
+                if (question.Type.Equals(QuestionEnum.TextQuestion))
                     return element.FindResource("TextQuestionTemplate") as DataTemplate;
-                else if (question.Enum.Equals(QuestionEnum.SingleChoiceQuestion))
+                else if (question.Type.Equals(QuestionEnum.SingleChoiceQuestion))
                     return element.FindResource("SingleChoiceTemplate") as DataTemplate;
-                else if (question.Enum.Equals(QuestionEnum.MultiChoiceQuestion))
+                else if (question.Type.Equals(QuestionEnum.MultiChoiceQuestion))
                     return element.FindResource("MultiChoiceTemplate") as DataTemplate;
 
                 return element.FindResource("TextQuestionTemplate") as DataTemplate;

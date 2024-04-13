@@ -9,8 +9,17 @@ namespace WPF_BKStudia.Infrastructure.Interfaces
 {
     public interface IQuestion
     {
-        public int Id { get; set; }
+        /// <summary>
+        /// <typeparam name = "Id">Номер вопроса в тесте</typeparam>
+        /// </summary>
+        public int Id { get ; set ; }
+        /// <summary>
+        /// <typeparam name = "NameQuestion">Вопрос, на который нужно ответить</typeparam>
+        /// </summary>
         public string NameQuestion { get; set; }
-        public QuestionEnum Enum { get; set; }
+        /// <summary>
+        /// <typeparam name = "Type">Тип вопроса</typeparam>
+        /// </summary>
+        public QuestionEnum Type { get; set; }
     }
 }
