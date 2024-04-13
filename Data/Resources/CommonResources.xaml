@@ -1,12 +1,9 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    
-                    xmlns:template="clr-namespace:WPF_BKStudia"
-                    >
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 
 
-    <template:TestTemplateselector x:Key="QuestionTemplateSelector"/>
+
     <DataTemplate x:Key="TextQuestionTemplate">
         <StackPanel Orientation="Vertical">
             <Border BorderBrush="Black">
