@@ -28,26 +28,6 @@ namespace WPF_BKStudia.View.Pages
         public CreateTestPage()
         {
             InitializeComponent();
-            //TextQuestion textQuestion = new TextQuestion 
-            //{ 
-            //    Id = 1,
-            //    NameQuestion ="as",
-            //    Type = QuestionEnum.TextQuestion,
-            //    Answer = "as"
-            //};
-            ////Попробуй создать абстрактный класс
-            //ObservableCollection<TextQuestion> bb = new ObservableCollection<TextQuestion>(); 
-            //bb.Add(textQuestion);
-            //bb.Add(textQuestion);
-            //TestModel<TextQuestion> model = new TestModel<TextQuestion>
-            //{
-            //    Name = "Hiz",
-            //    Questions = bb
-            //};
-            //ItemS.ItemsSource = bb;
-
-
-
         }
     }
 }

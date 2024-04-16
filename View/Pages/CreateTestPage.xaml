@@ -10,28 +10,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
+    <!--Добавляем в ресурсы селектор-->
     <UserControl.Resources>
         <ts:StaticSelector x:Key="QuestionSelector"/>
-        
-        <!--<DataTemplate x:Key="TextQuestionTemplate">
-            <StackPanel Orientation="Vertical">
-                <Border BorderBrush="Black">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" Content="Напишите свой вопрос" Margin="10 10"/>
-                        <TextBox Grid.Column="0" Text="{Binding NameQuestion, Mode=TwoWay}" Height="30" TextAlignment="Left"/>
-                        <Label Grid.Column="0" Content="Напишите ответ" Margin="10 10"/>
-                        <TextBox Grid.Column="0" Text="{Binding Answer, Mode=TwoWay}" Height="30" TextAlignment="Left"/>
-
-                        <Button Background="#bb4e44" Height="5" Width="5" Content="🞫" Grid.Column="1"/>
-                    </Grid>
-                </Border >
-            </StackPanel>
-        </DataTemplate>-->
-        
     </UserControl.Resources>
 
     
@@ -55,17 +36,8 @@
 
         <!--Редактор вопросов-->
 
-        <ItemsControl x:Name="ItemS" ItemTemplateSelector="{StaticResource QuestionSelector}"  Grid.Column="1" Margin="0 20 0 0" />
+        <ItemsControl ItemsSource="{Binding Model.QuestionsCollection}" ItemTemplateSelector="{StaticResource QuestionSelector}"  Grid.Column="1" Margin="0 20 0 0" />
 
-
-
-        <!--<ListView Margin="0 20 0 0" ItemsSource="{Binding TetsPerson}">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="Name"/>
-                    </GridView>
-                </ListView.View>
-            </ListView>-->
 
             
         
