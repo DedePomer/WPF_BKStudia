@@ -10,11 +10,12 @@ namespace WPF_BKStudia.Infrastructure.Services.DataType
 {
     internal class TextQuestion : IQuestion
     {
-        public int Id { get ; set ; }
-        public string NameQuestion { get ; set ; }
-        public QuestionEnum Type { get; set; }
+        public int? Id { get ; set ; }
+        public string? NameQuestion { get ; set ; }
+        public QuestionEnum? Type { get; set; }
 
-        public string Answer { get; set; }
+        public string? Answer { get; set; }
+
 
         //public TextQuestion(int a, string b, QuestionEnum c, string d)
         //{

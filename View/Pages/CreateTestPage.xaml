@@ -12,6 +12,26 @@
 
     <UserControl.Resources>
         <ts:StaticSelector x:Key="QuestionSelector"/>
+        
+        <!--<DataTemplate x:Key="TextQuestionTemplate">
+            <StackPanel Orientation="Vertical">
+                <Border BorderBrush="Black">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Content="Напишите свой вопрос" Margin="10 10"/>
+                        <TextBox Grid.Column="0" Text="{Binding NameQuestion, Mode=TwoWay}" Height="30" TextAlignment="Left"/>
+                        <Label Grid.Column="0" Content="Напишите ответ" Margin="10 10"/>
+                        <TextBox Grid.Column="0" Text="{Binding Answer, Mode=TwoWay}" Height="30" TextAlignment="Left"/>
+
+                        <Button Background="#bb4e44" Height="5" Width="5" Content="🞫" Grid.Column="1"/>
+                    </Grid>
+                </Border >
+            </StackPanel>
+        </DataTemplate>-->
+        
     </UserControl.Resources>
 
     
@@ -28,14 +48,14 @@
         <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center">
             <Label Margin="10"  Content="Название теста"/>
             <TextBox Text="{Binding Model.Name, Mode=TwoWay}"/>
-            <Button Command="{Binding CTest}" Content="Добавить вопрос" Style="{StaticResource ButtonStyle}"/>
+            <Button Command="{Binding CAddQuestionCommand}" Content="Добавить вопрос" Style="{StaticResource ButtonStyle}"/>
             <Button Content="Сохранить" Style="{StaticResource ButtonStyle}"/>
             <Button Command="{Binding CNavigateMenuPageViewModel}" Content="Назад" Style="{StaticResource ButtonStyle}"/>
         </StackPanel>
 
         <!--Редактор вопросов-->
 
-        <ItemsControl ItemTemplateSelector="{Binding }" Grid.Column="1" Margin="0 20 0 0"  ItemsSource="{Binding TetsPerson}"/>
+        <ItemsControl x:Name="ItemS" ItemTemplateSelector="{StaticResource QuestionSelector}"  Grid.Column="1" Margin="0 20 0 0" />
 
 
 

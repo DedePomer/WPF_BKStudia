@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using WPF_BKStudia.Infrastructure.Commands;
 using WPF_BKStudia.Infrastructure.Navigation;
+using WPF_BKStudia.Infrastructure.Services;
 using WPF_BKStudia.Infrastructure.Services.DataType;
 using WPF_BKStudia.Model;
 
 
 namespace WPF_BKStudia.ViewModel.Pages
 {
-
+    
 
     internal class CreateTestViewModel: ViewModel.Base.ViewModel
     {
@@ -43,13 +44,26 @@ namespace WPF_BKStudia.ViewModel.Pages
         //}
         ////Очень важно
 
-        //Поля
-        public TextQuestion teste = new TextQuestion();
-        
+        //--Поля
+        //private int _questionId = 0;
+        ////public TextQuestion teste = new TextQuestion();
+        //public TestModel Model { get; set; }
 
-        public TestModel Model = new TestModel() ;
+        ////Функциональные команды
+        //public  ICommand CAddQuestionCommand { get; }
+        //private bool CanCAddQuestionCommandExecuted(object p) => true;
+        //private void OnCAddQuestionCommandExecuted(object p)
+        //{
+        //    _questionId++;
+        //    Model.Questions.Add(new TextQuestion
+        //    {
+        //        Id = _questionId,
+        //        NameQuestion = "Gopa",
+        //        Type = QuestionEnum.TextQuestion,
 
-
+        //        Answer = "Попа"
+        //    });
+        //}
 
         //Навигационные команды
         public ICommand CNavigateMenuPageViewModel { get; }
@@ -57,6 +71,8 @@ namespace WPF_BKStudia.ViewModel.Pages
         public CreateTestViewModel(NavigationStore navigationStore)
         {
             CNavigateMenuPageViewModel = new NavigationCommand<MenuPageViewModel>(navigationStore, () => new MenuPageViewModel(navigationStore));
+
+            //CAddQuestionCommand = new LamdaCommand(OnCAddQuestionCommandExecuted, CanCAddQuestionCommandExecuted);
             //CTest = new LamdaCommand(OnCCTestExecuted, CanCCTestExecuted);
         }
     }

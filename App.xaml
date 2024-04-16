@@ -11,11 +11,6 @@
                         <ResourceDictionary Source="\Data\Themes\CommonTheme.xaml"/>
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
-                <!--<ResourceDictionary x:Name="ResDictionary">
-                    <ResourceDictionary.MergedDictionaries>
-                        <ResourceDictionary Source="\Data\Resources\CommonResources.xaml"/>
-                    </ResourceDictionary.MergedDictionaries>
-                </ResourceDictionary>-->
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
