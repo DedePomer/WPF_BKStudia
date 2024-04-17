@@ -20,27 +20,24 @@
     <Grid Background="White">
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="39*"/>
+            <ColumnDefinition Width="39*" />
             <ColumnDefinition Width="121*"/>
         </Grid.ColumnDefinitions>
 
         <!--Панель функциями-->
-        
-        <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center">
+
+        <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" >
             <Label Margin="10"  Content="Название теста"/>
-            <TextBox Text="{Binding Model.Name, Mode=TwoWay}"/>
-            <Button Command="{Binding CAddQuestionCommand}" Content="Добавить вопрос" Style="{StaticResource ButtonStyle}"/>
+            <TextBox Text="{Binding CurrentQuestion.Name, Mode=TwoWay}"/>
+            <Button Command="{Binding CAddQuestion}" Content="Добавить вопрос" Style="{StaticResource ButtonStyle}"/>
             <Button Content="Сохранить" Style="{StaticResource ButtonStyle}"/>
             <Button Command="{Binding CNavigateMenuPageViewModel}" Content="Назад" Style="{StaticResource ButtonStyle}"/>
         </StackPanel>
 
         <!--Редактор вопросов-->
 
-        <ItemsControl ItemsSource="{Binding Model.QuestionsCollection}" ItemTemplateSelector="{StaticResource QuestionSelector}"  Grid.Column="1" Margin="0 20 0 0" />
-
-
-            
-        
+        <ItemsControl ItemsSource="{Binding CurrentQuestion.QuestionCollection}" ItemTemplateSelector="{StaticResource QuestionSelector}"  Grid.Column="1" Margin="0 20 0 0" />
+  
     </Grid>
     
     

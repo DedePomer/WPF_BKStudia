@@ -10,22 +10,44 @@
     </Style>
     
     
-    <!--Шаблоны вопросов-->
+    <!--Шаблон текстового вопроса-->
     
     <DataTemplate x:Key="TextQuestionTemplate">
-        <StackPanel Orientation="Vertical">
-            <Border BorderBrush="Black">
+        <StackPanel Margin="20 20" Orientation="Vertical" Background="{Binding QuestionColor}">
+            <Border BorderBrush="Black" Margin="10 10">
                 <Grid>
+                    
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="3*"/>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Content="Напишите свой вопрос" Margin="10 10"/>
-                    <TextBox Grid.Column="0" Text="{Binding NameQuestion, Mode=TwoWay}" Height="30" TextAlignment="Left"/>
-                    <Label Grid.Column="0" Content="Напишите ответ" Margin="10 10"/>
-                    <TextBox Grid.Column="0" Text="{Binding Answer, Mode=TwoWay}" Height="30" TextAlignment="Left"/>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
 
-                    <Button Background="#bb4e44" Height="5" Width="5" Content="🞫" Grid.Column="1"/>
+                    <StackPanel Grid.Row="0"  Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
+                        <Label  Content="Напишите свой вопрос"/>
+                        <TextBox Text="{Binding Text, Mode=TwoWay}" Height="20" Width="200" TextAlignment="Left"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
+                        <Label  Content="Напишите ответ:" />
+                        <TextBox  Text="{Binding ListAnswer[0].Text, Mode=TwoWay}" Height="20" Width="200" TextAlignment="Left"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Top"  Grid.Row="0" Grid.Column="1">
+                        <ComboBox Width="220"> 
+                            <TextBlock>Текстовый вопрос</TextBlock>
+                            <TextBlock>Вопрос с одним выбором</TextBlock>
+                            <TextBlock>Вопрос с множественным выбором</TextBlock>
+                        </ComboBox>
+                    </StackPanel>
+                    
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Bottom"  Grid.Row="1" Grid.Column="1">
+                        <Button Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl,Mode=FindAncestor},Path=DataContext.CRemoveQuestion}" Background="#bb4e44" Height="20" Width="20" Content="🞫"/>
+                    </StackPanel>
+                                                       
                 </Grid>
             </Border >
         </StackPanel>

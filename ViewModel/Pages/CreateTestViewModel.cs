@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Media;
 using WPF_BKStudia.Infrastructure.Commands;
 using WPF_BKStudia.Infrastructure.Interfaces;
 using WPF_BKStudia.Infrastructure.Navigation;
 using WPF_BKStudia.Infrastructure.Services;
 using WPF_BKStudia.Infrastructure.Services.DataType;
 using WPF_BKStudia.Model;
+
 
 
 namespace WPF_BKStudia.ViewModel.Pages
@@ -21,21 +24,38 @@ namespace WPF_BKStudia.ViewModel.Pages
     {
         //--Поля
         private int _questionId = 0;
-        public TestModel Model { get; set; }
+        public SolidColorBrush AquaColor { get { return new SolidColorBrush(Colors.Aqua); } }
+        public TestModel CurrentQuestion { get; set; }
 
         //Функциональные команды
-        public ICommand CAddQuestionCommand { get; }
-        private bool CanCAddQuestionCommandExecuted(object p) => true;
-        private void OnCAddQuestionCommandExecuted(object p)
+        public ICommand CRemoveQuestion { get; }
+        private bool CanCRemoveQuestionExecuted(object p) => true;
+        private void OnCRemoveQuestionExecuted(object p)
+        { 
+            TextQuestion question = p as TextQuestion;
+            CurrentQuestion.QuestionCollection.Remove(question);
+        }
+
+        public ICommand CAddQuestion { get; }
+        private bool CanCAddQuestionExecuted(object p) => true;
+        private void OnCAddQuestionExecuted(object p)
         {
-            //_questionId++;
-            //Model.QuestionCollection.Add(new TextQuestion
-            //{
-            //    Id = _questionId,
-            //    Text = "Gopa",
-            //    Type = QuestionEnum.TextQuestion,
-            //    Answer = "Попа"
-            //});
+            _questionId++;
+            CurrentQuestion.QuestionCollection.Add(new TextQuestion
+            {
+                QuestionColor = AquaColor,
+                Id = _questionId,
+                Text = "",
+                Type = QuestionEnum.TextQuestion,
+                ListAnswer = new ObservableCollection<Answer> 
+                { new Answer()
+                { 
+                    Id = 1, 
+                    Text="Popa",
+                    IsTrue = true
+                } 
+                }
+            });
         }
 
         //Навигационные команды
@@ -43,11 +63,15 @@ namespace WPF_BKStudia.ViewModel.Pages
 
         public CreateTestViewModel(NavigationStore navigationStore)
         {            
-            Model = new TestModel();
-            Model.QuestionCollection = new ObservableCollection<TextQuestion>();
- 
+            CurrentQuestion = new TestModel();
+            CurrentQuestion.QuestionCollection = new ObservableCollection<TextQuestion>();
+
+
+           
             CNavigateMenuPageViewModel = new NavigationCommand<MenuPageViewModel>(navigationStore, () => new MenuPageViewModel(navigationStore));
-            CAddQuestionCommand = new LamdaCommand(OnCAddQuestionCommandExecuted, CanCAddQuestionCommandExecuted);
+
+            CAddQuestion = new LamdaCommand(OnCAddQuestionExecuted, CanCAddQuestionExecuted);
+            CRemoveQuestion = new LamdaCommand(OnCRemoveQuestionExecuted, CanCRemoveQuestionExecuted);
         }
     }
 }

@@ -11,5 +11,9 @@ namespace WPF_BKStudia.Infrastructure.Services.DataType
     {
         public int Id { get; set; }
         public string Text { get; set; }
+        /// <summary>
+        /// <typeparam name="IsTrue">true - verny otvet false - ne verny otvet</typeparam>
+        /// </summary>
+        public bool IsTrue { get; set; }    
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using WPF_BKStudia.Infrastructure.Interfaces;
+using WPF_BKStudia.Infrastructure.Services.DataType;
 
 namespace WPF_BKStudia.Infrastructure.Services
 {
@@ -15,9 +16,9 @@ namespace WPF_BKStudia.Infrastructure.Services
         {
             FrameworkElement element = container as FrameworkElement;
 
-            if (element != null && item != null && item is IQuestionAnswer)
+            if (element != null && item != null && item is TextQuestion)
             {
-                IQuestionAnswer question = item as IQuestionAnswer;
+                TextQuestion question = item as TextQuestion;
 
                 if (question.Type.Equals(QuestionEnum.TextQuestion))
                     return element.FindResource("TextQuestionTemplate") as DataTemplate;
