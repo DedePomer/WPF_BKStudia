@@ -45,12 +45,14 @@
                     </StackPanel>
                     
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Bottom"  Grid.Row="1" Grid.Column="1">
-                        <Button Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl,Mode=FindAncestor},Path=DataContext.CRemoveQuestion}" Background="#bb4e44" Height="20" Width="20" Content="🞫"/>
+                        <Button CommandParameter="{Binding}" Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl,Mode=FindAncestor},Path=DataContext.CRemoveQuestion}" Background="#bb4e44" Height="20" Width="20" Content="🞫"/>
                     </StackPanel>
                                                        
                 </Grid>
             </Border >
         </StackPanel>
     </DataTemplate>
+    
+    
 
 </ResourceDictionary>
