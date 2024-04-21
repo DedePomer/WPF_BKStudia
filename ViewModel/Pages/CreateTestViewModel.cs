@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using WPF_BKStudia.Infrastructure.Commands;
@@ -58,9 +59,21 @@ namespace WPF_BKStudia.ViewModel.Pages
             });
         }
 
+        public ICommand SaveTestCommand { get; }
+        private bool CanSaveTestCommandExecuted(object p) => true;
+        private void OnSaveTestCommandExecuted(object p)
+        {
+            if (FieldsNotNULL())
+            {
+                new FileWriter().SaveFile(CurrentQuestion);
+            }
+            MessageBox.Show("Введите корректное название теста (оно не должно полностью состоять из пробелов и содежать знаки)","Error", MessageBoxButton.OK,MessageBoxImage.Error);
+        }
+
         //Навигационные команды
         public ICommand NavigateMenuPageViewModelCommand { get; }
 
+        //Конструктор
         public CreateTestViewModel(NavigationStore navigationStore)
         {            
             CurrentQuestion = new TestModel();
@@ -71,6 +84,7 @@ namespace WPF_BKStudia.ViewModel.Pages
 
             AddQuestionCommand = new LamdaCommand(OnCAddQuestionExecuted, CanCAddQuestionExecuted);
             RemoveQuestionCommand = new LamdaCommand(OnCRemoveQuestionExecuted, CanCRemoveQuestionExecuted);
+            SaveTestCommand = new LamdaCommand(OnSaveTestCommandExecuted, CanSaveTestCommandExecuted);
         }
 
         //Сдвигает значение Id, после удаления элемента коллекции

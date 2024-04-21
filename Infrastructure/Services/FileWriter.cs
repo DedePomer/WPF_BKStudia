@@ -11,25 +11,24 @@ namespace WPF_BKStudia.Infrastructure.Services
 {
     public class FileWriter
     {
-        public void Savefile(TestModel test)
+        public void SaveFile(TestModel test)
         {
             string path = "Tests" + "\\" + test.Name + ".txt";
             
-
-            File.WriteAllText(path, test.Name);
-            File.WriteAllText(path, "\n\n");
+            File.AppendAllText(path, test.Name);
+            File.AppendAllText(path, "\n\n");
 
             foreach (var question in test.QuestionCollection)
             {
-                File.WriteAllText(path, question.Id.ToString());
-                File.WriteAllText(path, question.Type.ToString());
-                File.WriteAllText(path,question.Text.ToString());
+                File.AppendAllText(path, question.Id.ToString());
+                File.AppendAllText(path, question.Type.ToString());
+                File.AppendAllText(path,question.Text.ToString());
 
                 switch (question.Type)
                 { 
                     case QuestionEnum.TextQuestion:
-                        File.WriteAllText(path, question.ListAnswer[0].Id.ToString());
-                        File.WriteAllText(path, question.ListAnswer[0].Text.ToString());
+                        File.AppendAllText(path, question.ListAnswer[0].Id.ToString());
+                        File.AppendAllText(path, question.ListAnswer[0].Text.ToString());
                         break;
                     case QuestionEnum.SingleChoiceQuestion:
 
