@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WPF_BKStudia.Infrastructure.Interfaces;
 
-namespace WPF_BKStudia.Infrastructure.Services.DataType
+namespace WPF_BKStudia.Model.DataType
 {
     internal class Answer : IQuestionAnswer
     {
@@ -14,6 +14,6 @@ namespace WPF_BKStudia.Infrastructure.Services.DataType
         /// <summary>
         /// <typeparam name="IsTrue">true - verny otvet false - ne verny otvet</typeparam>
         /// </summary>
-        public bool IsTrue { get; set; }    
+        public bool IsTrue { get; set; }
     }
 }

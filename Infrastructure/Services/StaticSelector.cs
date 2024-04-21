@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using WPF_BKStudia.Infrastructure.Interfaces;
-using WPF_BKStudia.Infrastructure.Services.DataType;
+using WPF_BKStudia.Model.DataType;
 
 namespace WPF_BKStudia.Infrastructure.Services
 {

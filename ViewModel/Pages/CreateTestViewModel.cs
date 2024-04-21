@@ -11,21 +11,21 @@ using WPF_BKStudia.Infrastructure.Commands;
 using WPF_BKStudia.Infrastructure.Interfaces;
 using WPF_BKStudia.Infrastructure.Navigation;
 using WPF_BKStudia.Infrastructure.Services;
-using WPF_BKStudia.Infrastructure.Services.DataType;
 using WPF_BKStudia.Model;
+using WPF_BKStudia.Model.DataType;
 
 
 
 namespace WPF_BKStudia.ViewModel.Pages
 {
-    
-
     internal class CreateTestViewModel: ViewModel.Base.ViewModel
     {
-        //--Поля
+        //Поля
         private int _questionId = 0;
-        public SolidColorBrush AquaColor { get { return new SolidColorBrush(Colors.Aqua); } }
-        public TestModel CurrentQuestion { get; set; }
+        private SolidColorBrush _aquaColor = new SolidColorBrush(Colors.Aqua);
+        public QuestionComboBox QuestionComboBox { get; set; }
+        public TestModel CurrentQuestion { get; set; }       
+
 
         //Функциональные команды
         public ICommand CRemoveQuestion { get; }
@@ -43,7 +43,7 @@ namespace WPF_BKStudia.ViewModel.Pages
             _questionId++;
             CurrentQuestion.QuestionCollection.Add(new TextQuestion
             {
-                QuestionColor = AquaColor,
+                QuestionColor = _aquaColor,
                 Id = _questionId,
                 Text = "",
                 Type = QuestionEnum.TextQuestion,
@@ -67,7 +67,6 @@ namespace WPF_BKStudia.ViewModel.Pages
             CurrentQuestion.QuestionCollection = new ObservableCollection<TextQuestion>();
 
 
-           
             CNavigateMenuPageViewModel = new NavigationCommand<MenuPageViewModel>(navigationStore, () => new MenuPageViewModel(navigationStore));
 
             CAddQuestion = new LamdaCommand(OnCAddQuestionExecuted, CanCAddQuestionExecuted);

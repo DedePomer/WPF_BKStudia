@@ -7,13 +7,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using WPF_BKStudia.Infrastructure.Interfaces;
+using WPF_BKStudia.Infrastructure.Services;
 
-namespace WPF_BKStudia.Infrastructure.Services.DataType
+namespace WPF_BKStudia.Model.DataType
 {
     internal class TextQuestion : IQuestionAnswer
     {
         public int Id { get; set; }
-        public string Text { get ; set ; }
+        public string Text { get; set; }
         public QuestionEnum Type { get; set; }
         public ObservableCollection<Answer>? ListAnswer { get; set; }
         public SolidColorBrush QuestionColor { get; set; }
