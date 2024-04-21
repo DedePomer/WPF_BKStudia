@@ -28,7 +28,7 @@
                     </Grid.RowDefinitions>
 
                     <StackPanel Grid.Row="0"  Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
-                        <Label  Content="{Binding Id, Mode=TwoWay}"/>
+                        <Label FontSize="20"  Content="{Binding Id, Mode=TwoWay}"/>
                     </StackPanel>
                     
                     <StackPanel Grid.Row="1"  Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">

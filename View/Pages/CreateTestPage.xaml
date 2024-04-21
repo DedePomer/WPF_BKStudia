@@ -35,8 +35,10 @@
         </StackPanel>
 
         <!--Редактор вопросов-->
-
-        <ItemsControl ItemsSource="{Binding CurrentQuestion.QuestionCollection}" ItemTemplateSelector="{StaticResource QuestionSelector}"  Grid.Column="1" Margin="0 20 0 0" />
+        <ScrollViewer  Grid.Column="1" VerticalScrollBarVisibility="Auto">
+            <ItemsControl  ItemsSource="{Binding CurrentQuestion.QuestionCollection}" ItemTemplateSelector="{StaticResource QuestionSelector}"  Margin="0 20 0 0" />
+        </ScrollViewer>
+        
   
     </Grid>
     

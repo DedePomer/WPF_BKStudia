@@ -33,7 +33,8 @@ namespace WPF_BKStudia.ViewModel.Pages
         private void OnCRemoveQuestionExecuted(object p)
         { 
             TextQuestion question = p as TextQuestion;
-            CurrentQuestion.QuestionCollection.Remove(question);
+
+            RemoveCheck(question);
         }
 
         public ICommand CAddQuestion { get; }
@@ -71,6 +72,23 @@ namespace WPF_BKStudia.ViewModel.Pages
 
             CAddQuestion = new LamdaCommand(OnCAddQuestionExecuted, CanCAddQuestionExecuted);
             CRemoveQuestion = new LamdaCommand(OnCRemoveQuestionExecuted, CanCRemoveQuestionExecuted);
+        }
+
+        //Сдвигает значение Id, после удаления элемента коллекции
+        private void RemoveCheck(TextQuestion question)
+        { 
+            if (CurrentQuestion.QuestionCollection != null)
+            {
+                foreach (TextQuestion q in CurrentQuestion.QuestionCollection)
+                {
+                    if (q.Id > question.Id)
+                    {
+                        q.Id -= 1;
+                    }
+                }
+                CurrentQuestion.QuestionCollection.Remove(question);
+                _questionId--;
+            }
         }
     }
 }

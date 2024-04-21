@@ -11,9 +11,16 @@ using WPF_BKStudia.Infrastructure.Services;
 
 namespace WPF_BKStudia.Model.DataType
 {
-    internal class TextQuestion : IQuestionAnswer
+    internal class TextQuestion : ViewModel.Base.ViewModel , IQuestionAnswer
     {
-        public int Id { get; set; }
+        private int _id;
+        public int Id 
+        {
+            get 
+            { return _id; }
+            set 
+            { Set(ref _id, value); }
+        }
         public string Text { get; set; }
         public QuestionEnum Type { get; set; }
         public ObservableCollection<Answer>? ListAnswer { get; set; }
