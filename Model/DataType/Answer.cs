@@ -7,7 +7,7 @@ using WPF_BKStudia.Infrastructure.Interfaces;
 
 namespace WPF_BKStudia.Model.DataType
 {
-    internal class Answer : IQuestionAnswer
+    public class Answer : IQuestionAnswer
     {
         public int Id { get; set; }
         public string Text { get; set; }

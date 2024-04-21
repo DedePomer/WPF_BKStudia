@@ -90,14 +90,28 @@ namespace WPF_BKStudia.ViewModel.Pages
             }
         }
 
-        //Проверка полей на пустоту
+        //Проверка полей
         private bool FieldsNotNULL()
         {
-            if (!string.IsNullOrEmpty(CurrentQuestion.Name))
-            { 
-                return true;
+            string nameOfTest = CurrentQuestion.Name;
+            if (!string.IsNullOrEmpty(nameOfTest) && nameOfTest.Count(x => x == ' ') < nameOfTest.Length)
+            {
+                //Проверка на программные символы
+                int count = 0;
+                foreach (char c in nameOfTest)
+                {
+                    if (Char.IsLetterOrDigit(c))
+                    {
+                        count += 1;
+                    }
+                }
+                if (count == nameOfTest.Length) 
+                {
+                    return true;
+                }
+                return false;
             }
-            return true;
+            return false;
         }
 
 

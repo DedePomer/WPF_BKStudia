@@ -11,7 +11,7 @@ using WPF_BKStudia.Infrastructure.Services;
 
 namespace WPF_BKStudia.Model.DataType
 {
-    internal class TextQuestion : ViewModel.Base.ViewModel , IQuestionAnswer
+    public class TextQuestion : ViewModel.Base.ViewModel , IQuestionAnswer
     {
         private int _id;
         public int Id 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,8 @@ namespace WPF_BKStudia.ViewModel.Windows
 
         public MainWindowViewModel()
         {
+            if (!Directory.Exists("Tests")) Directory.CreateDirectory("Tests");
+
             //navigationStore.CurrentViewModel = new MenuPageViewModel(navigationStore);           
             navigationStore.CurrentViewModel = new CreateTestViewModel(navigationStore);
             navigationStore.CurrentViewModelChanged += () => OnCurrentViewChanged();

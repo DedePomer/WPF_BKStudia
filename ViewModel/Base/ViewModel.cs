@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace WPF_BKStudia.ViewModel.Base
 {
-    internal abstract class ViewModel : INotifyPropertyChanged
+    public abstract class ViewModel : INotifyPropertyChanged
     {
 
         public event PropertyChangedEventHandler? PropertyChanged;

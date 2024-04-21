@@ -9,10 +9,10 @@ using WPF_BKStudia.Model.DataType;
 
 namespace WPF_BKStudia.Model
 {
-    internal class TestModel
+    public class TestModel
     {
         //Модель где "содержаться" название теста и коллекция вопросов
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public ObservableCollection<TextQuestion>? QuestionCollection { get; set; }
 
     }
