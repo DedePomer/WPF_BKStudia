@@ -28,16 +28,15 @@ namespace WPF_BKStudia.ViewModel.Pages
 
 
         //Функциональные команды
-        public ICommand CRemoveQuestion { get; }
+        public ICommand RemoveQuestionCommand { get; }
         private bool CanCRemoveQuestionExecuted(object p) => true;
         private void OnCRemoveQuestionExecuted(object p)
         { 
             TextQuestion question = p as TextQuestion;
-
             RemoveCheck(question);
         }
 
-        public ICommand CAddQuestion { get; }
+        public ICommand AddQuestionCommand { get; }
         private bool CanCAddQuestionExecuted(object p) => true;
         private void OnCAddQuestionExecuted(object p)
         {
@@ -52,7 +51,7 @@ namespace WPF_BKStudia.ViewModel.Pages
                 { new Answer()
                 { 
                     Id = 1, 
-                    Text="Popa",
+                    Text="",
                     IsTrue = true
                 } 
                 }
@@ -60,7 +59,7 @@ namespace WPF_BKStudia.ViewModel.Pages
         }
 
         //Навигационные команды
-        public ICommand CNavigateMenuPageViewModel { get; }
+        public ICommand NavigateMenuPageViewModelCommand { get; }
 
         public CreateTestViewModel(NavigationStore navigationStore)
         {            
@@ -68,10 +67,10 @@ namespace WPF_BKStudia.ViewModel.Pages
             CurrentQuestion.QuestionCollection = new ObservableCollection<TextQuestion>();
 
 
-            CNavigateMenuPageViewModel = new NavigationCommand<MenuPageViewModel>(navigationStore, () => new MenuPageViewModel(navigationStore));
+            NavigateMenuPageViewModelCommand = new NavigationCommand<MenuPageViewModel>(navigationStore, () => new MenuPageViewModel(navigationStore));
 
-            CAddQuestion = new LamdaCommand(OnCAddQuestionExecuted, CanCAddQuestionExecuted);
-            CRemoveQuestion = new LamdaCommand(OnCRemoveQuestionExecuted, CanCRemoveQuestionExecuted);
+            AddQuestionCommand = new LamdaCommand(OnCAddQuestionExecuted, CanCAddQuestionExecuted);
+            RemoveQuestionCommand = new LamdaCommand(OnCRemoveQuestionExecuted, CanCRemoveQuestionExecuted);
         }
 
         //Сдвигает значение Id, после удаления элемента коллекции
@@ -90,5 +89,18 @@ namespace WPF_BKStudia.ViewModel.Pages
                 _questionId--;
             }
         }
+
+        //Проверка полей на пустоту
+        private bool FieldsNotNULL()
+        {
+            if (!string.IsNullOrEmpty(CurrentQuestion.Name))
+            { 
+                return true;
+            }
+            return true;
+        }
+
+
+
     }
 }

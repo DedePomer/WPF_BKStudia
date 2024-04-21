@@ -29,9 +29,9 @@
         <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" >
             <Label Margin="10"  Content="Название теста"/>
             <TextBox Text="{Binding CurrentQuestion.Name, Mode=TwoWay}"/>
-            <Button Command="{Binding CAddQuestion}" Content="Добавить вопрос" Style="{StaticResource ButtonStyle}"/>
+            <Button Command="{Binding AddQuestionCommand}" Content="Добавить вопрос" Style="{StaticResource ButtonStyle}"/>
             <Button Content="Сохранить" Style="{StaticResource ButtonStyle}"/>
-            <Button Command="{Binding CNavigateMenuPageViewModel}" Content="Назад" Style="{StaticResource ButtonStyle}"/>
+            <Button Command="{Binding NavigateMenuPageViewModelCommand}" Content="Назад" Style="{StaticResource ButtonStyle}"/>
         </StackPanel>
 
         <!--Редактор вопросов-->
