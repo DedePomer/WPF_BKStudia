@@ -14,33 +14,43 @@ namespace WPF_BKStudia.Infrastructure.Services
         public void SaveFile(TestModel test)
         {
             string path = "Tests" + "\\" + test.Name + ".txt";
-            
-            File.AppendAllText(path, test.Name);
-            File.AppendAllText(path, "\n\n");
-
-            foreach (var question in test.QuestionCollection)
+            if (!File.Exists(path))
             {
-                File.AppendAllText(path, question.Id.ToString());
-                File.AppendAllText(path, question.Type.ToString());
-                File.AppendAllText(path,question.Text.ToString());
+                File.AppendAllText(path, test.Name);
 
-                switch (question.Type)
-                { 
-                    case QuestionEnum.TextQuestion:
-                        File.AppendAllText(path, question.ListAnswer[0].Id.ToString());
-                        File.AppendAllText(path, question.ListAnswer[0].Text.ToString());
-                        break;
-                    case QuestionEnum.SingleChoiceQuestion:
+                foreach (var question in test.QuestionCollection)
+                {
+                    File.AppendAllText(path, "\n\n");
+                    File.AppendAllText(path, "\n" + question.Id.ToString());
+                    File.AppendAllText(path, "\n" + question.Type.ToString());
+                    File.AppendAllText(path, "\n" + question.Text.ToString());
 
-                        break;
-                    case QuestionEnum.MultiChoiceQuestion:
-                        break;
-                    default:
-                        MessageBox.Show("Тип вопроса " + question.Id + " неопределён", "Save error", MessageBoxButton.OK, MessageBoxImage.Error);
-                        break;
+                    switch (question.Type)
+                    {
+                        case QuestionEnum.TextQuestion:
+                            File.AppendAllText(path, "\n" + question.ListAnswer[0].Text.ToString());
+                            break;
+                        case QuestionEnum.SingleChoiceQuestion:
+
+                            break;
+                        case QuestionEnum.MultiChoiceQuestion:
+                            break;
+                        default:
+                            MessageBox.Show("Тип вопроса " + question.Id + " неопределён", "Save error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            break;
+                    }
                 }
             }
-
+            else 
+            {
+                var result = MessageBox.Show("Файл с таким именем существует. Если нажмёте \"Да\", то файл перезапишется. Если нажмёте \"Нет\" вернётесь к созданию теста",
+                        "Save error", MessageBoxButton.YesNo, MessageBoxImage.Error);
+                if (result == MessageBoxResult.Yes)
+                {
+                    File.Delete(path);
+                    SaveFile(test);
+                }
+            }
         }
 
     }

@@ -66,8 +66,10 @@ namespace WPF_BKStudia.ViewModel.Pages
             if (FieldsNotNULL())
             {
                 new FileWriter().SaveFile(CurrentQuestion);
+
             }
-            MessageBox.Show("Введите корректное название теста (оно не должно полностью состоять из пробелов и содежать знаки)","Error", MessageBoxButton.OK,MessageBoxImage.Error);
+            else
+                MessageBox.Show("Введите корректное название теста (оно не должно полностью состоять из пробелов и содежать знаки)","Error", MessageBoxButton.OK,MessageBoxImage.Error);
         }
 
         //Навигационные команды
