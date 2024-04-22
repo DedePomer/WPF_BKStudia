@@ -25,7 +25,57 @@ namespace WPF_BKStudia.ViewModel.Pages
         private int _questionId = 0;
         private SolidColorBrush _aquaColor = new SolidColorBrush(Colors.Aqua);
         public QuestionComboBox QuestionComboBox { get; set; }
-        public TestModel CurrentQuestion { get; set; }       
+        public TestModel CurrentQuestion { get; set; }
+
+        private QuestionEnum _questonType = QuestionEnum.TextQuestion;
+        public QuestionEnum QuestonType
+        { 
+            get { return  _questonType; }
+            set 
+            {
+                switch (value)
+                { 
+                    case QuestionEnum.TextQuestion:
+                        if (CurrentQuestion != null)
+                        {
+                            CurrentQuestion.QuestionCollection.RemoveAt(_questionId - 1);
+                            CurrentQuestion.QuestionCollection.Insert(_questionId - 1, new TextQuestion
+                            {
+                                QuestionColor = _aquaColor,
+                                Id = _questionId + 1,
+                                Text = "",
+                                Type = QuestionEnum.TextQuestion,
+                                ListAnswer = new ObservableCollection<Answer>
+                                { new Answer()
+                                {
+                                    Id = 1,
+                                    Text="",
+                                    IsTrue = true
+                                }
+                                }
+                            });
+                            //CurrentQuestion.QuestionCollection[_questionId - 1].Type = QuestionEnum.TextQuestion;
+                            //CurrentQuestion.QuestionCollection[_questionId - 1].ListAnswer.Clear();
+                        }                      
+                        break;
+                    case  QuestionEnum.MultiChoiceQuestion:
+                        if (CurrentQuestion != null)
+                        {
+                            CurrentQuestion.QuestionCollection[_questionId - 1].Type = QuestionEnum.MultiChoiceQuestion;
+                            CurrentQuestion.QuestionCollection[_questionId - 1].ListAnswer.Clear();
+                        }
+                        break ;
+                    case QuestionEnum.SingleChoiceQuestion:
+                        if (CurrentQuestion != null)
+                        {
+                            CurrentQuestion.QuestionCollection[_questionId - 1].Type = QuestionEnum.SingleChoiceQuestion;
+                            CurrentQuestion.QuestionCollection[_questionId - 1].ListAnswer.Clear();
+                        }
+                        break;
+                }
+                Set(ref _questonType, value); 
+            }
+        }
 
 
         //Функциональные команды
@@ -40,12 +90,11 @@ namespace WPF_BKStudia.ViewModel.Pages
         public ICommand AddQuestionCommand { get; }
         private bool CanCAddQuestionExecuted(object p) => true;
         private void OnCAddQuestionExecuted(object p)
-        {
-            _questionId++;
+        {        
             CurrentQuestion.QuestionCollection.Add(new TextQuestion
             {
                 QuestionColor = _aquaColor,
-                Id = _questionId,
+                Id = _questionId + 1,
                 Text = "",
                 Type = QuestionEnum.TextQuestion,
                 ListAnswer = new ObservableCollection<Answer> 
@@ -57,6 +106,7 @@ namespace WPF_BKStudia.ViewModel.Pages
                 } 
                 }
             });
+            _questionId++;
         }
 
         public ICommand SaveTestCommand { get; }
@@ -66,11 +116,12 @@ namespace WPF_BKStudia.ViewModel.Pages
             if (FieldsNotNULL())
             {
                 new FileWriter().SaveFile(CurrentQuestion);
-
             }
             else
                 MessageBox.Show("Введите корректное название теста (оно не должно полностью состоять из пробелов и содежать знаки)","Error", MessageBoxButton.OK,MessageBoxImage.Error);
         }
+        
+
 
         //Навигационные команды
         public ICommand NavigateMenuPageViewModelCommand { get; }

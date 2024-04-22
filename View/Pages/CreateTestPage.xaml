@@ -13,6 +13,159 @@
     <!--Добавляем в ресурсы селектор-->
     <UserControl.Resources>
         <ts:StaticSelector x:Key="QuestionSelector"/>
+        <ts:QuestionEnumToIntConverter x:Key="QuestionConvecter"/>
+
+
+        <!--Шаблон текстового вопроса-->
+
+        <DataTemplate x:Key="TextQuestionTemplate">
+            <StackPanel Margin="20 20" Orientation="Vertical" Background="{Binding QuestionColor}">
+                <Border BorderBrush="Black" Margin="10 10">
+                    <Grid>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="3*"/>
+                            <RowDefinition Height="3*"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0"  Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
+                            <Label FontSize="20"  Content="{Binding Id, Mode=TwoWay}"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="1"  Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
+                            <Label  Content="Напишите свой вопрос"/>
+                            <TextBox Text="{Binding Text, Mode=TwoWay}" Height="20" Width="200" TextAlignment="Left"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
+                            <Label  Content="Напишите ответ:" />
+                            <TextBox  Text="{Binding ListAnswer[0].Text, Mode=TwoWay}" Height="20" Width="200" TextAlignment="Left"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Top"  Grid.Row="0" Grid.Column="1">
+                            <ComboBox Width="220" SelectedIndex="{Binding RelativeSource={RelativeSource AncestorType=UserControl,Mode=FindAncestor }
+                            ,Path=DataContext.QuestonType, Converter={StaticResource QuestionConvecter}}">
+                                <ComboBoxItem>Текстовый вопрос</ComboBoxItem>
+                                <ComboBoxItem>Вопрос с одиночным выбором</ComboBoxItem>
+                                <ComboBoxItem>Вопрос с множественным выбором</ComboBoxItem>
+                            </ComboBox>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Bottom"  Grid.Row="2" Grid.Column="1">
+                            <Button CommandParameter="{Binding}" Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl,Mode=FindAncestor},
+                            Path=DataContext.RemoveQuestionCommand}" Background="#bb4e44" Height="20" Width="20" Content="🞫"/>
+                        </StackPanel>
+
+                    </Grid>
+                </Border >
+            </StackPanel>
+        </DataTemplate>
+
+        <!--Шаблон вопроса с одним выбором-->
+        
+        <DataTemplate x:Key="SingleChoiceQuestionTemplate">
+            <StackPanel Margin="20 20" Orientation="Vertical" Background="{Binding QuestionColor}">
+                <Border BorderBrush="Black" Margin="10 10">
+                    <Grid>
+
+                        <!--<Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="3*"/>
+                            <RowDefinition Height="3*"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0"  Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
+                            <Label FontSize="20"  Content="{Binding Id, Mode=TwoWay}"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="1"  Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
+                            <Label  Content="Напишите свой вопрос"/>
+                            <TextBox Text="{Binding Text, Mode=TwoWay}" Height="20" Width="200" TextAlignment="Left"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
+                            <Label  Content="Напишите ответ:" />
+                            <TextBox  Text="{Binding ListAnswer[0].Text, Mode=TwoWay}" Height="20" Width="200" TextAlignment="Left"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Top"  Grid.Row="0" Grid.Column="1">
+                            <ComboBox Width="220" SelectedIndex="{Binding RelativeSource={RelativeSource AncestorType=UserControl,Mode=FindAncestor }
+                     ,Path=DataContext.QuestonType, Converter={StaticResource QuestionConvecter}}">
+                                <ComboBoxItem>Текстовый вопрос</ComboBoxItem>
+                                <ComboBoxItem>Вопрос с одиночным выбором</ComboBoxItem>
+                                <ComboBoxItem>Вопрос с множественным выбором</ComboBoxItem>
+                            </ComboBox>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Bottom"  Grid.Row="2" Grid.Column="1">
+                            <Button CommandParameter="{Binding}" Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl,Mode=FindAncestor},
+                     Path=DataContext.RemoveQuestionCommand}" Background="#bb4e44" Height="20" Width="20" Content="🞫"/>
+                        </StackPanel>-->
+
+                    </Grid>
+                </Border >
+            </StackPanel>
+        </DataTemplate>
+
+        <!--Шаблон вопроса с множествеенным выбором-->
+
+        <DataTemplate x:Key="MultiChoiceQuestionTemplate">
+            <StackPanel Margin="20 20" Orientation="Vertical" Background="{Binding QuestionColor}">
+                <Border BorderBrush="Black" Margin="10 10">
+                    <Grid>
+
+                        <!--<Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="3*"/>
+                            <RowDefinition Height="3*"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0"  Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
+                            <Label FontSize="20"  Content="{Binding Id, Mode=TwoWay}"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="1"  Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
+                            <Label  Content="Напишите свой вопрос"/>
+                            <TextBox Text="{Binding Text, Mode=TwoWay}" Height="20" Width="200" TextAlignment="Left"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
+                            <Label  Content="Напишите ответ:" />
+                            <TextBox  Text="{Binding ListAnswer[0].Text, Mode=TwoWay}" Height="20" Width="200" TextAlignment="Left"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Top"  Grid.Row="0" Grid.Column="1">
+                            <ComboBox Width="220" SelectedIndex="{Binding RelativeSource={RelativeSource AncestorType=UserControl,Mode=FindAncestor }
+             ,Path=DataContext.QuestonType, Converter={StaticResource QuestionConvecter}}">
+                                <ComboBoxItem>Текстовый вопрос</ComboBoxItem>
+                                <ComboBoxItem>Вопрос с одиночным выбором</ComboBoxItem>
+                                <ComboBoxItem>Вопрос с множественным выбором</ComboBoxItem>
+                            </ComboBox>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Bottom"  Grid.Row="2" Grid.Column="1">
+                            <Button CommandParameter="{Binding}" Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl,Mode=FindAncestor},
+             Path=DataContext.RemoveQuestionCommand}" Background="#bb4e44" Height="20" Width="20" Content="🞫"/>
+                        </StackPanel>-->
+
+                    </Grid>
+                </Border >
+            </StackPanel>
+        </DataTemplate>
+
     </UserControl.Resources>
 
     

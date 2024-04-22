@@ -8,8 +8,9 @@ namespace WPF_BKStudia.Infrastructure.Services
 {
     public enum QuestionEnum
     {
-        SingleChoiceQuestion,
-        MultiChoiceQuestion,
-        TextQuestion
+        TextQuestion = 0,
+        SingleChoiceQuestion = 1,
+        MultiChoiceQuestion = 2
+        
     }
 }
