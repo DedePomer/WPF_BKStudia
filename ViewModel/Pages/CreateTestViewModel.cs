@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using WPF_BKStudia.Infrastructure.Commands;
@@ -24,7 +25,6 @@ namespace WPF_BKStudia.ViewModel.Pages
         //Поля
         private int _questionId = 0;
         private SolidColorBrush _aquaColor = new SolidColorBrush(Colors.Aqua);
-        public QuestionComboBox QuestionComboBox { get; set; }
         public TestModel CurrentQuestion { get; set; }
 
         private QuestionEnum _questonType = QuestionEnum.TextQuestion;
@@ -76,6 +76,20 @@ namespace WPF_BKStudia.ViewModel.Pages
                 Set(ref _questonType, value); 
             }
         }
+        private TextQuestion _questonTypeBindingGroup;
+        public TextQuestion QuestonTypeBindingGroup
+        {
+            get
+            {
+                return _questonTypeBindingGroup;
+            }
+            set
+            { 
+                Set(ref _questonTypeBindingGroup, value);
+            }
+        }
+
+
 
 
         //Функциональные команды

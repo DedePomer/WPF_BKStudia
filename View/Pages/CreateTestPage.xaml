@@ -19,7 +19,7 @@
         <!--Шаблон текстового вопроса-->
 
         <DataTemplate x:Key="TextQuestionTemplate">
-            <StackPanel Margin="20 20" Orientation="Vertical" Background="{Binding QuestionColor}">
+            <StackPanel  Margin="20 20" Orientation="Vertical" Background="{Binding QuestionColor}">
                 <Border BorderBrush="Black" Margin="10 10">
                     <Grid>
 
@@ -47,8 +47,8 @@
                             <TextBox  Text="{Binding ListAnswer[0].Text, Mode=TwoWay}" Height="20" Width="200" TextAlignment="Left"/>
                         </StackPanel>
 
-                        <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Top"  Grid.Row="0" Grid.Column="1">
-                            <ComboBox Width="220" SelectedIndex="{Binding RelativeSource={RelativeSource AncestorType=UserControl,Mode=FindAncestor }
+                        <StackPanel  Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Top"  Grid.Row="0" Grid.Column="1">
+                            <ComboBox ItemBindingGroup="{Binding QuestonTypeBindingGroup}"  Width="220" SelectedIndex="{Binding RelativeSource={RelativeSource AncestorType=UserControl,Mode=FindAncestor }
                             ,Path=DataContext.QuestonType, Converter={StaticResource QuestionConvecter}}">
                                 <ComboBoxItem>Текстовый вопрос</ComboBoxItem>
                                 <ComboBoxItem>Вопрос с одиночным выбором</ComboBoxItem>
@@ -189,7 +189,7 @@
 
         <!--Редактор вопросов-->
         <ScrollViewer  Grid.Column="1" VerticalScrollBarVisibility="Auto">
-            <ItemsControl  ItemsSource="{Binding CurrentQuestion.QuestionCollection}" ItemTemplateSelector="{StaticResource QuestionSelector}"  Margin="0 20 0 0" />
+            <ItemsControl ItemsSource="{Binding CurrentQuestion.QuestionCollection}" ItemTemplateSelector="{StaticResource QuestionSelector}"  Margin="0 20 0 0" />
         </ScrollViewer>
         
   
