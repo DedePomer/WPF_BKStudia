@@ -27,68 +27,55 @@ namespace WPF_BKStudia.ViewModel.Pages
         private SolidColorBrush _aquaColor = new SolidColorBrush(Colors.Aqua);
         public TestModel CurrentQuestion { get; set; }
 
-        private QuestionEnum _questonType = QuestionEnum.TextQuestion;
-        public QuestionEnum QuestonType
+        private QuestionEnum _chooseQuestion = QuestionEnum.TextQuestion;
+        public QuestionEnum ChooseQuestion
         { 
-            get { return  _questonType; }
+            get { return  _chooseQuestion; }
             set 
             {
                 switch (value)
                 { 
-                    case QuestionEnum.TextQuestion:
-                        if (CurrentQuestion != null)
-                        {
-                            CurrentQuestion.QuestionCollection.RemoveAt(_questionId - 1);
-                            CurrentQuestion.QuestionCollection.Insert(_questionId - 1, new TextQuestion
-                            {
-                                QuestionColor = _aquaColor,
-                                Id = _questionId + 1,
-                                Text = "",
-                                Type = QuestionEnum.TextQuestion,
-                                ListAnswer = new ObservableCollection<Answer>
-                                { new Answer()
-                                {
-                                    Id = 1,
-                                    Text="",
-                                    IsTrue = true
-                                }
-                                }
-                            });
-                            //CurrentQuestion.QuestionCollection[_questionId - 1].Type = QuestionEnum.TextQuestion;
-                            //CurrentQuestion.QuestionCollection[_questionId - 1].ListAnswer.Clear();
-                        }                      
-                        break;
-                    case  QuestionEnum.MultiChoiceQuestion:
-                        if (CurrentQuestion != null)
-                        {
-                            CurrentQuestion.QuestionCollection[_questionId - 1].Type = QuestionEnum.MultiChoiceQuestion;
-                            CurrentQuestion.QuestionCollection[_questionId - 1].ListAnswer.Clear();
-                        }
-                        break ;
-                    case QuestionEnum.SingleChoiceQuestion:
-                        if (CurrentQuestion != null)
-                        {
-                            CurrentQuestion.QuestionCollection[_questionId - 1].Type = QuestionEnum.SingleChoiceQuestion;
-                            CurrentQuestion.QuestionCollection[_questionId - 1].ListAnswer.Clear();
-                        }
-                        break;
+                    //case QuestionEnum.TextQuestion:
+                    //    //if (CurrentQuestion != null)
+                    //    //{
+                    //    //    CurrentQuestion.QuestionCollection.RemoveAt(_questionId - 1);
+                    //    //    CurrentQuestion.QuestionCollection.Insert(_questionId - 1, new TextQuestion
+                    //    //    {
+                    //    //        QuestionColor = _aquaColor,
+                    //    //        Id = _questionId + 1,
+                    //    //        Text = "",
+                    //    //        Type = QuestionEnum.TextQuestion,
+                    //    //        ListAnswer = new ObservableCollection<Answer>
+                    //    //        { new Answer()
+                    //    //        {
+                    //    //            Id = 1,
+                    //    //            Text="",
+                    //    //            IsTrue = true
+                    //    //        }
+                    //    //        }
+                    //    //    });
+                    //    //    //CurrentQuestion.QuestionCollection[_questionId - 1].Type = QuestionEnum.TextQuestion;
+                    //    //    //CurrentQuestion.QuestionCollection[_questionId - 1].ListAnswer.Clear();
+                    //    //}                      
+                    //    break;
+                    //case  QuestionEnum.MultiChoiceQuestion:
+                    //    if (CurrentQuestion != null)
+                    //    {
+                    //        CurrentQuestion.QuestionCollection[_questionId - 1].Type = QuestionEnum.MultiChoiceQuestion;
+                    //        CurrentQuestion.QuestionCollection[_questionId - 1].ListAnswer.Clear();
+                    //    }
+                    //    break ;
+                    //case QuestionEnum.SingleChoiceQuestion:
+                    //    if (CurrentQuestion != null)
+                    //    {
+                    //        CurrentQuestion.QuestionCollection[_questionId - 1].Type = QuestionEnum.SingleChoiceQuestion;
+                    //        CurrentQuestion.QuestionCollection[_questionId - 1].ListAnswer.Clear();
+                    //    }
+                    //    break;
                 }
-                Set(ref _questonType, value); 
+                Set(ref _chooseQuestion, value); 
             }
         }
-        private TextQuestion _questonTypeBindingGroup;
-        public TextQuestion QuestonTypeBindingGroup
-        {
-            get
-            {
-                return _questonTypeBindingGroup;
-            }
-            set
-            { 
-                Set(ref _questonTypeBindingGroup, value);
-            }
-        }
-
 
 
 
@@ -145,6 +132,9 @@ namespace WPF_BKStudia.ViewModel.Pages
         {            
             CurrentQuestion = new TestModel();
             CurrentQuestion.QuestionCollection = new ObservableCollection<TextQuestion>();
+
+            //_chooseQuestion = new QuestionComboBox();
+            //_chooseQuestion.Type = QuestionEnum.TextQuestion;
 
 
             NavigateMenuPageViewModelCommand = new NavigationCommand<MenuPageViewModel>(navigationStore, () => new MenuPageViewModel(navigationStore));

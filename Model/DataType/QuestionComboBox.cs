@@ -7,9 +7,10 @@ using WPF_BKStudia.Infrastructure.Services;
 
 namespace WPF_BKStudia.Model.DataType
 {
-    internal class QuestionComboBox
+    class QuestionComboBox
     {
-        public string Text { get; set; }
+        public int Id { get; set; }
+
         public QuestionEnum Type { get; set; }
     }
 }
