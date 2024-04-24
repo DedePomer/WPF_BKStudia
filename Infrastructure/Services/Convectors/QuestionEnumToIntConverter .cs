@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Markup;
 
-namespace WPF_BKStudia.Infrastructure.Services
+namespace WPF_BKStudia.Infrastructure.Services.Convectors
 {
-    public class QuestionEnumToIntConverter :  IValueConverter
+    public class QuestionEnumToIntConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

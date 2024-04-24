@@ -22,7 +22,12 @@ namespace WPF_BKStudia.Model.DataType
             { Set(ref _id, value); }
         }
         public string Text { get; set; }
-        public QuestionEnum Type { get; set; }
+        private QuestionEnum _type;
+        public QuestionEnum Type 
+        {
+            get { return _type; }
+            set { Set(ref _type, value); }         
+        }
         public ObservableCollection<Answer>? ListAnswer { get; set; }
         public SolidColorBrush QuestionColor { get; set; }
     }

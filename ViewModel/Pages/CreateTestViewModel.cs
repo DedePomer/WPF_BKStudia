@@ -133,8 +133,6 @@ namespace WPF_BKStudia.ViewModel.Pages
             CurrentQuestion = new TestModel();
             CurrentQuestion.QuestionCollection = new ObservableCollection<TextQuestion>();
 
-            //_chooseQuestion = new QuestionComboBox();
-            //_chooseQuestion.Type = QuestionEnum.TextQuestion;
 
 
             NavigateMenuPageViewModelCommand = new NavigationCommand<MenuPageViewModel>(navigationStore, () => new MenuPageViewModel(navigationStore));
