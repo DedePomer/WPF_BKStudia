@@ -27,58 +27,6 @@ namespace WPF_BKStudia.ViewModel.Pages
         private SolidColorBrush _aquaColor = new SolidColorBrush(Colors.Aqua);
         public TestModel CurrentQuestion { get; set; }
 
-        private QuestionEnum _chooseQuestion = QuestionEnum.TextQuestion;
-        public QuestionEnum ChooseQuestion
-        { 
-            get { return  _chooseQuestion; }
-            set 
-            {
-                switch (value)
-                { 
-                    //case QuestionEnum.TextQuestion:
-                    //    //if (CurrentQuestion != null)
-                    //    //{
-                    //    //    CurrentQuestion.QuestionCollection.RemoveAt(_questionId - 1);
-                    //    //    CurrentQuestion.QuestionCollection.Insert(_questionId - 1, new TextQuestion
-                    //    //    {
-                    //    //        QuestionColor = _aquaColor,
-                    //    //        Id = _questionId + 1,
-                    //    //        Text = "",
-                    //    //        Type = QuestionEnum.TextQuestion,
-                    //    //        ListAnswer = new ObservableCollection<Answer>
-                    //    //        { new Answer()
-                    //    //        {
-                    //    //            Id = 1,
-                    //    //            Text="",
-                    //    //            IsTrue = true
-                    //    //        }
-                    //    //        }
-                    //    //    });
-                    //    //    //CurrentQuestion.QuestionCollection[_questionId - 1].Type = QuestionEnum.TextQuestion;
-                    //    //    //CurrentQuestion.QuestionCollection[_questionId - 1].ListAnswer.Clear();
-                    //    //}                      
-                    //    break;
-                    //case  QuestionEnum.MultiChoiceQuestion:
-                    //    if (CurrentQuestion != null)
-                    //    {
-                    //        CurrentQuestion.QuestionCollection[_questionId - 1].Type = QuestionEnum.MultiChoiceQuestion;
-                    //        CurrentQuestion.QuestionCollection[_questionId - 1].ListAnswer.Clear();
-                    //    }
-                    //    break ;
-                    //case QuestionEnum.SingleChoiceQuestion:
-                    //    if (CurrentQuestion != null)
-                    //    {
-                    //        CurrentQuestion.QuestionCollection[_questionId - 1].Type = QuestionEnum.SingleChoiceQuestion;
-                    //        CurrentQuestion.QuestionCollection[_questionId - 1].ListAnswer.Clear();
-                    //    }
-                    //    break;
-                }
-                Set(ref _chooseQuestion, value); 
-            }
-        }
-
-
-
         //Функциональные команды
         public ICommand RemoveQuestionCommand { get; }
         private bool CanCRemoveQuestionExecuted(object p) => true;
@@ -156,6 +104,7 @@ namespace WPF_BKStudia.ViewModel.Pages
                 }
                 CurrentQuestion.QuestionCollection.Remove(question);
                 _questionId--;
+                OnPropertyChanged();
             }
         }
 
