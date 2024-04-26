@@ -31,10 +31,18 @@
 
         <!--Смешная картинка-->
         
-        <StackPanel Grid.Column="1" Orientation="Vertical">
-            
-            
-        </StackPanel>
+        <Grid Grid.Column="1" >
+
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                <TextBlock.RenderTransform>
+                    <RotateTransform Angle="45"/>
+                </TextBlock.RenderTransform>
+                <Run FontSize="90" Foreground="Red">М</Run><Run FontSize="25" Foreground="DarkKhaki">Е</Run>
+                <Run FontSize="70" Foreground="LightGreen">Н</Run><Run FontSize="150" Foreground="Black">Ю</Run>
+            </TextBlock>
+
+
+        </Grid>
 
     </Grid>
 </UserControl>
