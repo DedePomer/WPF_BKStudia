@@ -14,7 +14,8 @@
     <!--Добавляем в ресурсы селектор-->
     <UserControl.Resources>
         <conv:QuestionEnumToIntConverter x:Key="QuestionConvecter"/>
-        <ts:StaticSelector x:Key="QuestionSelector"/>
+        
+        <!--<ts:StaticSelector x:Key="QuestionSelector"/>-->
 
 
         <!--Шаблон текстового вопроса-->
@@ -39,6 +40,8 @@
 
         <!--Общий шаблон-->
         <DataTemplate x:Key="CustomerTemplate">
+            
+            <!--Общая часть интерфейса "Вопроса"-->
             
             <StackPanel  Margin="20 20" Orientation="Vertical" Background="{Binding QuestionColor}">
                 <Border BorderBrush="Black" Margin="10 10">
@@ -81,6 +84,8 @@
                 </Border >
             </StackPanel>
 
+            <!--Тригеры на смену шаблонов-->
+            
             <DataTemplate.Triggers>
                 <DataTrigger Binding="{Binding ElementName=TextComboBoxItem, Path=IsSelected}" Value="True">
                     <Setter TargetName="ChangingControl" Property="Template" Value="{StaticResource TextQuestionTemplate}" />
@@ -97,9 +102,7 @@
             
         </DataTemplate>
 
-       
-
-
+      
     </UserControl.Resources>
 
 
