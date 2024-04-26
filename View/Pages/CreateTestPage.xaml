@@ -46,6 +46,7 @@
             <StackPanel  Margin="20 20" Orientation="Vertical" Background="{Binding QuestionColor}">
                 <Border BorderBrush="Black" Margin="10 10">
                     <Grid>
+                        
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="3*"/>
                             <ColumnDefinition Width="3*"/>

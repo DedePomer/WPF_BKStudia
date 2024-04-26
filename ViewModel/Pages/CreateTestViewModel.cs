@@ -27,6 +27,9 @@ namespace WPF_BKStudia.ViewModel.Pages
         private SolidColorBrush _aquaColor = new SolidColorBrush(Colors.Aqua);
         public TestModel CurrentQuestion { get; set; }
 
+        //Навигационные команды
+        public ICommand NavigateMenuPageViewModelCommand { get; }
+
         //Функциональные команды
         public ICommand RemoveQuestionCommand { get; }
         private bool CanCRemoveQuestionExecuted(object p) => true;
@@ -65,6 +68,7 @@ namespace WPF_BKStudia.ViewModel.Pages
             if (FieldsNotNULL())
             {
                 new FileWriter().SaveFile(CurrentQuestion);
+                NavigateMenuPageViewModelCommand.Execute(p);
             }
             else
                 MessageBox.Show("Введите корректное название теста (оно не должно полностью состоять из пробелов и содежать знаки)","Error", MessageBoxButton.OK,MessageBoxImage.Error);
@@ -72,8 +76,7 @@ namespace WPF_BKStudia.ViewModel.Pages
         
 
 
-        //Навигационные команды
-        public ICommand NavigateMenuPageViewModelCommand { get; }
+        
 
         //Конструктор
         public CreateTestViewModel(NavigationStore navigationStore)
