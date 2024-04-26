@@ -13,24 +13,36 @@
 
     <!--Добавляем в ресурсы селектор-->
     <UserControl.Resources>
-        <ts:StaticSelector x:Key="QuestionSelector"/>
-        <ts:BindingProxy x:Key="Proxy" Data="{Binding }"/>
         <conv:QuestionEnumToIntConverter x:Key="QuestionConvecter"/>
-     
+        <ts:StaticSelector x:Key="QuestionSelector"/>
+
+
         <!--Шаблон текстового вопроса-->
+        <ControlTemplate x:Key="TextQuestionTemplate">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                <Label  Content="Напишите ответ:" />
+                <TextBox  Text="{Binding ListAnswer[0].Text, Mode=TwoWay}" Height="20" Width="200" TextAlignment="Left"/>
+            </StackPanel>
+        </ControlTemplate>
+        <!--Шаблон вопроса с одним выбором-->
+        <ControlTemplate x:Key="SingleChoiceQuestionTemplate">
+            <StackPanel Background="Red">
+                <Label Content="В разработке" FontSize="25"/>
+            </StackPanel>
+        </ControlTemplate>
+        <!--Шаблон вопроса с множествеенным выбором-->
+        <ControlTemplate x:Key="MultiChoiceQuestionTemplate">
+            <StackPanel Background="Green">
+                <Label Content="В разработке" FontSize="25"/>
+            </StackPanel>
+        </ControlTemplate>
 
-        <DataTemplate x:Key="TextQuestionTemplate">
-
-            <!--<DataTemplate.Triggers>
-                <DataTrigger Binding="{Binding Path=IsSelected,ElementName=SingleQuestionComboBox}" Value="True">
-                    <Setter TargetName="{Binding Path=MainItemsConrol}" Property="ItemTemplateSelector" Value="{StaticResource QuestionSelector}"/>
-                </DataTrigger>
-            </DataTemplate.Triggers>-->
-
+        <!--Общий шаблон-->
+        <DataTemplate x:Key="CustomerTemplate">
+            
             <StackPanel  Margin="20 20" Orientation="Vertical" Background="{Binding QuestionColor}">
                 <Border BorderBrush="Black" Margin="10 10">
                     <Grid>
-
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="3*"/>
                             <ColumnDefinition Width="3*"/>
@@ -50,132 +62,42 @@
                             <TextBox Text="{Binding Text, Mode=TwoWay}" Height="20" Width="200" TextAlignment="Left"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
-                            <Label  Content="Напишите ответ:" />
-                            <TextBox  Text="{Binding ListAnswer[0].Text, Mode=TwoWay}" Height="20" Width="200" TextAlignment="Left"/>
-                        </StackPanel>
+                        <Control Grid.Row="2" Grid.Column="0" x:Name="ChangingControl" Focusable="False" Template="{StaticResource TextQuestionTemplate}" />
 
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Top"  Grid.Row="0" Grid.Column="1">
-                            <Label Content="{Binding Type}"/>
-                            <ComboBox Width="220" SelectedIndex="{Binding Type, Converter={StaticResource QuestionConvecter},ConverterParameter={StaticResource Proxy}, Mode=TwoWay}">
-                                <ComboBoxItem x:Name="TextQuestionComboBox">Текстовый вопрос</ComboBoxItem>
-                                <ComboBoxItem x:Name="SingleQuestionComboBox">Вопрос с одиночным выбором</ComboBoxItem>
-                                <ComboBoxItem x:Name="MultyQuestionComboBox">Вопрос с множественным выбором</ComboBoxItem>
+                            <ComboBox Width="220" SelectedIndex="{Binding Type, Converter={StaticResource QuestionConvecter}}">
+                                <ComboBoxItem x:Name="TextComboBoxItem">Текстовый вопрос</ComboBoxItem>
+                                <ComboBoxItem x:Name="SingleComboBoxItem">Вопрос с одиночным выбором</ComboBoxItem>
+                                <ComboBoxItem x:Name="MultiComboBoxItem">Вопрос с множественным выбором</ComboBoxItem>
                             </ComboBox>
                         </StackPanel>
 
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Bottom"  Grid.Row="2" Grid.Column="1">
                             <Button CommandParameter="{Binding}" Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl,Mode=FindAncestor},
-                                        Path=DataContext.RemoveQuestionCommand}" Background="#bb4e44" Height="20" Width="20" Content="🞫"/>
+                             Path=DataContext.RemoveQuestionCommand}" Background="#bb4e44" Height="20" Width="20" Content="🞫"/>
                         </StackPanel>
-
+                        
                     </Grid>
                 </Border >
             </StackPanel>
+
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding ElementName=TextComboBoxItem, Path=IsSelected}" Value="True">
+                    <Setter TargetName="ChangingControl" Property="Template" Value="{StaticResource TextQuestionTemplate}" />
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding ElementName=SingleComboBoxItem, Path=IsSelected}" Value="True">
+                    <Setter TargetName="ChangingControl" Property="Template" Value="{StaticResource SingleChoiceQuestionTemplate}" />
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding ElementName=MultiComboBoxItem, Path=IsSelected}" Value="True">
+                    <Setter TargetName="ChangingControl" Property="Template" Value="{StaticResource MultiChoiceQuestionTemplate}" />
+                </DataTrigger>
+            </DataTemplate.Triggers>
+            
         </DataTemplate>
 
        
-
-        <!--Шаблон вопроса с одним выбором-->
-
-        <DataTemplate x:Key="SingleChoiceQuestionTemplate">
-            <StackPanel Margin="20 20" Orientation="Vertical" Background="{Binding QuestionColor}">
-                <Border BorderBrush="Black" Margin="10 10">
-                    <Grid>
-
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="3*"/>
-                            <ColumnDefinition Width="3*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="1*"/>
-                            <RowDefinition Height="3*"/>
-                            <RowDefinition Height="3*"/>
-                        </Grid.RowDefinitions>
-
-                        <StackPanel Grid.Row="0"  Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
-                            <Label FontSize="20"  Content="{Binding Id, Mode=TwoWay}"/>
-                        </StackPanel>
-
-                        <!--<StackPanel Grid.Row="1"  Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
-                            <Label  Content="Напишите свой вопрос"/>
-                            <TextBox Text="{Binding Text, Mode=TwoWay}" Height="20" Width="200" TextAlignment="Left"/>
-                        </StackPanel>
-
-                        <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
-                            <Label  Content="Напишите ответ:" />
-                            <TextBox  Text="{Binding ListAnswer[0].Text, Mode=TwoWay}" Height="20" Width="200" TextAlignment="Left"/>
-                        </StackPanel>
-
-                        <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Top"  Grid.Row="0" Grid.Column="1">
-                            <ComboBox Width="220" SelectedIndex="{Binding RelativeSource={RelativeSource AncestorType=UserControl,Mode=FindAncestor }
-                     ,Path=DataContext.QuestonType, Converter={StaticResource QuestionConvecter}}">
-                                <ComboBoxItem>Текстовый вопрос</ComboBoxItem>
-                                <ComboBoxItem>Вопрос с одиночным выбором</ComboBoxItem>
-                                <ComboBoxItem>Вопрос с множественным выбором</ComboBoxItem>
-                            </ComboBox>
-                        </StackPanel>
-
-                        <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Bottom"  Grid.Row="2" Grid.Column="1">
-                            <Button CommandParameter="{Binding}" Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl,Mode=FindAncestor},
-                     Path=DataContext.RemoveQuestionCommand}" Background="#bb4e44" Height="20" Width="20" Content="🞫"/>
-                        </StackPanel>-->
-
-                    </Grid>
-                </Border >
-            </StackPanel>
-        </DataTemplate>
-
-        <!--Шаблон вопроса с множествеенным выбором-->
-
-        <DataTemplate x:Key="MultiChoiceQuestionTemplate">
-            <StackPanel Margin="20 20" Orientation="Vertical" Background="{Binding QuestionColor}">
-                <Border BorderBrush="Black" Margin="10 10">
-                    <Grid>
-
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="3*"/>
-                            <ColumnDefinition Width="3*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="1*"/>
-                            <RowDefinition Height="3*"/>
-                            <RowDefinition Height="3*"/>
-                        </Grid.RowDefinitions>
-
-                        <StackPanel Grid.Row="0"  Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
-                            <Label FontSize="20"  Content="{Binding Id, Mode=TwoWay}"/>
-                        </StackPanel>
-
-                        <!--<StackPanel Grid.Row="1"  Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
-                            <Label  Content="Напишите свой вопрос"/>
-                            <TextBox Text="{Binding Text, Mode=TwoWay}" Height="20" Width="200" TextAlignment="Left"/>
-                        </StackPanel>
-
-                        <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
-                            <Label  Content="Напишите ответ:" />
-                            <TextBox  Text="{Binding ListAnswer[0].Text, Mode=TwoWay}" Height="20" Width="200" TextAlignment="Left"/>
-                        </StackPanel>
-
-                        <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Top"  Grid.Row="0" Grid.Column="1">
-                            <ComboBox Width="220" SelectedIndex="{Binding RelativeSource={RelativeSource AncestorType=UserControl,Mode=FindAncestor }
-             ,Path=DataContext.QuestonType, Converter={StaticResource QuestionConvecter}}">
-                                <ComboBoxItem>Текстовый вопрос</ComboBoxItem>
-                                <ComboBoxItem>Вопрос с одиночным выбором</ComboBoxItem>
-                                <ComboBoxItem>Вопрос с множественным выбором</ComboBoxItem>
-                            </ComboBox>
-                        </StackPanel>
-
-                        <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Bottom"  Grid.Row="2" Grid.Column="1">
-                            <Button CommandParameter="{Binding}" Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl,Mode=FindAncestor},
-             Path=DataContext.RemoveQuestionCommand}" Background="#bb4e44" Height="20" Width="20" Content="🞫"/>
-                        </StackPanel>-->
-
-                    </Grid>
-                </Border >
-            </StackPanel>
-        </DataTemplate>
-
 
 
     </UserControl.Resources>
@@ -202,11 +124,9 @@
 
         <!--Редактор вопросов-->
         <ScrollViewer  Grid.Column="1" VerticalScrollBarVisibility="Auto">
-            <ItemsControl x:Name="MainItemsConrol"  ItemsSource="{Binding CurrentQuestion.QuestionCollection, Mode=TwoWay}"
-                          ItemTemplateSelector="{StaticResource QuestionSelector}"  Margin="0 20 0 0" 
-                          >
+            <ItemsControl  x:Name="MainItemsConrol"  ItemsSource="{Binding CurrentQuestion.QuestionCollection, Mode=TwoWay}"
+                          ItemTemplate="{StaticResource CustomerTemplate}"  Margin="0 20 0 0" >
             </ItemsControl>
-            
         </ScrollViewer>
         
   

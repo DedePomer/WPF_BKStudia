@@ -12,6 +12,7 @@ namespace WPF_BKStudia.Infrastructure.Services
 {
     internal class StaticSelector: DataTemplateSelector
     {
+        public DataTemplate? ChangingTemplate { get; set; }
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
             FrameworkElement element = container as FrameworkElement;
