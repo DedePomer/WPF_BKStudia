@@ -19,7 +19,7 @@
 
         <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" >
             <TextBlock TextWrapping="Wrap" Margin="10"  Text="Выбирете тест и нажмите кнопку 'Выбрать', чтобы начать проходить тест " Height="51"/>
-            <Button Command="{Binding}" Margin="10 2 10 10" Content="Выбрать" Style="{StaticResource ButtonStyle}"/>
+            <Button Command="{Binding ChoiseTestCommand}" Margin="10 2 10 10" Content="Выбрать" Style="{StaticResource ButtonStyle}"/>
             <Button Command="{Binding NavigateMenuPageViewModelCommand}" Content="Назад" Style="{StaticResource ButtonStyle}"/>
         </StackPanel>
 

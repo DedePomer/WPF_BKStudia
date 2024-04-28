@@ -22,9 +22,9 @@
         
         <StackPanel Grid.Column="0" Orientation="Vertical">
 
-            <Button Command="{Binding CNavigateCreateTest}" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Center"  Content="Создание тестов" />
-            <Button Command="{Binding CNavigateGetTesttedMenu}" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Center"  Content="Пройти тест" />
-            <Button Command="{Binding CNavigateDeleteTest}" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Center"  Content="У далить тест" />
+            <Button Command="{Binding NavigateCreateTestCommand}" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Center"  Content="Создание тестов" />
+            <Button Command="{Binding NavigateGetTesttedMenuCommand}" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Center"  Content="Пройти тест" />
+            <Button Command="{Binding NavigateDeleteTestCommand}" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Center"  Content="У далить тест" />
             <Button Command="{Binding CCloseApp}" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Center"  Content="Выход" />
 
         </StackPanel>

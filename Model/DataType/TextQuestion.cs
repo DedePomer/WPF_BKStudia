@@ -14,6 +14,7 @@ using WPF_BKStudia.ViewModel.Pages;
 
 namespace WPF_BKStudia.Model.DataType
 {
+    //Номер, тектс вопроса, тип вопроса, список ответов, Цвет вопроса + реализация метода INotifyPropertyChanged
     public class TextQuestion :  INotifyPropertyChanged, IQuestionAnswer
     {
         //Приватные поля

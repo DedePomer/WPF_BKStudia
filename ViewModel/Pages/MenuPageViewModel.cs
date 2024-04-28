@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,9 +14,9 @@ namespace WPF_BKStudia.ViewModel.Pages
     internal class MenuPageViewModel: ViewModel.Base.ViewModel
     {
         //Навигационные команды
-        public ICommand CNavigateGetTesttedMenu { get; }
-        public ICommand CNavigateDeleteTest { get; }
-        public ICommand CNavigateCreateTest { get; }
+        public ICommand NavigateGetTesttedMenuCommand { get; }
+        public ICommand NavigateDeleteTestCommand { get; }
+        public ICommand NavigateCreateTestCommand { get; }
 
         //Функциональные команды
         public ICommand CCloseApp { get;  }
@@ -28,11 +29,32 @@ namespace WPF_BKStudia.ViewModel.Pages
 
         public MenuPageViewModel(NavigationStore navigationStore)  
         {
-            CNavigateGetTesttedMenu = new NavigationCommand<GetTesttedMenuViewModel>(navigationStore, () => new GetTesttedMenuViewModel(navigationStore));
-            CNavigateDeleteTest = new NavigationCommand<DeleteTestViewModel>(navigationStore, () => new DeleteTestViewModel(navigationStore));
-            CNavigateCreateTest = new NavigationCommand<CreateTestViewModel>(navigationStore, () => new CreateTestViewModel(navigationStore));
+            NavigateGetTesttedMenuCommand = new NavigationCommand<GetTesttedMenuViewModel>(navigationStore, () => new GetTesttedMenuViewModel(navigationStore));
+            NavigateDeleteTestCommand = new NavigationCommand<DeleteTestViewModel>(navigationStore, () => new DeleteTestViewModel(navigationStore));
+            NavigateCreateTestCommand = new NavigationCommand<CreateTestViewModel>(navigationStore, () => new CreateTestViewModel(navigationStore));
 
             CCloseApp = new LamdaCommand(OnCCloseAppExecuted, CanCCloseAppExecuted);
+        }
+
+        //Проверяет пуста ли пака Tests
+        private void IsNotNullDirectory(string path)
+        {
+            if (Directory.GetFileSystemEntries(path).ToList().Count == 0)
+            {
+                MessageBoxResult result = MessageBox.Show("В папке Tests нет тестов. Хотите создать тест ? (нажмите Да)", "Information", MessageBoxButton.YesNo, MessageBoxImage.Information);
+                switch (result)
+                {
+                    case MessageBoxResult.Yes:
+                        NavigateCreateTestViewModelCommand.Execute(1);
+                        break;
+                    case MessageBoxResult.No:
+                        NavigateMenuPageViewModelCommand.Execute(1);
+                        break;
+                    default:
+                        NavigateMenuPageViewModelCommand.Execute(1);
+                        break;
+                }
+            }
         }
     }
 }

@@ -68,23 +68,19 @@ namespace WPF_BKStudia.ViewModel.Pages
             if (FieldsNotNULL())
             {
                 new FileWriter().SaveFile(CurrentQuestion);
+                MessageBox.Show("Тест сохранён", "Information", MessageBoxButton.OK);
                 NavigateMenuPageViewModelCommand.Execute(p);
             }
             else
                 MessageBox.Show("Введите корректное название теста (оно не должно полностью состоять из пробелов и содежать знаки)","Error", MessageBoxButton.OK,MessageBoxImage.Error);
         }
-        
-
-
-        
+          
 
         //Конструктор
         public CreateTestViewModel(NavigationStore navigationStore)
         {            
             CurrentQuestion = new TestModel();
             CurrentQuestion.QuestionCollection = new ObservableCollection<TextQuestion>();
-
-
 
             NavigateMenuPageViewModelCommand = new NavigationCommand<MenuPageViewModel>(navigationStore, () => new MenuPageViewModel(navigationStore));
 

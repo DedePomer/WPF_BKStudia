@@ -20,7 +20,7 @@ namespace WPF_BKStudia.ViewModel.Windows
             if (!Directory.Exists("Tests")) Directory.CreateDirectory("Tests");
 
             navigationStore.CurrentViewModel = new MenuPageViewModel(navigationStore);
-            //navigationStore.CurrentViewModel = new CreateTestViewModel(navigationStore);
+            //navigationStore.CurrentViewModel = new GetTesttedMenuViewModel(navigationStore);
             navigationStore.CurrentViewModelChanged += () => OnCurrentViewChanged();
         }
 
