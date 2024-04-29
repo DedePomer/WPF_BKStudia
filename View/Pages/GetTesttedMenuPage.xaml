@@ -21,9 +21,9 @@
             <StackPanel  Margin="20 20" Orientation="Vertical" Background="LightBlue">
                 <Border BorderBrush="Black" Margin="10 10">
                     <Grid>
-
+                    <!--Сделать красиво-->
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="auto"/>
                             <ColumnDefinition Width="3*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
@@ -36,13 +36,12 @@
                         </StackPanel>
 
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top"  Grid.Row="0" Grid.Column="1">
-                            <TextBlock TextWrapping="Wrap" FontSize="20"  Text="{Binding Name,StringFormat='Название: \{0\}!' ,
+                            <TextBlock TextWrapping="Wrap" FontSize="20"  Text="{Binding Name,StringFormat='Название: \{0\}' ,
                                 Converter={StaticResource TestConvector}}"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Row="1"  Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
-                            <!--<TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=UserControl,Mode=FindAncestor},
-                                Path=DataContext.NumberOfQuestion,StringFormat='Количество вопросов:, \{0\}!'}" Height="20" Width="200" TextAlignment="Left"/>-->
+                        <StackPanel  Grid.Row="1"  Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
+                            <TextBlock Text="{Binding Quantity,StringFormat='Количество вопросов: \{0\}'}" FontSize="15" Height="20" Width="200" TextAlignment="Left"/>
                         </StackPanel>
 
                        

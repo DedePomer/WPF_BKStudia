@@ -13,7 +13,7 @@ namespace WPF_BKStudia.Infrastructure.Services.Convectors
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             string newString = (string)value;
-            return newString.Replace(".txt", "").Replace("Tests", "").Replace("\\", "").Replace("!", ""); 
+            return newString.Replace(".txt", "").Replace("Tests", "").Replace("\\", ""); 
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
