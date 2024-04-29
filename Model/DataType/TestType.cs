@@ -10,7 +10,7 @@ namespace WPF_BKStudia.Model.DataType
     class TestType
     {
         public int Id { get; set; }
-
         public string Name { get; set; }
+        public int Quantity { get; set; }
     }
 }

@@ -9,7 +9,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-
+    <!--Ресурсы-->
+    
     <UserControl.Resources>
         <conv:NameTestConvector x:Key="TestConvector"/>
 
@@ -78,7 +79,6 @@
         <!--Список тестов-->
         <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
             <ItemsControl  ItemsSource="{Binding MyTests}" ItemTemplate="{StaticResource ItemTemplate}">
-
             </ItemsControl>
         </ScrollViewer>
 

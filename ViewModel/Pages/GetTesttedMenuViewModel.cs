@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Shapes;
 using WPF_BKStudia.Infrastructure.Commands;
 using WPF_BKStudia.Infrastructure.Navigation;
+using WPF_BKStudia.Infrastructure.Services;
 using WPF_BKStudia.Model.DataType;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -64,7 +65,8 @@ namespace WPF_BKStudia.ViewModel.Pages
                     MyTests.Add(new TestType()
                     {
                         Id = i+1,
-                        Name = Directory.GetFileSystemEntries(_path).ToList()[i]
+                        Name = Directory.GetFileSystemEntries(_path).ToList()[i],
+                        Quantity = new CountTestReader().Count(Directory.GetFileSystemEntries(_path).ToList()[i])
                     });
                 }
             }

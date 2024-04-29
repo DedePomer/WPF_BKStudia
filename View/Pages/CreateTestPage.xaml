@@ -11,11 +11,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" x:Name="UC">
 
-    <!--Добавляем в ресурсы селектор-->
+    <!--Ресурсы-->
     <UserControl.Resources>
         <conv:QuestionEnumToIntConverter x:Key="QuestionConvecter"/>
-        
-        <!--<ts:StaticSelector x:Key="QuestionSelector"/>-->
 
 
         <!--Шаблон текстового вопроса-->
