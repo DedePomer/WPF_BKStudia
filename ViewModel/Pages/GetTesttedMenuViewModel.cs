@@ -35,6 +35,12 @@ namespace WPF_BKStudia.ViewModel.Pages
             
         }
 
+        public ICommand RemoveTestCommand { get; }
+        private bool CanRemoveTestCommandExecuted(object p) => true;
+        private void OnRemoveTestCommandExecuted(object p)
+        {
+
+        }
 
         //Конструктор
         public GetTesttedMenuViewModel(NavigationStore navigationStore)
@@ -46,6 +52,7 @@ namespace WPF_BKStudia.ViewModel.Pages
             NavigateCreateTestViewModelCommand = new NavigationCommand<CreateTestViewModel>(navigationStore, () => new CreateTestViewModel(navigationStore));
 
             ChoiseTestCommand = new LamdaCommand(OnChoiseTestCommandExecuted, CanChoiseTestCommandExecuted);
+            RemoveTestCommand = new LamdaCommand(OnRemoveTestCommandExecuted, CanRemoveTestCommandExecuted);
         }
 
         private void FillTestsList()
@@ -56,7 +63,7 @@ namespace WPF_BKStudia.ViewModel.Pages
                 {
                     MyTests.Add(new TestType()
                     {
-                        Id = i,
+                        Id = i+1,
                         Name = Directory.GetFileSystemEntries(_path).ToList()[i]
                     });
                 }

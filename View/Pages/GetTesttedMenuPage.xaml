@@ -4,22 +4,25 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WPF_BKStudia.View.Pages"
+             
+             xmlns:conv="clr-namespace:WPF_BKStudia.Infrastructure.Services.Convectors"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
 
     <UserControl.Resources>
-        
-        <!--Шаблон ItemsControl-->
+        <conv:NameTestConvector x:Key="TestConvector"/>
 
-        <DataTemplate x:Key="CustomerTemplate">
+        <!--Шаблон ItemTemplate-->
+
+        <DataTemplate x:Key="ItemTemplate">
 
             <StackPanel  Margin="20 20" Orientation="Vertical" Background="LightBlue">
                 <Border BorderBrush="Black" Margin="10 10">
                     <Grid>
 
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="3*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
@@ -27,30 +30,28 @@
                             <RowDefinition Height="3*"/>
                         </Grid.RowDefinitions>
 
-                        <StackPanel Grid.Row="0"  Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
-                            <Label FontSize="20"  Content="{Binding Id, Mode=TwoWay}"/>
+                        <StackPanel Grid.Row="0"  Grid.Column="0" Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Left">
+                            <TextBlock FontSize="20"  Text="{Binding Id}"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top"  Grid.Row="0" Grid.Column="1">
+                            <TextBlock TextWrapping="Wrap" FontSize="20"  Text="{Binding Name,StringFormat='Название: \{0\}!' ,
+                                Converter={StaticResource TestConvector}}"/>
                         </StackPanel>
 
                         <StackPanel Grid.Row="1"  Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
-                            <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=UserControl,Mode=FindAncestor},
-                            Path=DataContext.NumberOfQuestion,StringFormat='Количество вопросов:, \{0\}!'}" Height="20" Width="200" TextAlignment="Left"/>
+                            <!--<TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=UserControl,Mode=FindAncestor},
+                                Path=DataContext.NumberOfQuestion,StringFormat='Количество вопросов:, \{0\}!'}" Height="20" Width="200" TextAlignment="Left"/>-->
                         </StackPanel>
 
-                        <Control Grid.Row="2" Grid.Column="0" x:Name="ChangingControl" Focusable="False" Template="{StaticResource TextQuestionTemplate}" />
+                       
 
-                        <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Top"  Grid.Row="0" Grid.Column="1">
-                            <ComboBox Width="220" SelectedIndex="{Binding Type, Converter={StaticResource QuestionConvecter}}">
-                                <ComboBoxItem x:Name="TextComboBoxItem">Текстовый вопрос</ComboBoxItem>
-                                <ComboBoxItem x:Name="SingleComboBoxItem">Вопрос с одиночным выбором</ComboBoxItem>
-                                <ComboBoxItem x:Name="MultiComboBoxItem">Вопрос с множественным выбором</ComboBoxItem>
-                            </ComboBox>
-                        </StackPanel>
-
-                        <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Bottom"  Grid.Row="2" Grid.Column="1">
+                        <WrapPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom"  Grid.Row="1" Grid.Column="1">
                             <Button CommandParameter="{Binding}" Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl,Mode=FindAncestor},
-                       Path=DataContext.RemoveQuestionCommand}" Background="#bb4e44" Height="20" Width="20" Content="🞫"/>
-                        </StackPanel>
-
+                                Path=DataContext.ChoiseTestCommand}" Margin="0 0 10 0" Height="30" Padding="20 0" Content="Выбрать"/>
+                            <Button CommandParameter="{Binding}" Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl,Mode=FindAncestor},
+                                Path=DataContext.RemoveTestCommand}" Background="#bb4e44" Height="20" Width="20" Content="🞫"/>
+                        </WrapPanel>
                     </Grid>
                 </Border >
             </StackPanel>
@@ -76,7 +77,7 @@
 
         <!--Список тестов-->
         <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
-            <ItemsControl  ItemsSource="{Binding MyTests}">
+            <ItemsControl  ItemsSource="{Binding MyTests}" ItemTemplate="{StaticResource ItemTemplate}">
 
             </ItemsControl>
         </ScrollViewer>
