@@ -21,6 +21,7 @@ namespace WPF_BKStudia.ViewModel.Pages
         //Поля
         private string _path = "Tests";
         public ObservableCollection<TestType> MyTests {  get; set; }
+        public int NumberOfQuestion {  get; set; }
 
         //Навигационные команды
         public ICommand NavigateMenuPageViewModelCommand { get; }

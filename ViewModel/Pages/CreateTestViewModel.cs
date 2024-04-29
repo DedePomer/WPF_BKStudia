@@ -24,7 +24,7 @@ namespace WPF_BKStudia.ViewModel.Pages
     {
         //Поля
         private int _questionId = 0;
-        private SolidColorBrush _aquaColor = new SolidColorBrush(Colors.Aqua);
+        private SolidColorBrush _aquaColor = new SolidColorBrush(Colors.LightBlue);
         public TestModel CurrentQuestion { get; set; }
 
         //Навигационные команды

@@ -10,7 +10,54 @@
 
     <UserControl.Resources>
         
-        
+        <!--Шаблон ItemsControl-->
+
+        <DataTemplate x:Key="CustomerTemplate">
+
+            <StackPanel  Margin="20 20" Orientation="Vertical" Background="LightBlue">
+                <Border BorderBrush="Black" Margin="10 10">
+                    <Grid>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="3*"/>
+                            <RowDefinition Height="3*"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0"  Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
+                            <Label FontSize="20"  Content="{Binding Id, Mode=TwoWay}"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="1"  Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
+                            <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=UserControl,Mode=FindAncestor},
+                            Path=DataContext.NumberOfQuestion,StringFormat='Количество вопросов:, \{0\}!'}" Height="20" Width="200" TextAlignment="Left"/>
+                        </StackPanel>
+
+                        <Control Grid.Row="2" Grid.Column="0" x:Name="ChangingControl" Focusable="False" Template="{StaticResource TextQuestionTemplate}" />
+
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Top"  Grid.Row="0" Grid.Column="1">
+                            <ComboBox Width="220" SelectedIndex="{Binding Type, Converter={StaticResource QuestionConvecter}}">
+                                <ComboBoxItem x:Name="TextComboBoxItem">Текстовый вопрос</ComboBoxItem>
+                                <ComboBoxItem x:Name="SingleComboBoxItem">Вопрос с одиночным выбором</ComboBoxItem>
+                                <ComboBoxItem x:Name="MultiComboBoxItem">Вопрос с множественным выбором</ComboBoxItem>
+                            </ComboBox>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Bottom"  Grid.Row="2" Grid.Column="1">
+                            <Button CommandParameter="{Binding}" Command="{Binding RelativeSource={RelativeSource AncestorType=UserControl,Mode=FindAncestor},
+                       Path=DataContext.RemoveQuestionCommand}" Background="#bb4e44" Height="20" Width="20" Content="🞫"/>
+                        </StackPanel>
+
+                    </Grid>
+                </Border >
+            </StackPanel>
+
+        </DataTemplate>
+
+
     </UserControl.Resources>
     
     <Grid Background="White">
@@ -24,14 +71,14 @@
 
         <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" >
             <TextBlock TextWrapping="Wrap" Margin="10"  Text="Выбирете тест и нажмите кнопку 'Выбрать', чтобы начать проходить тест " Height="51"/>
-            <Button Command="{Binding NavigateMenuPageViewModelCommand}" Content="Назад" Style="{StaticResource ButtonStyle}"/>
+            <Button Command="{Binding NavigateMenuPageViewModelCommand}" Content="Назад" Style="{DynamicResource ButtonStyle}"/>
         </StackPanel>
 
-        <!--Редактор вопросов-->
-        <ScrollViewer  Grid.Column="1" VerticalScrollBarVisibility="Auto">
-            <ListBox>
-                
-            </ListBox>
+        <!--Список тестов-->
+        <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
+            <ItemsControl  ItemsSource="{Binding MyTests}">
+
+            </ItemsControl>
         </ScrollViewer>
 
 
