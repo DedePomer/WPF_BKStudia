@@ -60,6 +60,10 @@ namespace WPF_BKStudia.ViewModel.Pages
                     });
                 }
             }
+            else 
+            {
+                MessageBox.Show("Как ты сюда зашёл", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
     }
 
