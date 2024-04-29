@@ -39,6 +39,7 @@ namespace WPF_BKStudia.ViewModel.Pages
         public GetTesttedMenuViewModel(NavigationStore navigationStore)
         {         
             MyTests = new ObservableCollection<TestType>();
+            FillTestsList();
 
             NavigateMenuPageViewModelCommand = new NavigationCommand<MenuPageViewModel>(navigationStore, () => new MenuPageViewModel(navigationStore));
             NavigateCreateTestViewModelCommand = new NavigationCommand<CreateTestViewModel>(navigationStore, () => new CreateTestViewModel(navigationStore));
@@ -46,7 +47,20 @@ namespace WPF_BKStudia.ViewModel.Pages
             ChoiseTestCommand = new LamdaCommand(OnChoiseTestCommandExecuted, CanChoiseTestCommandExecuted);
         }
 
-        
+        private void FillTestsList()
+        {
+            if (Directory.GetFileSystemEntries(_path).ToList().Count != 0)
+            {
+                for (int i = 0; i < Directory.GetFileSystemEntries(_path).ToList().Count; i++)
+                {
+                    MyTests.Add(new TestType()
+                    {
+                        Id = i,
+                        Name = Directory.GetFileSystemEntries(_path).ToList()[i]
+                    });
+                }
+            }
+        }
     }
 
     

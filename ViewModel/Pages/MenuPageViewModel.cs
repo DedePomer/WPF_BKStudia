@@ -63,9 +63,13 @@ namespace WPF_BKStudia.ViewModel.Pages
                     case MessageBoxResult.Yes:
                         NavigateCreateTestCommand.Execute(1);
                         break;
-                    case MessageBoxResult.No: default:
+                    case MessageBoxResult.No:default:                        
                         break;
                 }
+            }
+            else
+            {
+                NavigateGetTesttedMenuCommand.Execute(1);
             }
         }
     }
