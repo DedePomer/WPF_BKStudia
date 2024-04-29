@@ -7,10 +7,20 @@
              
             
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800" x:Name="NainMenuUserControl">
 
 
-
+    <!--<UserControl.Resources>
+        <Style TargetType="UserControl">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=NainMenuUserControl, 
+                    Path=Loaded}" Value="True">
+                    <Setter Property="{Binding }"
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>-->
+    
     <Grid Background="White">
         
         <Grid.ColumnDefinitions>
@@ -23,9 +33,9 @@
         <StackPanel Grid.Column="0" Orientation="Vertical">
 
             <Button Command="{Binding NavigateCreateTestCommand}" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Center"  Content="Создание тестов" />
-            <Button Command="{Binding NavigateGetTesttedMenuCommand}" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Center"  Content="Пройти тест" />
+            <Button Command="{Binding GetTesttedMenuCommand}" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Center"  Content="Пройти тест" />
             <Button Command="{Binding NavigateDeleteTestCommand}" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Center"  Content="У далить тест" />
-            <Button Command="{Binding CCloseApp}" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Center"  Content="Выход" />
+            <Button Command="{Binding CloseAppCommand}" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Center"  Content="Выход" />
 
         </StackPanel>
 

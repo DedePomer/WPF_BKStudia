@@ -13,18 +13,31 @@ namespace WPF_BKStudia.ViewModel.Pages
 {
     internal class MenuPageViewModel: ViewModel.Base.ViewModel
     {
+        //Поля
+        private string _path = "Tests";
+        
+
         //Навигационные команды
         public ICommand NavigateGetTesttedMenuCommand { get; }
         public ICommand NavigateDeleteTestCommand { get; }
         public ICommand NavigateCreateTestCommand { get; }
 
         //Функциональные команды
-        public ICommand CCloseApp { get;  }
+        public ICommand CloseAppCommand { get;  }
         private bool CanCCloseAppExecuted(object p) => true;
         private void OnCCloseAppExecuted(object p)
         { 
             Application.Current.Shutdown();
         }
+
+        public ICommand GetTesttedMenuCommand { get; }
+        private bool CanGetTesttedMenuCommandExecuted(object p) => true;
+        private void OnGetTesttedMenuCommandExecuted(object p)
+        {
+            IsNotNullDirectory();
+        }
+
+
 
 
         public MenuPageViewModel(NavigationStore navigationStore)  
@@ -32,26 +45,25 @@ namespace WPF_BKStudia.ViewModel.Pages
             NavigateGetTesttedMenuCommand = new NavigationCommand<GetTesttedMenuViewModel>(navigationStore, () => new GetTesttedMenuViewModel(navigationStore));
             NavigateDeleteTestCommand = new NavigationCommand<DeleteTestViewModel>(navigationStore, () => new DeleteTestViewModel(navigationStore));
             NavigateCreateTestCommand = new NavigationCommand<CreateTestViewModel>(navigationStore, () => new CreateTestViewModel(navigationStore));
+            
+            CloseAppCommand = new LamdaCommand(OnCCloseAppExecuted, CanCCloseAppExecuted);
 
-            CCloseApp = new LamdaCommand(OnCCloseAppExecuted, CanCCloseAppExecuted);
+            //Спросить про это
+            GetTesttedMenuCommand = new LamdaCommand(OnGetTesttedMenuCommandExecuted, CanGetTesttedMenuCommandExecuted);
         }
 
         //Проверяет пуста ли пака Tests
-        private void IsNotNullDirectory(string path)
+        private void IsNotNullDirectory()
         {
-            if (Directory.GetFileSystemEntries(path).ToList().Count == 0)
+            if (Directory.GetFileSystemEntries(_path).ToList().Count == 0)
             {
                 MessageBoxResult result = MessageBox.Show("В папке Tests нет тестов. Хотите создать тест ? (нажмите Да)", "Information", MessageBoxButton.YesNo, MessageBoxImage.Information);
                 switch (result)
                 {
                     case MessageBoxResult.Yes:
-                        NavigateCreateTestViewModelCommand.Execute(1);
+                        NavigateCreateTestCommand.Execute(1);
                         break;
-                    case MessageBoxResult.No:
-                        NavigateMenuPageViewModelCommand.Execute(1);
-                        break;
-                    default:
-                        NavigateMenuPageViewModelCommand.Execute(1);
+                    case MessageBoxResult.No: default:
                         break;
                 }
             }
