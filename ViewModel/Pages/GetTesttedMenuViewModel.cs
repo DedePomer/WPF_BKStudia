@@ -40,7 +40,7 @@ namespace WPF_BKStudia.ViewModel.Pages
         private bool CanRemoveTestCommandExecuted(object p) => true;
         private void OnRemoveTestCommandExecuted(object p)
         {
-
+            object v = p;
         }
 
         //Конструктор
@@ -64,15 +64,15 @@ namespace WPF_BKStudia.ViewModel.Pages
                 {
                     MyTests.Add(new TestType()
                     {
-                        Id = i+1,
-                        Name = Directory.GetFileSystemEntries(_path).ToList()[i],
-                        Quantity = new CountTestReader().Count(Directory.GetFileSystemEntries(_path).ToList()[i])
+                        Id = i + 1,
+                        Name = Directory.GetFileSystemEntries(_path).ToList()[i]   
                     });
+                    MyTests[i].Quantity = MyTests[i].GetCountQuantity();
                 }
             }
             else 
             {
-                MessageBox.Show("Как ты сюда зашёл", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Как ты сюда зашёл ?", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
     }
