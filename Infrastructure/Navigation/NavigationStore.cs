@@ -24,6 +24,7 @@ namespace WPF_BKStudia.Infrastructure.Navigation
                 OnCurrentViewModelChanged();
             }
         }
+        public object Param { get; set; }
 
         //?
         private void OnCurrentViewModelChanged()

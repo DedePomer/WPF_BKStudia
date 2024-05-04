@@ -28,7 +28,8 @@ namespace WPF_BKStudia.Infrastructure.Commands
 
         public override void Execute(object? parameter)
         {
-            _navigationStore.CurrentViewModel = _createViewModel();
+            _navigationStore.Param = parameter;
+            _navigationStore.CurrentViewModel = _createViewModel();          
         }
     }
 }
