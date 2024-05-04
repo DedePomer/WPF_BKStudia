@@ -26,8 +26,8 @@
                 <vp:CreateTestPage/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type vmp:DeleteTestViewModel}">
-                <vp:DeleteTestPage/>
+            <DataTemplate DataType="{x:Type vmp:TakeTestPageViewModel}">
+                <vp:TakeTestPage/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type vmp:GetTesttedMenuViewModel}">

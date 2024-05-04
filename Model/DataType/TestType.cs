@@ -9,10 +9,13 @@ using System.Threading.Tasks;
 
 namespace WPF_BKStudia.Model.DataType
 {
-    //Номер и название теста
+    //Номер и название теста + методы подсчёта количесва вопросов  в тесте и проверки
     class TestType :INotifyPropertyChanged
     {
+        //Приватные поля
         private int _id;
+
+        //Свойства
         public int Id
         {
             get 
@@ -28,6 +31,7 @@ namespace WPF_BKStudia.Model.DataType
         public string Name { get; set; }
         public int Quantity { get; set; }
 
+        //Методы
         public int GetCountQuantity()
         {
             string testText;
@@ -38,7 +42,18 @@ namespace WPF_BKStudia.Model.DataType
             }
             return -1;
         }
+        public bool IsTest()
+        {
+            string nameOfTest = Name.Replace("\\", "").Replace("Tests", "").Replace(".txt", "");
+            if (File.ReadLines(Name).First() == nameOfTest)
+            { 
+                return true;
+            }
+            return false;
+        }
 
+
+        //Реализация интерфейса INotifyPropertyChanged
         public event PropertyChangedEventHandler? PropertyChanged;
         public void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {

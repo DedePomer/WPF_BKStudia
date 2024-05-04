@@ -33,7 +33,11 @@ namespace WPF_BKStudia.ViewModel.Pages
         private bool CanChoiseTestCommandExecuted(object p) => true;
         private void OnChoiseTestCommandExecuted(object p)
         {
-            
+            TestType test = p as TestType;
+            if (test.IsTest())
+            {
+
+            }
         }
 
         public ICommand RemoveTestCommand { get; }
@@ -84,7 +88,7 @@ namespace WPF_BKStudia.ViewModel.Pages
             }
             else 
             {
-                MessageBox.Show("Как ты сюда зашёл ?", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Как ты сюда зашёл ?", "FF", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
     }
