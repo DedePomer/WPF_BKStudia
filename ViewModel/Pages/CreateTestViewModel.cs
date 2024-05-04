@@ -25,7 +25,7 @@ namespace WPF_BKStudia.ViewModel.Pages
         //Поля
         private int _questionId = 0;
         private SolidColorBrush _aquaColor = new SolidColorBrush(Colors.LightBlue);
-        public TestModel CurrentQuestion { get; set; }
+        public Model.TestModel CurrentQuestion { get; set; }
 
         //Навигационные команды
         public ICommand NavigateMenuPageViewModelCommand { get; }
@@ -42,7 +42,7 @@ namespace WPF_BKStudia.ViewModel.Pages
         public ICommand AddQuestionCommand { get; }
         private bool CanCAddQuestionExecuted(object p) => true;
         private void OnCAddQuestionExecuted(object p)
-        {        
+        {
             CurrentQuestion.QuestionCollection.Add(new TextQuestion
             {
                 QuestionColor = _aquaColor,
@@ -78,8 +78,8 @@ namespace WPF_BKStudia.ViewModel.Pages
 
         //Конструктор
         public CreateTestViewModel(NavigationStore navigationStore)
-        {            
-            CurrentQuestion = new TestModel();
+        {
+            CurrentQuestion = new Model.TestModel();
             CurrentQuestion.QuestionCollection = new ObservableCollection<TextQuestion>();
 
             NavigateMenuPageViewModelCommand = new NavigationCommand<MenuPageViewModel>(navigationStore, () => new MenuPageViewModel(navigationStore));

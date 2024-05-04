@@ -13,7 +13,7 @@ using System.Xml.Linq;
 using WPF_BKStudia.Infrastructure.Commands;
 using WPF_BKStudia.Infrastructure.Navigation;
 using WPF_BKStudia.Infrastructure.Services;
-using WPF_BKStudia.Model.DataType;
+using WPF_BKStudia.Model;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace WPF_BKStudia.ViewModel.Pages
@@ -23,7 +23,7 @@ namespace WPF_BKStudia.ViewModel.Pages
         //Поля
         private string _path = "Tests";
         private int _testId = 0;
-        public ObservableCollection<TestType> MyTests {  get; set; }
+        public ObservableCollection<TestModel> MyTests {  get; set; }
         public int NumberOfQuestion {  get; set; }
 
         //Навигационные команды
@@ -36,7 +36,7 @@ namespace WPF_BKStudia.ViewModel.Pages
         private bool CanChoiseTestCommandExecuted(object p) => true;
         private void OnChoiseTestCommandExecuted(object p)
         {
-            TestType test = p as TestType;
+            TestModel test = p as TestModel;
             NavigateTakeTestPageViewModelCommand.Execute(test);       
         }
 
@@ -44,12 +44,12 @@ namespace WPF_BKStudia.ViewModel.Pages
         private bool CanRemoveTestCommandExecuted(object p) => true;
         private void OnRemoveTestCommandExecuted(object p)
         {
-            TestType test = p as TestType;
+            TestModel test = p as TestModel;
             if (File.Exists(test.Name))
             { 
                 File.Delete(test.Name);
                 MyTests.Remove(test);
-                foreach (TestType t in MyTests)
+                foreach (TestModel t in MyTests)
                 {
                     if (t.Id > test.Id)
                     {
@@ -63,7 +63,7 @@ namespace WPF_BKStudia.ViewModel.Pages
         //Конструктор
         public GetTesttedMenuViewModel(NavigationStore navigationStore)
         {         
-            MyTests = new ObservableCollection<TestType>();
+            MyTests = new ObservableCollection<TestModel>();
             FillTestsList();
 
             NavigateMenuPageViewModelCommand = new NavigationCommand<MenuPageViewModel>(navigationStore, () => new MenuPageViewModel(navigationStore));
@@ -83,12 +83,11 @@ namespace WPF_BKStudia.ViewModel.Pages
                 {
                     if (IsTest(OurTests[i]))
                     {
-                        MyTests.Add(new TestType()
+                        MyTests.Add(new TestModel()
                         {
                             Id = _testId + 1,
                             Name = OurTests[i]
-                        });
-                        MyTests[_testId].Quantity = MyTests[_testId].GetCountQuantity();
+                        });                       
                         _testId++;
                     }
                 }
