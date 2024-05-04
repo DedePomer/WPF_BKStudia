@@ -40,7 +40,19 @@ namespace WPF_BKStudia.ViewModel.Pages
         private bool CanRemoveTestCommandExecuted(object p) => true;
         private void OnRemoveTestCommandExecuted(object p)
         {
-            object v = p;
+            TestType test = p as TestType;
+            if (File.Exists(test.Name))
+            { 
+                File.Delete(test.Name);
+                MyTests.Remove(test);
+                foreach (TestType t in MyTests)
+                {
+                    if (t.Id > test.Id)
+                    {
+                        t.Id--;
+                    }
+                }
+            }
         }
 
         //Конструктор

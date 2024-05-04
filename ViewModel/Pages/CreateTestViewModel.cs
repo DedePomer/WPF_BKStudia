@@ -131,7 +131,5 @@ namespace WPF_BKStudia.ViewModel.Pages
             return false;
         }
 
-
-
     }
 }
