@@ -17,6 +17,7 @@ namespace WPF_BKStudia.Infrastructure.Services
             if (!File.Exists(path))
             {
                 File.AppendAllText(path, test.Name);
+                File.AppendAllText(path, "\n" + test.Quanty.ToString());
 
                 foreach (var question in test.QuestionCollection)
                 {

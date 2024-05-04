@@ -86,7 +86,8 @@ namespace WPF_BKStudia.ViewModel.Pages
                         MyTests.Add(new TestModel()
                         {
                             Id = _testId + 1,
-                            Name = OurTests[i]
+                            Name = OurTests[i],
+                            Quanty = new FileReader().GetCountQuestions(OurTests[i])
                         });                       
                         _testId++;
                     }

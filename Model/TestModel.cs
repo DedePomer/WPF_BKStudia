@@ -30,6 +30,7 @@ namespace WPF_BKStudia.Model
         }
         public string? Name { get; set; }
         public ObservableCollection<TextQuestion>? QuestionCollection { get; set; }
+        public int? Quanty { get; set; }
 
 
         //Реализация интерфейса INotifyPropertyChanged

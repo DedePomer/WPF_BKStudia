@@ -40,7 +40,7 @@
                         </StackPanel>
 
                         <StackPanel  Grid.Row="1"  Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
-                            <TextBlock Text="{Binding QuestionCollection.Count,StringFormat='Количество вопросов: \{0\}'}" FontSize="15" Height="20" Width="200" TextAlignment="Left"/>
+                            <TextBlock Text="{Binding Quanty,StringFormat='Количество вопросов: \{0\}'}" FontSize="15" Height="20" Width="200" TextAlignment="Left"/>
                         </StackPanel>
 
                        
