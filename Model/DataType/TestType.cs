@@ -42,15 +42,7 @@ namespace WPF_BKStudia.Model.DataType
             }
             return -1;
         }
-        public bool IsTest()
-        {
-            string nameOfTest = Name.Replace("\\", "").Replace("Tests", "").Replace(".txt", "");
-            if (File.ReadLines(Name).First() == nameOfTest)
-            { 
-                return true;
-            }
-            return false;
-        }
+
 
 
         //Реализация интерфейса INotifyPropertyChanged

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 using WPF_BKStudia.Infrastructure.Commands;
 using WPF_BKStudia.Infrastructure.Navigation;
 using WPF_BKStudia.Infrastructure.Services;
@@ -21,12 +22,14 @@ namespace WPF_BKStudia.ViewModel.Pages
     {
         //Поля
         private string _path = "Tests";
+        private int _testId = 0;
         public ObservableCollection<TestType> MyTests {  get; set; }
         public int NumberOfQuestion {  get; set; }
 
         //Навигационные команды
         public ICommand NavigateMenuPageViewModelCommand { get; }
         public ICommand NavigateCreateTestViewModelCommand { get; }
+        public ICommand NavigateTakeTestPageViewModelCommand { get; }
 
         //Функциональные команды
         public ICommand ChoiseTestCommand { get; }
@@ -34,10 +37,7 @@ namespace WPF_BKStudia.ViewModel.Pages
         private void OnChoiseTestCommandExecuted(object p)
         {
             TestType test = p as TestType;
-            if (test.IsTest())
-            {
-
-            }
+            NavigateTakeTestPageViewModelCommand.Execute(test);       
         }
 
         public ICommand RemoveTestCommand { get; }
@@ -56,6 +56,7 @@ namespace WPF_BKStudia.ViewModel.Pages
                         t.Id--;
                     }
                 }
+                _testId--;
             }
         }
 
@@ -67,6 +68,7 @@ namespace WPF_BKStudia.ViewModel.Pages
 
             NavigateMenuPageViewModelCommand = new NavigationCommand<MenuPageViewModel>(navigationStore, () => new MenuPageViewModel(navigationStore));
             NavigateCreateTestViewModelCommand = new NavigationCommand<CreateTestViewModel>(navigationStore, () => new CreateTestViewModel(navigationStore));
+            NavigateTakeTestPageViewModelCommand = new NavigationCommand<TakeTestPageViewModel>(navigationStore, () => new TakeTestPageViewModel(navigationStore));
 
             ChoiseTestCommand = new LamdaCommand(OnChoiseTestCommandExecuted, CanChoiseTestCommandExecuted);
             RemoveTestCommand = new LamdaCommand(OnRemoveTestCommandExecuted, CanRemoveTestCommandExecuted);
@@ -74,22 +76,37 @@ namespace WPF_BKStudia.ViewModel.Pages
 
         private void FillTestsList()
         {
-            if (Directory.GetFileSystemEntries(_path).ToList().Count != 0)
+            List<string> OurTests = Directory.GetFileSystemEntries(_path).ToList();
+            if (OurTests.Count != 0)
             {
-                for (int i = 0; i < Directory.GetFileSystemEntries(_path).ToList().Count; i++)
+                for (int i = 0; i < OurTests.Count; i++)
                 {
-                    MyTests.Add(new TestType()
+                    if (IsTest(OurTests[i]))
                     {
-                        Id = i + 1,
-                        Name = Directory.GetFileSystemEntries(_path).ToList()[i]   
-                    });
-                    MyTests[i].Quantity = MyTests[i].GetCountQuantity();
+                        MyTests.Add(new TestType()
+                        {
+                            Id = _testId + 1,
+                            Name = OurTests[i]
+                        });
+                        MyTests[_testId].Quantity = MyTests[_testId].GetCountQuantity();
+                        _testId++;
+                    }
                 }
             }
             else 
             {
-                MessageBox.Show("Как ты сюда зашёл ?", "FF", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Как ты сюда зашёл ?", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             }
+        }
+
+        public bool IsTest(string path)
+        {
+            string nameOfTest = path.Replace("\\", "").Replace("Tests", "").Replace(".txt", "");
+            if (File.ReadLines(path).First() == nameOfTest)
+            {
+                return true;
+            }
+            return false;
         }
     }
 

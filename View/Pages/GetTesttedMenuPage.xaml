@@ -21,7 +21,6 @@
             <StackPanel  Margin="20 20" Orientation="Vertical" Background="LightBlue">
                 <Border BorderBrush="Black" Margin="10 10">
                     <Grid>
-                    <!--Сделать красиво-->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
                             <ColumnDefinition Width="3*"/>
