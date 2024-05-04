@@ -19,7 +19,6 @@ namespace WPF_BKStudia.ViewModel.Pages
 
         //Навигационные команды
         public ICommand NavigateGetTesttedMenuCommand { get; }
-        public ICommand NavigateDeleteTestCommand { get; }
         public ICommand NavigateCreateTestCommand { get; }
 
         //Функциональные команды
@@ -43,7 +42,6 @@ namespace WPF_BKStudia.ViewModel.Pages
         public MenuPageViewModel(NavigationStore navigationStore)  
         {
             NavigateGetTesttedMenuCommand = new NavigationCommand<GetTesttedMenuViewModel>(navigationStore, () => new GetTesttedMenuViewModel(navigationStore));
-            NavigateDeleteTestCommand = new NavigationCommand<DeleteTestViewModel>(navigationStore, () => new DeleteTestViewModel(navigationStore));
             NavigateCreateTestCommand = new NavigationCommand<CreateTestViewModel>(navigationStore, () => new CreateTestViewModel(navigationStore));
             
             CloseAppCommand = new LamdaCommand(OnCCloseAppExecuted, CanCCloseAppExecuted);

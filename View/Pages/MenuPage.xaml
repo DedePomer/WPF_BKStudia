@@ -34,7 +34,6 @@
 
             <Button Command="{Binding NavigateCreateTestCommand}" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Center"  Content="Создание тестов" />
             <Button Command="{Binding GetTesttedMenuCommand}" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Center"  Content="Пройти тест" />
-            <Button Command="{Binding NavigateDeleteTestCommand}" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Center"  Content="У далить тест" />
             <Button Command="{Binding CloseAppCommand}" Style="{StaticResource ButtonStyle}" HorizontalAlignment="Center"  Content="Выход" />
 
         </StackPanel>
