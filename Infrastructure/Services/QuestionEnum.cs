@@ -10,7 +10,6 @@ namespace WPF_BKStudia.Infrastructure.Services
     {
         TextQuestion = 0,
         SingleChoiceQuestion = 1,
-        MultiChoiceQuestion = 2
-        
+        MultiChoiceQuestion = 2      
     }
 }

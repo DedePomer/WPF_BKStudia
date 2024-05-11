@@ -23,7 +23,7 @@ namespace WPF_BKStudia.Infrastructure.Services
                 {
                     File.AppendAllText(path, "\n\n");
                     File.AppendAllText(path, "\n" + question.Id.ToString());
-                    File.AppendAllText(path, "\n" + question.Type.ToString());
+                    File.AppendAllText(path, "\n" + (int)question.Type);
                     File.AppendAllText(path, "\n" + question.Text.ToString());
 
                     switch (question.Type)
