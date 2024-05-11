@@ -13,9 +13,9 @@ namespace WPF_BKStudia.ViewModel.Pages
     {
         public TakeTestPageViewModel(NavigationStore navigationStore) 
         {
-            //TestModel test = navigationStore.Param as TestModel;
-            //FileReader fileReader = new FileReader();
-            //test = fileReader.ReadFile(test.Name);
+            TestModel test = navigationStore.Param as TestModel;
+            FileReader fileReader = new FileReader();
+            test.QuestionCollection = fileReader.GetQuestionCollection(test.Name);
         }
     }
 }

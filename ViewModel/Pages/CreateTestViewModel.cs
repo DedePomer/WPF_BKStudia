@@ -68,7 +68,6 @@ namespace WPF_BKStudia.ViewModel.Pages
             if (FieldsNotNULL())
             {
                 CurrentQuestion.Quanty = _questionId;
-                new FileWriter().SaveFile(CurrentQuestion);
                 if (new FileWriter().SaveFile(CurrentQuestion))
                 {
                     MessageBox.Show("Тест сохранён", "Information", MessageBoxButton.OK);

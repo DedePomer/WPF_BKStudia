@@ -18,32 +18,51 @@ namespace WPF_BKStudia.Infrastructure.Services
             List<string> fileStr = File.ReadLines(path).ToList();
             return int.Parse(fileStr[1]);
         }
-        //private ObservableCollection<TextQuestion> GetQuestionCollection(string[] file, string path)
-        //{
-        //    ObservableCollection<TextQuestion> questions = new ObservableCollection<TextQuestion>();
-        //    for (int i = 0; i < file.Length; i++)
-        //    { 
-        //        string[] mas = file[i].Split('\n');
-        //        questions.Add(new TextQuestion()
-        //        {
-        //            Id = Int32.Parse(mas[0]),
-        //            Type = (QuestionEnum)1,
-        //        });
-        //    }
-        //    return questions;
-        //}
-        //public TestModel ReadFile(string path)
-        //{
-        //    TestModel test = new TestModel();
-        //    string fileStr = File.ReadAllText(path);
-        //    test.Name = path.Replace(".txt", "").Replace("Tests", "").Replace("\\", "");
-        //    test.Quanty = GetCountQuestions(path);
-        //    fileStr = fileStr.Replace(test.Name + "\n" + test.Quanty, "");
-        //    string[] fileMas = fileStr.Split("\n\n\n");
-            
-           
-        //}
+        public ObservableCollection<TextQuestion> GetQuestionCollection(string path)
+        {
+            string[] file = GetQuestionMas(path);
+            ObservableCollection<TextQuestion> questions = new ObservableCollection<TextQuestion>();
+            for (int i = 0; i < file.Length; i++)
+            {
+                string[] mas = file[i].Split('\n');
+                questions.Add(new TextQuestion()
+                {
+                    Id = Int32.Parse(mas[0]),
+                    Type = (QuestionEnum)Int32.Parse(mas[1]),
+                    Text = mas[2]
+                });
+                switch (questions[i].Type)
+                {
+                    case QuestionEnum.TextQuestion:
+                        questions[i].ListAnswer = new ObservableCollection<Answer>();
+                        questions[i].ListAnswer.Add(new Answer()
+                        {
+                            Text = mas[3],
+                            IsTrue = true
+                        });
 
+                        break;
+                    case QuestionEnum.SingleChoiceQuestion:
 
+                        break;
+                    case QuestionEnum.MultiChoiceQuestion:
+
+                        break;
+                    default:
+                        break;
+                }
+            }
+            return questions;
+        }
+        private string[] GetQuestionMas(string path)
+        {
+            string fileStr = File.ReadAllText(path);
+
+            fileStr = fileStr.Replace(path.Replace(".txt", "").Replace("Tests", "").Replace("\\", "") + "\n" + GetCountQuestions(path), "");
+            fileStr = fileStr.Substring(3);
+
+            string[] fileMas = fileStr.Split("\n\n\n");
+            return fileMas;
+        }
     }
 }
