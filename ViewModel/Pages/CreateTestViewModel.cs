@@ -69,8 +69,11 @@ namespace WPF_BKStudia.ViewModel.Pages
             {
                 CurrentQuestion.Quanty = _questionId;
                 new FileWriter().SaveFile(CurrentQuestion);
-                MessageBox.Show("Тест сохранён", "Information", MessageBoxButton.OK);
-                NavigateMenuPageViewModelCommand.Execute(p);
+                if (new FileWriter().SaveFile(CurrentQuestion))
+                {
+                    MessageBox.Show("Тест сохранён", "Information", MessageBoxButton.OK);
+                    NavigateMenuPageViewModelCommand.Execute(p);
+                }                               
             }
             else
                 MessageBox.Show("Введите корректное название теста (оно не должно полностью состоять из пробелов и содежать знаки)","Error", MessageBoxButton.OK,MessageBoxImage.Error);
