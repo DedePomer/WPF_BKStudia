@@ -29,12 +29,19 @@ namespace WPF_BKStudia.Infrastructure.Services
                     switch (question.Type)
                     {
                         case QuestionEnum.TextQuestion:
-                            File.AppendAllText(path, "\n" + question.ListAnswer[0].Text.ToString());
+                            if (question.ListAnswer[0].IsTrue)
+                            {
+                                if (question.ListAnswer[0].Text == "")
+                                    File.AppendAllText(path, "\n ");                               
+                                else
+                                    File.AppendAllText(path, "\n" + question.ListAnswer[0].Text.ToString());
+                            }                          
                             break;
                         case QuestionEnum.SingleChoiceQuestion:
 
                             break;
                         case QuestionEnum.MultiChoiceQuestion:
+
                             break;
                         default:
                             MessageBox.Show("Тип вопроса " + question.Id + " неопределён", "Save error", MessageBoxButton.OK, MessageBoxImage.Error);

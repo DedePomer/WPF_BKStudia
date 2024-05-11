@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WPF_BKStudia.Infrastructure.Navigation;
+using WPF_BKStudia.Infrastructure.Services;
+using WPF_BKStudia.Model;
 
 namespace WPF_BKStudia.ViewModel.Pages
 {
@@ -11,7 +13,9 @@ namespace WPF_BKStudia.ViewModel.Pages
     {
         public TakeTestPageViewModel(NavigationStore navigationStore) 
         {
-
+            TestModel test = navigationStore.Param as TestModel;
+            FileReader fileReader = new FileReader();
+            test = fileReader.ReadFile(test.Name);
         }
     }
 }
