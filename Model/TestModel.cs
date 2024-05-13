@@ -33,6 +33,11 @@ namespace WPF_BKStudia.Model
         public int? Quanty { get; set; }
 
 
+
+        //Засунуть в абстрактный класс!!!!!!!!!
+        //Засунуть в абстрактный класс!!!!!!!!!
+
+
         //Реализация интерфейса INotifyPropertyChanged
         public event PropertyChangedEventHandler? PropertyChanged;
         public void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
