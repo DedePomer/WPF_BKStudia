@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WPF_BKStudia.Infrastructure.Interfaces;
 using WPF_BKStudia.ViewModel.Base;
 
 
 namespace WPF_BKStudia.Infrastructure.Navigation
 {
-    internal class NavigationStore
+    internal class NavigationStore: INavigationStoreService
     {
         //?
         public event Action CurrentViewModelChanged;
