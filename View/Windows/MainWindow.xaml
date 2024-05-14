@@ -11,9 +11,6 @@
         
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Window.DataContext>
-        <vmm:MainWindowViewModel/>
-    </Window.DataContext>
 
     <ContentControl Content="{Binding CurrentViewModel}">
         <ContentControl.Resources>
