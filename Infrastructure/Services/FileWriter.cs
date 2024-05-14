@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Shapes;
+using WPF_BKStudia.Infrastructure.Services.Enums;
 using WPF_BKStudia.Model;
 
 namespace WPF_BKStudia.Infrastructure.Services

@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using WPF_BKStudia.Infrastructure.Interfaces;
+using WPF_BKStudia.Infrastructure.Services.Enums;
 using WPF_BKStudia.Model.DataType;
 
-namespace WPF_BKStudia.Infrastructure.Services
+namespace WPF_BKStudia.Infrastructure.Services.Selectors
 {
-    internal class StaticSelector: DataTemplateSelector
+    internal class StaticSelector : DataTemplateSelector
     {
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {

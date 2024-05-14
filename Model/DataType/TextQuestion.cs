@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using WPF_BKStudia.Infrastructure.Interfaces;
-using WPF_BKStudia.Infrastructure.Services;
+using WPF_BKStudia.Infrastructure.Services.Enums;
 using WPF_BKStudia.ViewModel.Pages;
 
 namespace WPF_BKStudia.Model.DataType

@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WPF_BKStudia.Infrastructure.Services
+namespace WPF_BKStudia.Infrastructure.Services.Enums
 {
     public enum QuestionEnum
     {
         TextQuestion = 0,
         SingleChoiceQuestion = 1,
-        MultiChoiceQuestion = 2      
+        MultiChoiceQuestion = 2
     }
 }

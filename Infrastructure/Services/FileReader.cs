@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WPF_BKStudia.Infrastructure.Services.Enums;
 using WPF_BKStudia.Model;
 using WPF_BKStudia.Model.DataType;
 using static System.Net.Mime.MediaTypeNames;

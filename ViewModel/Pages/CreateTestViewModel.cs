@@ -13,6 +13,7 @@ using WPF_BKStudia.Infrastructure.Commands;
 using WPF_BKStudia.Infrastructure.Interfaces;
 using WPF_BKStudia.Infrastructure.Navigation;
 using WPF_BKStudia.Infrastructure.Services;
+using WPF_BKStudia.Infrastructure.Services.Enums;
 using WPF_BKStudia.Model;
 using WPF_BKStudia.Model.DataType;
 
