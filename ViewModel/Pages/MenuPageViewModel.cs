@@ -74,7 +74,7 @@ namespace WPF_BKStudia.ViewModel.Pages
             }
             else
             {
-                _navigationStoreService.CurrentViewModel = new TakeTestPageViewModel(_navigationStoreService, _fileReaderService, _fileWriterService);
+                _navigationStoreService.CurrentViewModel = new GetTesttedMenuViewModel(_navigationStoreService, _fileReaderService, _fileWriterService);
             }
         }
     }
