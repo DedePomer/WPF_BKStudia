@@ -11,7 +11,7 @@ using WPF_BKStudia.Model.DataType;
 
 namespace WPF_BKStudia.Model
 {
-    public class TestModel : INotifyPropertyChanged
+    public class TestModel : AbstractINotifyProperty, INotifyPropertyChanged
     {
         //Модель где "содержаться" название теста и коллекция вопросов
         private int? _id;
@@ -31,21 +31,5 @@ namespace WPF_BKStudia.Model
         public string? Name { get; set; }
         public ObservableCollection<TextQuestion>? QuestionCollection { get; set; }
         public int? Quanty { get; set; }
-
-
-
-        //Засунуть в абстрактный класс!!!!!!!!!
-        //Засунуть в абстрактный класс!!!!!!!!!
-
-
-        //Реализация интерфейса INotifyPropertyChanged
-        public event PropertyChangedEventHandler? PropertyChanged;
-        public void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-
     }
 }

@@ -14,12 +14,9 @@ using WPF_BKStudia.ViewModel.Pages;
 
 namespace WPF_BKStudia.Model.DataType
 {
-    //Номер, тектс вопроса, тип вопроса, список ответов, Цвет вопроса + реализация метода INotifyPropertyChanged
+    //Номер, тектс вопроса, тип вопроса, список ответов, Цвет вопроса
 
-    //ВАЖНО!!! Попробуй использовать делегат для INotifyPropertyChanged
-    //ВАЖНО!!! Попробуй использовать делегат для INotifyPropertyChanged
-    //ВАЖНО!!! Попробуй использовать делегат для INotifyPropertyChanged
-    public class TextQuestion :  INotifyPropertyChanged, IQuestionAnswer
+    public class TextQuestion : AbstractINotifyProperty,  INotifyPropertyChanged, IQuestionAnswer
     {
         //Приватные поля
         private int _id;
@@ -49,13 +46,5 @@ namespace WPF_BKStudia.Model.DataType
         }
         public ObservableCollection<Answer>? ListAnswer { get; set; }
         public SolidColorBrush QuestionColor { get; set; }
-
-        //Реализация интерфейса INotifyPropertyChanged
-        public event PropertyChangedEventHandler? PropertyChanged;
-        public void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }
