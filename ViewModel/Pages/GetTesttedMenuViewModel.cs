@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Shapes;
 using System.Xml.Linq;
 using WPF_BKStudia.Infrastructure.Commands;
+using WPF_BKStudia.Infrastructure.Interfaces;
 using WPF_BKStudia.Infrastructure.Navigation;
 using WPF_BKStudia.Infrastructure.Services;
 using WPF_BKStudia.Model;
@@ -61,7 +62,7 @@ namespace WPF_BKStudia.ViewModel.Pages
         }
 
         //Конструктор
-        public GetTesttedMenuViewModel(NavigationStore navigationStore)
+        public GetTesttedMenuViewModel(INavigationStoreService navigationStoreService, IFileReaderService fileReaderService, IFileWriterService fileWriterService)
         {         
             MyTests = new ObservableCollection<TestModel>();
             FillTestsList();

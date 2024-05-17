@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using WPF_BKStudia.Infrastructure.Commands;
+using WPF_BKStudia.Infrastructure.Interfaces;
 using WPF_BKStudia.Infrastructure.Navigation;
 
 namespace WPF_BKStudia.ViewModel.Pages
@@ -15,11 +16,24 @@ namespace WPF_BKStudia.ViewModel.Pages
     {
         //Поля
         private string _path = "Tests";
-        
+        private INavigationStoreService _navigationStoreService { get; set; }
+        private IFileReaderService _fileReaderService { get; set; }
+        private IFileWriterService _fileWriterService { get; set; }
 
         //Навигационные команды
         public ICommand NavigateGetTesttedMenuCommand { get; }
+        private bool CanNavigateGetTesttedMenuCommandExecuted(object p) => true;
+        private void OnNavigateGetTesttedMenuCommandExecuted(object p)
+        {
+            IsNotNullDirectory();            
+        }
+
         public ICommand NavigateCreateTestCommand { get; }
+        private bool CanNavigateCreateTestCommandExecuted(object p) => true;
+        private void OnNavigateCreateTestCommandExecuted(object p)
+        {
+            _navigationStoreService.CurrentViewModel = new CreateTestViewModel(_navigationStoreService, _fileReaderService, _fileWriterService);
+        }
 
         //Функциональные команды
         public ICommand CloseAppCommand { get;  }
@@ -29,25 +43,20 @@ namespace WPF_BKStudia.ViewModel.Pages
             Application.Current.Shutdown();
         }
 
-        public ICommand GetTesttedMenuCommand { get; }
-        private bool CanGetTesttedMenuCommandExecuted(object p) => true;
-        private void OnGetTesttedMenuCommandExecuted(object p)
+
+
+
+
+        public MenuPageViewModel(INavigationStoreService navigationStoreService, IFileReaderService fileReaderService, IFileWriterService fileWriterService)  
         {
-            IsNotNullDirectory();
-        }
+            _navigationStoreService = navigationStoreService;
+            _fileReaderService = fileReaderService;
+            _fileWriterService = fileWriterService;
 
+            NavigateGetTesttedMenuCommand = new LamdaCommand(OnNavigateGetTesttedMenuCommandExecuted, CanNavigateGetTesttedMenuCommandExecuted); 
+            NavigateCreateTestCommand = new LamdaCommand(OnNavigateCreateTestCommandExecuted, CanNavigateCreateTestCommandExecuted);
 
-
-
-        public MenuPageViewModel(NavigationStore navigationStore)  
-        {
-            NavigateGetTesttedMenuCommand = new NavigationCommand<GetTesttedMenuViewModel>(navigationStore, () => new GetTesttedMenuViewModel(navigationStore));
-            NavigateCreateTestCommand = new NavigationCommand<CreateTestViewModel>(navigationStore, () => new CreateTestViewModel(navigationStore));
-            
-            CloseAppCommand = new LamdaCommand(OnCCloseAppExecuted, CanCCloseAppExecuted);
-
-            //Спросить про это
-            GetTesttedMenuCommand = new LamdaCommand(OnGetTesttedMenuCommandExecuted, CanGetTesttedMenuCommandExecuted);
+            CloseAppCommand = new LamdaCommand(OnCCloseAppExecuted, CanCCloseAppExecuted);          
         }
 
         //Проверяет пуста ли пака Tests
@@ -67,7 +76,7 @@ namespace WPF_BKStudia.ViewModel.Pages
             }
             else
             {
-                NavigateGetTesttedMenuCommand.Execute(1);
+                _navigationStoreService.CurrentViewModel = new TakeTestPageViewModel(_navigationStoreService, _fileReaderService, _fileWriterService);
             }
         }
     }

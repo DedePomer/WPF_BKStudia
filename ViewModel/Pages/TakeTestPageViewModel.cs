@@ -13,7 +13,7 @@ namespace WPF_BKStudia.ViewModel.Pages
     internal class TakeTestPageViewModel: ViewModel.Base.ViewModel
     {
         private IFileReaderService _fileReaderService { get; set; }
-        public TakeTestPageViewModel(NavigationStore navigationStore, IFileReaderService fileReaderService) 
+        public TakeTestPageViewModel(INavigationStoreService navigationStoreService, IFileReaderService fileReaderService, IFileWriterService fileWriterService) 
         {
             _fileReaderService = fileReaderService;
             TestModel test = navigationStore.Param as TestModel;

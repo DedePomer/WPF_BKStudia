@@ -81,7 +81,7 @@ namespace WPF_BKStudia.ViewModel.Pages
           
 
         //Конструктор
-        public CreateTestViewModel(NavigationStore navigationStore)
+        public CreateTestViewModel(INavigationStoreService navigationStoreService, IFileReaderService fileReaderService, IFileWriterService fileWriterService)
         {
             CurrentQuestion = new Model.TestModel();
             CurrentQuestion.QuestionCollection = new ObservableCollection<TextQuestion>();
