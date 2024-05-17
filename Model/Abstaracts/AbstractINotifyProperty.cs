@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WPF_BKStudia.Model
+namespace WPF_BKStudia.Model.Abstaracts
 {
     //Реализация интерфейса INotifyPropertyChanged
     public abstract class AbstractINotifyProperty : INotifyPropertyChanged

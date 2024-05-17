@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using WPF_BKStudia.Infrastructure.Interfaces;
+using WPF_BKStudia.Model.Abstaracts;
 using WPF_BKStudia.Model.DataType;
 
 namespace WPF_BKStudia.Model
@@ -15,7 +16,6 @@ namespace WPF_BKStudia.Model
     {
         //Модель где "содержаться" название теста и коллекция вопросов
         private int? _id;
-
         public int? Id
         {
             get
