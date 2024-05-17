@@ -25,12 +25,31 @@ namespace WPF_BKStudia.ViewModel.Pages
         private string _path = "Tests";
         private int _testId = 0;
         public ObservableCollection<TestModel> MyTests {  get; set; }
-        public int NumberOfQuestion {  get; set; }
+        private INavigationStoreService _navigationStoreService { get; set; }
+        private IFileReaderService _fileReaderService { get; set; }
+        private IFileWriterService _fileWriterService { get; set; }
 
         //Навигационные команды
         public ICommand NavigateMenuPageViewModelCommand { get; }
+        private bool CanNavigateMenuPageViewModelCommandExecuted(object p) => true;
+        private void OnNavigateMenuPageViewModelCommandExecuted(object p)
+        {
+            _navigationStoreService.CurrentViewModel = new MenuPageViewModel(_navigationStoreService, _fileReaderService, _fileWriterService);
+        }
+
         public ICommand NavigateCreateTestViewModelCommand { get; }
+        private bool CanNavigateCreateTestViewModelCommandExecuted(object p) => true;
+        private void OnNavigateCreateTestViewModelCommandExecuted(object p)
+        {
+            _navigationStoreService.CurrentViewModel = new CreateTestViewModel(_navigationStoreService, _fileReaderService, _fileWriterService);
+        }
+
         public ICommand NavigateTakeTestPageViewModelCommand { get; }
+        private bool CanNavigateTakeTestPageViewModelCommandExecuted(object p) => true;
+        private void OnNavigateTakeTestPageViewModelCommandExecuted(object p)
+        {
+            _navigationStoreService.CurrentViewModel = new TakeTestPageViewModel(_navigationStoreService, _fileReaderService, _fileWriterService);
+        }
 
         //Функциональные команды
         public ICommand ChoiseTestCommand { get; }
@@ -63,13 +82,16 @@ namespace WPF_BKStudia.ViewModel.Pages
 
         //Конструктор
         public GetTesttedMenuViewModel(INavigationStoreService navigationStoreService, IFileReaderService fileReaderService, IFileWriterService fileWriterService)
-        {         
+        {
+            _navigationStoreService = navigationStoreService;
+            _fileReaderService = fileReaderService;
+            _fileWriterService = fileWriterService;
             MyTests = new ObservableCollection<TestModel>();
             FillTestsList();
 
-            NavigateMenuPageViewModelCommand = new NavigationCommand<MenuPageViewModel>(navigationStore, () => new MenuPageViewModel(navigationStore));
-            NavigateCreateTestViewModelCommand = new NavigationCommand<CreateTestViewModel>(navigationStore, () => new CreateTestViewModel(navigationStore));
-            NavigateTakeTestPageViewModelCommand = new NavigationCommand<TakeTestPageViewModel>(navigationStore, () => new TakeTestPageViewModel(navigationStore));
+            NavigateMenuPageViewModelCommand = new LamdaCommand(OnNavigateMenuPageViewModelCommandExecuted, CanNavigateMenuPageViewModelCommandExecuted);
+            NavigateCreateTestViewModelCommand = new LamdaCommand(OnNavigateCreateTestViewModelCommandExecuted, CanNavigateCreateTestViewModelCommandExecuted);
+            NavigateTakeTestPageViewModelCommand = new LamdaCommand(OnNavigateTakeTestPageViewModelCommandExecuted, CanNavigateTakeTestPageViewModelCommandExecuted);
 
             ChoiseTestCommand = new LamdaCommand(OnChoiseTestCommandExecuted, CanChoiseTestCommandExecuted);
             RemoveTestCommand = new LamdaCommand(OnRemoveTestCommandExecuted, CanRemoveTestCommandExecuted);
@@ -88,7 +110,7 @@ namespace WPF_BKStudia.ViewModel.Pages
                         {
                             Id = _testId + 1,
                             Name = OurTests[i],
-                            Quanty = new FileReader().GetCountQuestions(OurTests[i])
+                            Quanty = _fileReaderService.GetCountQuestions(OurTests[i])
                         });                       
                         _testId++;
                     }

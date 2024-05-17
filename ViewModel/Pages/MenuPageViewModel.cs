@@ -45,8 +45,6 @@ namespace WPF_BKStudia.ViewModel.Pages
 
 
 
-
-
         public MenuPageViewModel(INavigationStoreService navigationStoreService, IFileReaderService fileReaderService, IFileWriterService fileWriterService)  
         {
             _navigationStoreService = navigationStoreService;

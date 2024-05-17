@@ -27,9 +27,17 @@ namespace WPF_BKStudia.ViewModel.Pages
         private int _questionId = 0;
         private SolidColorBrush _aquaColor = new SolidColorBrush(Colors.LightBlue);
         public Model.TestModel CurrentQuestion { get; set; }
+        private INavigationStoreService _navigationStoreService { get; set; }
+        private IFileReaderService _fileReaderService { get; set; }
+        private IFileWriterService _fileWriterService { get; set; }
 
         //Навигационные команды
         public ICommand NavigateMenuPageViewModelCommand { get; }
+        private bool CanNavigateMenuPageViewModelCommandExecuted(object p) => true;
+        private void OnNavigateMenuPageViewModelCommandExecuted(object p)
+        {
+            _navigationStoreService.CurrentViewModel = new MenuPageViewModel(_navigationStoreService, _fileReaderService, _fileWriterService);
+        }
 
         //Функциональные команды
         public ICommand RemoveQuestionCommand { get; }
@@ -69,10 +77,10 @@ namespace WPF_BKStudia.ViewModel.Pages
             if (FieldsNotNULL())
             {
                 CurrentQuestion.Quanty = _questionId;
-                if (new FileWriter().SaveFile(CurrentQuestion))
+                if (_fileWriterService.SaveFile(CurrentQuestion))
                 {
                     MessageBox.Show("Тест сохранён", "Information", MessageBoxButton.OK);
-                    NavigateMenuPageViewModelCommand.Execute(p);
+                    NavigateMenuPageViewModelCommand.Execute(1);
                 }                               
             }
             else
@@ -83,10 +91,13 @@ namespace WPF_BKStudia.ViewModel.Pages
         //Конструктор
         public CreateTestViewModel(INavigationStoreService navigationStoreService, IFileReaderService fileReaderService, IFileWriterService fileWriterService)
         {
+            _navigationStoreService = navigationStoreService;
+            _fileReaderService = fileReaderService;
+            _fileWriterService = fileWriterService;
             CurrentQuestion = new Model.TestModel();
             CurrentQuestion.QuestionCollection = new ObservableCollection<TextQuestion>();
 
-            NavigateMenuPageViewModelCommand = new NavigationCommand<MenuPageViewModel>(navigationStore, () => new MenuPageViewModel(navigationStore));
+            NavigateMenuPageViewModelCommand = new LamdaCommand(OnNavigateMenuPageViewModelCommandExecuted, CanNavigateMenuPageViewModelCommandExecuted);
 
             AddQuestionCommand = new LamdaCommand(OnCAddQuestionExecuted, CanCAddQuestionExecuted);
             RemoveQuestionCommand = new LamdaCommand(OnCRemoveQuestionExecuted, CanCRemoveQuestionExecuted);
