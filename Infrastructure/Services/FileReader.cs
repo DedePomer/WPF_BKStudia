@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 using WPF_BKStudia.Infrastructure.Interfaces;
 using WPF_BKStudia.Infrastructure.Services.Enums;
 using WPF_BKStudia.Model;
@@ -33,7 +34,8 @@ namespace WPF_BKStudia.Infrastructure.Services
                     Type = (QuestionEnum)Int32.Parse(mas[1]),
                     Text = mas[2],
                     Answer = new ObservableCollection<Answer>(),
-                    ListAnswer = new ObservableCollection<Answer>()
+                    ListAnswer = new ObservableCollection<Answer>(),
+                    QuestionColor  = new SolidColorBrush(Colors.LightBlue)
             }); ;
                 switch (questions[i].Type)
                 {
