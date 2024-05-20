@@ -25,7 +25,8 @@ namespace WPF_BKStudia.ViewModel.Pages
 
         private SolidColorBrush _aquaColor = new SolidColorBrush(Colors.LightBlue);
 
-        public ObservableCollection<TextQuestion> Questions { get; set; } 
+        public ObservableCollection<TextQuestion> Questions { get; set; }
+        //public int CountTrueQuestion { get; set; } 
         public Visibility HidenObject { get; set; }
 
         //Навигационные команды
