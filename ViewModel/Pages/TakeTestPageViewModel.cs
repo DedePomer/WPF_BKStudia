@@ -26,7 +26,8 @@ namespace WPF_BKStudia.ViewModel.Pages
         private SolidColorBrush _aquaColor = new SolidColorBrush(Colors.LightBlue);
 
         public ObservableCollection<TextQuestion> Questions { get; set; }
-        //public int CountTrueQuestion { get; set; } 
+        public int CountTrueQuestion { get; set; }
+        public int CountQuestion { get; set; }
         public Visibility HidenObject { get; set; }
 
         //Навигационные команды
@@ -56,6 +57,7 @@ namespace WPF_BKStudia.ViewModel.Pages
             TestModel test = _navigationStoreService.Param as TestModel;
             Questions = _fileReaderService.GetQuestionCollection(test.Name);
             HidenObject = Visibility.Collapsed;
+            CountQuestion = fileReaderService.GetCountQuestions(test.Name);
 
             NavigateGetTesttedMenuViewModelCommand = new LamdaCommand(OnNavigateGetTesttedMenuViewModelCommandExecuted, CanNavigateGetTesttedMenuViewModelCommandExecuted);
 

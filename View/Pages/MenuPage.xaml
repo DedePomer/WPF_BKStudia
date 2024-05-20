@@ -10,17 +10,7 @@
              d:DesignHeight="450" d:DesignWidth="800" x:Name="NainMenuUserControl">
 
 
-    <!--<UserControl.Resources>
-        <Style TargetType="UserControl">
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding ElementName=NainMenuUserControl, 
-                    Path=Loaded}" Value="True">
-                    <Setter Property="{Binding }"
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-    </UserControl.Resources>-->
-    
+   
     <Grid Background="White">
         
         <Grid.ColumnDefinitions>

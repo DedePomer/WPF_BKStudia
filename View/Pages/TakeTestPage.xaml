@@ -56,11 +56,79 @@
         </DataTemplate>
         
         <DataTemplate x:Key="SingleChoiceQuestionTemplate">
+            <StackPanel  Margin="20 20" Orientation="Vertical" Background="{Binding QuestionColor}">
 
+                <Border BorderBrush="Black" Margin="10 10">
+                    <Grid>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0"  Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
+                            <Label FontSize="20"  Content="{Binding Id}"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="0"  Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left">
+                            <Label  Content="{Binding Text}" Height="20" Width="200"/>
+                        </StackPanel>
+
+                        <StackPanel Background="Green" Grid.Row="1"  Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left">
+                        </StackPanel>
+
+                        <StackPanel Background="Red" Visibility="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor},
+                            Path=DataContext.HidenObject}" Grid.Row="2"  Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left">
+                            
+                        </StackPanel>
+
+                    </Grid>
+                </Border>
+
+            </StackPanel>
         </DataTemplate>
         
         <DataTemplate x:Key="MultiChoiceQuestionTemplate">
+            <StackPanel  Margin="20 20" Orientation="Vertical" Background="{Binding QuestionColor}">
 
+                <Border BorderBrush="Black" Margin="10 10">
+                    <Grid>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0"  Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
+                            <Label FontSize="20"  Content="{Binding Id}"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="0"  Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left">
+                            <Label  Content="{Binding Text}" Height="20" Width="200"/>
+                        </StackPanel>
+
+                        <StackPanel Background="Blue" Grid.Row="1"  Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left">
+                        </StackPanel>
+
+                        <StackPanel Background="Red" Visibility="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor},
+                  Path=DataContext.HidenObject}" Grid.Row="2"  Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left">
+
+                        </StackPanel>
+
+                    </Grid>
+                </Border>
+
+            </StackPanel>
         </DataTemplate>
     </UserControl.Resources>
     
@@ -82,7 +150,9 @@
         <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
             <StackPanel>
 
-                <Label Visibility="{Binding HidenObject}"/>
+                <TextBlock FontSize="20" Visibility="{Binding HidenObject}">
+                    <Run Text="{Binding CountTrueQuestion}"/><Run Text="/"/><Run Text="{Binding CountQuestion}"/>
+                </TextBlock>
                 <ItemsControl  ItemsSource="{Binding Questions}" ItemTemplateSelector="{StaticResource TypeSelector}">
                 </ItemsControl>
                 
