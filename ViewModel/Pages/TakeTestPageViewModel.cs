@@ -13,6 +13,7 @@ using WPF_BKStudia.Infrastructure.Navigation;
 using WPF_BKStudia.Infrastructure.Services;
 using WPF_BKStudia.Model;
 using WPF_BKStudia.Model.DataType;
+using WPF_BKStudia.Infrastructure.Services.Enums;
 
 namespace WPF_BKStudia.ViewModel.Pages
 {
@@ -43,7 +44,23 @@ namespace WPF_BKStudia.ViewModel.Pages
         private bool CanTakeResultCommandExecuted(object p) => true;
         private void OnTakeResultCommandExecuted(object p)
         {
-            
+            foreach (TextQuestion question in Questions)
+            {
+                switch (question.Type) 
+                {
+                    case QuestionEnum.TextQuestion:
+                        if (CorrectStringQuestionCheker(question.Answer[0].Text, question.ListAnswer[0].Text))
+                        { 
+                            
+                        }
+                        break;
+                    case QuestionEnum.SingleChoiceQuestion:
+                        break;
+                    case QuestionEnum.MultiChoiceQuestion:
+                        break;
+                }
+
+            }
         }
 
 
@@ -62,6 +79,20 @@ namespace WPF_BKStudia.ViewModel.Pages
             NavigateGetTesttedMenuViewModelCommand = new LamdaCommand(OnNavigateGetTesttedMenuViewModelCommandExecuted, CanNavigateGetTesttedMenuViewModelCommandExecuted);
 
             TakeResultCommand = new LamdaCommand(OnTakeResultCommandExecuted, CanTakeResultCommandExecuted);
+        }
+
+        //Проверяет ответ текстового вопроса с множеством правильных ответов
+        private bool CorrectStringQuestionCheker(string firstStr, string secondStr)
+        {
+            string[] secondStrMas = secondStr.Split('$');
+            for (int i = 0; i < secondStrMas.Length; i++)
+            {
+                if (secondStrMas[i] == firstStr)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
