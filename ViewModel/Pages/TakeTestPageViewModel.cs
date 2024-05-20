@@ -15,6 +15,7 @@ using WPF_BKStudia.Model;
 using WPF_BKStudia.Model.DataType;
 using WPF_BKStudia.Infrastructure.Services.Enums;
 using System.Windows.Controls;
+using System.Security.Cryptography;
 
 namespace WPF_BKStudia.ViewModel.Pages
 {
@@ -25,12 +26,45 @@ namespace WPF_BKStudia.ViewModel.Pages
         private IFileReaderService _fileReaderService { get; set; }
         private IFileWriterService _fileWriterService { get; set; }
 
+        private Visibility _hidenObject;
+        private bool _enableObject;
+        private int _countTrueQuestion;
 
         public ObservableCollection<TextQuestion> Questions { get; set; }
-        public int CountTrueQuestion { get; set; }
+        public int CountTrueQuestion
+        {
+            get
+            {
+                return _countTrueQuestion;
+            }
+            set
+            {
+                Set<int>(ref _countTrueQuestion, value);
+            }
+        }
         public int CountQuestion { get; set; }
-        public Visibility HidenObject { get; set; }
-        public bool EnableObject { get; set; }
+        public Visibility HidenObject 
+        {
+            get
+            { 
+                return _hidenObject; 
+            }
+            set
+            {
+                Set<Visibility>(ref _hidenObject, value);
+            }
+        }
+        public bool EnableObject
+        {
+            get
+            {
+                return _enableObject;
+            }
+            set
+            {
+                Set<bool>(ref _enableObject, value);
+            }
+        }
         public TestModel MyModel { get; set; }
 
         //Навигационные команды
@@ -47,6 +81,8 @@ namespace WPF_BKStudia.ViewModel.Pages
         private void OnTakeResultCommandExecuted(object p)
         {
             HidenObject = Visibility.Visible;
+            EnableObject = false;
+            CountTrueQuestion = 0;
             foreach (TextQuestion question in Questions)
             {
                 switch (question.Type) 
@@ -54,7 +90,12 @@ namespace WPF_BKStudia.ViewModel.Pages
                     case QuestionEnum.TextQuestion:
                         if (IsTrueStringQuestion(question.Answer[0].Text, question.ListAnswer[0].Text))
                         {
-                            question.QuestionColor = new SolidColorBrush(Colors.LightSlateGray);
+                            question.QuestionColor = new SolidColorBrush(Colors.LightSeaGreen);
+                            CountTrueQuestion++;
+                        }
+                        else
+                        {
+                            question.QuestionColor = new SolidColorBrush(Colors.DarkRed);
                         }
                         break;
                     case QuestionEnum.SingleChoiceQuestion:
@@ -71,11 +112,12 @@ namespace WPF_BKStudia.ViewModel.Pages
         {
             _navigationStoreService = navigationStoreService;
             _fileReaderService = fileReaderService;
-            _fileWriterService = fileWriterService;
+            _fileWriterService = fileWriterService;           
 
             MyModel = _navigationStoreService.Param as TestModel;
             Questions = _fileReaderService.GetQuestionCollection(MyModel.Name);
             HidenObject = Visibility.Collapsed;
+            EnableObject = true;
             CountQuestion = fileReaderService.GetCountQuestions(MyModel.Name);
 
             NavigateGetTesttedMenuViewModelCommand = new LamdaCommand(OnNavigateGetTesttedMenuViewModelCommandExecuted, CanNavigateGetTesttedMenuViewModelCommandExecuted);

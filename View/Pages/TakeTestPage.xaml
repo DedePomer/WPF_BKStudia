@@ -42,7 +42,8 @@
 
                         <StackPanel Grid.Row="1"  Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left">
                             <TextBlock Text="Ответ: "/>
-                            <TextBox IsEnabled="{Binding EnableObject}"  Text="{Binding Answer[0].Text, Mode=TwoWay}" Height="20" Width="350" TextAlignment="Left"/>
+                            <TextBox IsEnabled="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor},
+                            Path=DataContext.EnableObject}"  Text="{Binding Answer[0].Text, Mode=TwoWay}" Height="20" Width="350" TextAlignment="Left"/>
                         </StackPanel>
 
                         <StackPanel Visibility="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor},
