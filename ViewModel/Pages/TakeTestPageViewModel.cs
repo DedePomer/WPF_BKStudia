@@ -14,6 +14,7 @@ using WPF_BKStudia.Infrastructure.Services;
 using WPF_BKStudia.Model;
 using WPF_BKStudia.Model.DataType;
 using WPF_BKStudia.Infrastructure.Services.Enums;
+using System.Windows.Controls;
 
 namespace WPF_BKStudia.ViewModel.Pages
 {
@@ -29,6 +30,7 @@ namespace WPF_BKStudia.ViewModel.Pages
         public int CountTrueQuestion { get; set; }
         public int CountQuestion { get; set; }
         public Visibility HidenObject { get; set; }
+        public bool EnableObject { get; set; }
         public TestModel MyModel { get; set; }
 
         //Навигационные команды
@@ -44,14 +46,15 @@ namespace WPF_BKStudia.ViewModel.Pages
         private bool CanTakeResultCommandExecuted(object p) => true;
         private void OnTakeResultCommandExecuted(object p)
         {
+            HidenObject = Visibility.Visible;
             foreach (TextQuestion question in Questions)
             {
                 switch (question.Type) 
                 {
                     case QuestionEnum.TextQuestion:
-                        if (CorrectStringQuestionCheker(question.Answer[0].Text, question.ListAnswer[0].Text))
-                        { 
-                            
+                        if (IsTrueStringQuestion(question.Answer[0].Text, question.ListAnswer[0].Text))
+                        {
+                            question.QuestionColor = new SolidColorBrush(Colors.LightSlateGray);
                         }
                         break;
                     case QuestionEnum.SingleChoiceQuestion:
@@ -59,7 +62,6 @@ namespace WPF_BKStudia.ViewModel.Pages
                     case QuestionEnum.MultiChoiceQuestion:
                         break;
                 }
-
             }
         }
 
@@ -82,7 +84,7 @@ namespace WPF_BKStudia.ViewModel.Pages
         }
 
         //Проверяет ответ текстового вопроса с множеством правильных ответов
-        private bool CorrectStringQuestionCheker(string firstStr, string secondStr)
+        private bool IsTrueStringQuestion(string firstStr, string secondStr)
         {
             string[] secondStrMas = secondStr.Split('$');
             for (int i = 0; i < secondStrMas.Length; i++)

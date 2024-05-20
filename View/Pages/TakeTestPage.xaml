@@ -42,7 +42,7 @@
 
                         <StackPanel Grid.Row="1"  Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left">
                             <TextBlock Text="Ответ: "/>
-                            <TextBox  Text="{Binding Answer[0].Text, Mode=TwoWay}" Height="20" Width="350" TextAlignment="Left"/>
+                            <TextBox IsEnabled="{Binding EnableObject}"  Text="{Binding Answer[0].Text, Mode=TwoWay}" Height="20" Width="350" TextAlignment="Left"/>
                         </StackPanel>
 
                         <StackPanel Visibility="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor},
@@ -150,7 +150,7 @@
         <StackPanel Margin="0 0 0 0" Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" >
             <TextBlock HorizontalAlignment="Center" FontSize="15" Text="{Binding MyModel.Name, Converter={StaticResource NameConvector}}" TextWrapping="Wrap" Margin="5"  />
             <Button Command="{Binding NavigateGetTesttedMenuViewModelCommand}" Content="Назад" Style="{DynamicResource ButtonStyle}"/>
-            <Button Command="{Binding TakeResultCommand}" Content="Проверить тест" Style="{DynamicResource ButtonStyle}"/>
+            <Button IsEnabled="{Binding EnableObject}" Command="{Binding TakeResultCommand}" Content="Проверить тест" Style="{DynamicResource ButtonStyle}"/>
         </StackPanel>
 
         <!--Список тестов-->
