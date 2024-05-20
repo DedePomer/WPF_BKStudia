@@ -21,7 +21,7 @@ namespace WPF_BKStudia.ViewModel.Pages
 {
     internal class GetTesttedMenuViewModel: ViewModel.Base.ViewModel
     {
-        //Поля
+        // Поля
         private string _path = "Tests";
         private int _testId = 0;
         public ObservableCollection<TestModel> MyTests {  get; set; }

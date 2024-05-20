@@ -4,9 +4,45 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WPF_BKStudia.View.Pages"
+             
+             xmlns:selectors="clr-namespace:WPF_BKStudia.Infrastructure.Services.Selectors"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="Green">
+    
+    <UserControl.Resources>
+        <selectors:StaticSelector x:Key="TypeSelector"/>
+
+        <DataTemplate x:Key="TextQuestionTemplate">
             
+        </DataTemplate>
+        
+        <DataTemplate x:Key="SingleChoiceQuestionTemplate">
+
+        </DataTemplate>
+        
+        <DataTemplate x:Key="MultiChoiceQuestionTemplate">
+
+        </DataTemplate>
+    </UserControl.Resources>
+    
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="39*" />
+            <ColumnDefinition Width="121*"/>
+        </Grid.ColumnDefinitions>
+
+        <!--Панель функциями-->
+
+        <StackPanel Margin="0 20 0 0" Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" >
+            <!--<TextBlock TextWrapping="Wrap" Margin="10"  Text="Выбирете тест и нажмите кнопку 'Выбрать', чтобы начать проходить тест " Height="51"/>-->
+            <Button Command="{Binding NavigateGetTesttedMenuViewModelCommand}" Content="Назад" Style="{DynamicResource ButtonStyle}"/>
+            <Button Command="{Binding TakeResultCommand}" Content="Проверить тест" Style="{DynamicResource ButtonStyle}"/>
+        </StackPanel>
+
+        <!--Список тестов-->
+        <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
+            <ItemsControl  ItemsSource="{Binding Questions}" ItemTemplateSelector="{StaticResource TypeSelector}">
+            </ItemsControl>
+        </ScrollViewer>
     </Grid>
 </UserControl>
