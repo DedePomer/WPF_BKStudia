@@ -32,18 +32,21 @@ namespace WPF_BKStudia.Infrastructure.Services
                     Id = Int32.Parse(mas[0]),
                     Type = (QuestionEnum)Int32.Parse(mas[1]),
                     Text = mas[2],
-                    Answer = new ObservableCollection<Answer>()
-                }); ;
+                    Answer = new ObservableCollection<Answer>(),
+                    ListAnswer = new ObservableCollection<Answer>()
+            }); ;
                 switch (questions[i].Type)
                 {
-                    case QuestionEnum.TextQuestion:
-                        questions[i].ListAnswer = new ObservableCollection<Answer>();
+                    case QuestionEnum.TextQuestion:                      
                         questions[i].ListAnswer.Add(new Answer()
                         {
                             Text = mas[3],
                             IsTrue = true
                         });
-
+                        questions[i].Answer.Add(new Answer()
+                        {
+                            Text = ""
+                        });
                         break;
                     case QuestionEnum.SingleChoiceQuestion:
 

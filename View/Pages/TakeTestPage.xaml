@@ -39,7 +39,7 @@
                         </StackPanel>
 
                         <StackPanel Grid.Row="1"  Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left">
-                            <TextBox  Text="{Binding Answer[0].Text}" Height="20" Width="200" TextAlignment="Left"/>
+                            <TextBox  Text="{Binding Answer[0].Text, Mode=TwoWay}" Height="20" Width="200" TextAlignment="Left"/>
                         </StackPanel>
 
                         <StackPanel Visibility="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor},
