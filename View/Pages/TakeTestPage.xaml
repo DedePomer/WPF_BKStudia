@@ -14,7 +14,40 @@
         <selectors:StaticSelector x:Key="TypeSelector"/>
 
         <DataTemplate x:Key="TextQuestionTemplate">
-            
+
+            <StackPanel  Margin="20 20" Orientation="Vertical" Background="{Binding QuestionColor}">
+                
+                <Border BorderBrush="Black" Margin="10 10">
+                    <Grid>
+                        
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0"  Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
+                            <Label FontSize="20"  Content="{Binding Id}"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="0"  Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left">
+                            <Label  Content="{Binding Text}" Height="20" Width="200"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="2"  Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left">
+                            <TextBox  Text="{Binding True[0].Text, Mode=TwoWay}" Height="20" Width="200" TextAlignment="Left"/>
+                        </StackPanel>
+
+                    </Grid>
+                </Border>
+                
+            </StackPanel>
+                
+
         </DataTemplate>
         
         <DataTemplate x:Key="SingleChoiceQuestionTemplate">
@@ -42,8 +75,13 @@
 
         <!--Список тестов-->
         <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
-            <ItemsControl  ItemsSource="{Binding Questions}" ItemTemplateSelector="{StaticResource TypeSelector}">
-            </ItemsControl>
+            <StackPanel>
+                
+                <Label Visibility="Hidden"/>
+                <ItemsControl  ItemsSource="{Binding Questions}" ItemTemplateSelector="{StaticResource TypeSelector}">
+                </ItemsControl>
+                
+            </StackPanel>
         </ScrollViewer>
     </Grid>
 </UserControl>

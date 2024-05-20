@@ -46,6 +46,7 @@ namespace WPF_BKStudia.Model.DataType
                 NotifyPropertyChanged();
             }
         }
+        public ObservableCollection<Answer>? TrueAnswer { get; set; }
         public ObservableCollection<Answer>? ListAnswer { get; set; }
         public SolidColorBrush QuestionColor
         {
