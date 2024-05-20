@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using WPF_BKStudia.Infrastructure.Commands;
@@ -24,7 +25,8 @@ namespace WPF_BKStudia.ViewModel.Pages
 
         private SolidColorBrush _aquaColor = new SolidColorBrush(Colors.LightBlue);
 
-        public ObservableCollection<TextQuestion> Questions { get; set; }       
+        public ObservableCollection<TextQuestion> Questions { get; set; } 
+        public Visibility HidenObject { get; set; }
 
         //Навигационные команды
         public ICommand NavigateGetTesttedMenuViewModelCommand { get; }
@@ -52,6 +54,7 @@ namespace WPF_BKStudia.ViewModel.Pages
 
             TestModel test = _navigationStoreService.Param as TestModel;
             Questions = _fileReaderService.GetQuestionCollection(test.Name);
+            HidenObject = Visibility.Collapsed;
 
             NavigateGetTesttedMenuViewModelCommand = new LamdaCommand(OnNavigateGetTesttedMenuViewModelCommandExecuted, CanNavigateGetTesttedMenuViewModelCommandExecuted);
 

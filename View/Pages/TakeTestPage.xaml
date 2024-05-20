@@ -38,8 +38,13 @@
                             <Label  Content="{Binding Text}" Height="20" Width="200"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Row="2"  Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left">
-                            <TextBox  Text="{Binding True[0].Text, Mode=TwoWay}" Height="20" Width="200" TextAlignment="Left"/>
+                        <StackPanel Grid.Row="1"  Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left">
+                            <TextBox  Text="{Binding Answer[0].Text}" Height="20" Width="200" TextAlignment="Left"/>
+                        </StackPanel>
+
+                        <StackPanel Visibility="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor},
+                            Path=DataContext.HidenObject}" Grid.Row="2"  Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left">
+                            <Label Content="{Binding ListAnswer[0].Text,StringFormat='Правильный овет: \{0\}'}" Style="{DynamicResource LabelStyleRed}" Height="20" Width="200" />
                         </StackPanel>
 
                     </Grid>
@@ -76,8 +81,8 @@
         <!--Список тестов-->
         <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
             <StackPanel>
-                
-                <Label Visibility="Hidden"/>
+
+                <Label Visibility="{Binding HidenObject}"/>
                 <ItemsControl  ItemsSource="{Binding Questions}" ItemTemplateSelector="{StaticResource TypeSelector}">
                 </ItemsControl>
                 

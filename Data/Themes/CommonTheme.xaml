@@ -9,5 +9,11 @@
         <Setter Property="Margin" Value="10 10" />
         <Setter Property="Width" Value="110" />
     </Style>
-    
+
+    <!--Стиль на Lable-->
+
+    <Style x:Key="LabelStyleRed" TargetType="Label">
+        <Setter Property="Foreground" Value="Red"/>
+    </Style>
+
 </ResourceDictionary>

@@ -32,7 +32,7 @@ namespace WPF_BKStudia.Infrastructure.Services
                     Id = Int32.Parse(mas[0]),
                     Type = (QuestionEnum)Int32.Parse(mas[1]),
                     Text = mas[2],
-                    TrueAnswer = new ObservableCollection<Answer>()
+                    Answer = new ObservableCollection<Answer>()
                 }); ;
                 switch (questions[i].Type)
                 {
