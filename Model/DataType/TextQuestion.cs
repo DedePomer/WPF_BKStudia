@@ -23,6 +23,7 @@ namespace WPF_BKStudia.Model.DataType
         private int _id;
         private QuestionEnum _type;
         private SolidColorBrush _questionColor;
+        private ObservableCollection<Answer>? _answer;
 
         //Свойства
         public int Id 
@@ -46,7 +47,16 @@ namespace WPF_BKStudia.Model.DataType
                 NotifyPropertyChanged();
             }
         }
-        public ObservableCollection<Answer>? Answer { get; set; }
+        public ObservableCollection<Answer>? Answer
+        {
+            get
+            { return _answer; }
+            set
+            {
+                _answer = value;
+                NotifyPropertyChanged();
+            }
+        }
         public ObservableCollection<Answer>? ListAnswer { get; set; }
         public SolidColorBrush QuestionColor
         {

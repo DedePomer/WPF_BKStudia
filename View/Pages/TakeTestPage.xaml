@@ -23,7 +23,7 @@
                     <Grid>
                         
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="3*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
@@ -33,20 +33,21 @@
                         </Grid.RowDefinitions>
 
                         <StackPanel Grid.Row="0"  Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
-                            <Label FontSize="20"  Content="{Binding Id}"/>
+                            <TextBlock Text="{Binding Id, StringFormat='Номер: \{0\}'}" FontSize="15"  />
                         </StackPanel>
 
                         <StackPanel Grid.Row="0"  Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left">
-                            <Label  Content="{Binding Text}" Height="20" Width="200"/>
+                            <TextBlock Text="{Binding Text, StringFormat='Вопрос: \{0\}'}" TextWrapping="Wrap" FontSize="15"  />
                         </StackPanel>
 
-                        <StackPanel Grid.Row="1"  Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left">
-                            <TextBox  Text="{Binding Answer[0].Text, Mode=TwoWay}" Height="20" Width="200" TextAlignment="Left"/>
+                        <StackPanel Grid.Row="1"  Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left">
+                            <TextBlock Text="Ответ: "/>
+                            <TextBox  Text="{Binding Answer[0].Text, Mode=TwoWay}" Height="20" Width="350" TextAlignment="Left"/>
                         </StackPanel>
 
                         <StackPanel Visibility="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor},
                             Path=DataContext.HidenObject}" Grid.Row="2"  Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left">
-                            <Label Content="{Binding ListAnswer[0].Text,StringFormat='Правильный овет: \{0\}'}" Style="{DynamicResource LabelStyleRed}" Height="20" Width="200" />
+                            <TextBlock Foreground="Red" Text="{Binding ListAnswer[0].Text,StringFormat='Правильный овет: \{0\}'}"  Height="20" Width="200" />
                         </StackPanel>
 
                     </Grid>
@@ -74,14 +75,16 @@
                         </Grid.RowDefinitions>
 
                         <StackPanel Grid.Row="0"  Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
-                            <Label FontSize="20"  Content="{Binding Id}"/>
+                            <TextBlock Text="{Binding Id, StringFormat='Номер: \{0\}'}" FontSize="15"  />
                         </StackPanel>
 
                         <StackPanel Grid.Row="0"  Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left">
-                            <Label  Content="{Binding Text}" Height="20" Width="200"/>
+                            <TextBlock Text="{Binding Text, StringFormat='Вопрос: \{0\}'}" TextWrapping="Wrap" FontSize="15"  />
                         </StackPanel>
 
-                        <StackPanel Background="Green" Grid.Row="1"  Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left">
+
+                        <StackPanel  Background="Green" Grid.Row="1"  Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left">
+                            <TextBlock FontSize="20">В разработке</TextBlock>
                         </StackPanel>
 
                         <StackPanel Background="Red" Visibility="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor},
@@ -112,18 +115,20 @@
                         </Grid.RowDefinitions>
 
                         <StackPanel Grid.Row="0"  Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left">
-                            <Label FontSize="20"  Content="{Binding Id}"/>
+                            <TextBlock Text="{Binding Id, StringFormat='Номер: \{0\}'}" FontSize="15"  />
                         </StackPanel>
 
                         <StackPanel Grid.Row="0"  Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left">
-                            <Label  Content="{Binding Text}" Height="20" Width="200"/>
+                            <TextBlock Text="{Binding Text, StringFormat='Вопрос: \{0\}'}" TextWrapping="Wrap" FontSize="15"  />
                         </StackPanel>
 
+
                         <StackPanel Background="Blue" Grid.Row="1"  Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left">
+                            <TextBlock FontSize="20">В разработке</TextBlock>
                         </StackPanel>
 
                         <StackPanel Background="Red" Visibility="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor},
-                  Path=DataContext.HidenObject}" Grid.Row="2"  Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left">
+                             Path=DataContext.HidenObject}" Grid.Row="2"  Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left">
 
                         </StackPanel>
 
