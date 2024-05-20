@@ -48,7 +48,8 @@ namespace WPF_BKStudia.ViewModel.Pages
         private bool CanNavigateTakeTestPageViewModelCommandExecuted(object p) => true;
         private void OnNavigateTakeTestPageViewModelCommandExecuted(object p)
         {
-            _navigationStoreService.CurrentViewModel = new TakeTestPageViewModel(_navigationStoreService, _fileReaderService, _fileWriterService);
+            _navigationStoreService.Param = p;
+            _navigationStoreService.CurrentViewModel = new TakeTestPageViewModel(_navigationStoreService, _fileReaderService, _fileWriterService);    
         }
 
         //Функциональные команды
