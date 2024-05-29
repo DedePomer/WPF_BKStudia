@@ -1,21 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media;
+using WPF_BKStudia.Infrastructure.Enums;
 using WPF_BKStudia.Infrastructure.Interfaces;
-using WPF_BKStudia.Infrastructure.Services.Enums;
-using WPF_BKStudia.Model;
 using WPF_BKStudia.Model.DataType;
-using static System.Net.Mime.MediaTypeNames;
+
 
 namespace WPF_BKStudia.Infrastructure.Services
 {
-    public class FileReader: IFileReaderService
+    public class FileReaderService: IFileReaderService
     {
+        private const string FileDataSplitter = "\n\n\n";
+        private const string QuestionDataSplitter = "\n";
+        private const int FirstQuestionLineNumber = 1;
+
         public int GetCountQuestions(string path)
         {
             List<string> fileStr = File.ReadLines(path).ToList();
@@ -23,31 +22,33 @@ namespace WPF_BKStudia.Infrastructure.Services
         }
         public ObservableCollection<TextQuestion> GetQuestionCollection(string path)
         {
-            string[] file = GetQuestionMas(path);
+            string[] fileLines = File.ReadAllText(path).Split(FileDataSplitter);
             ObservableCollection<TextQuestion> questions = new ObservableCollection<TextQuestion>();
-            for (int i = 0; i < file.Length; i++)
+            for (int i = FirstQuestionLineNumber; i < fileLines.Length; i++)
             {
-                string[] mas = file[i].Split('\n');
+                string[] questionData = fileLines[i].Split(QuestionDataSplitter);
                 questions.Add(new TextQuestion()
                 {
-                    Id = Int32.Parse(mas[0]),
-                    Type = (QuestionEnum)Int32.Parse(mas[1]),
-                    Text = mas[2],
+                    Id = Int32.Parse(questionData[0]),
+                    Type = (QuestionEnum)Int32.Parse(questionData[1]),
+                    Text = questionData[2],
                     Answer = new ObservableCollection<Answer>(),
                     ListAnswer = new ObservableCollection<Answer>(),
                     QuestionColor  = new SolidColorBrush(Colors.LightBlue)
-            }); ;
-                switch (questions[i].Type)
+                });
+
+                var currentQuestion = questions[i - 1];
+                switch (currentQuestion.Type)
                 {
-                    case QuestionEnum.TextQuestion:                      
-                        questions[i].ListAnswer.Add(new Answer()
+                    case QuestionEnum.TextQuestion:
+                        currentQuestion.ListAnswer.Add(new Answer()
                         {
-                            Text = mas[3],
-                            IsTrue = true
+                            Text = questionData[3],
+                            IsCorrect = true
                         });
-                        questions[i].Answer.Add(new Answer()
+                        currentQuestion.Answer.Add(new Answer()
                         {
-                            Text = ""
+                            Text = string.Empty
                         });
                         break;
                     case QuestionEnum.SingleChoiceQuestion:
@@ -61,16 +62,6 @@ namespace WPF_BKStudia.Infrastructure.Services
                 }
             }
             return questions;
-        }
-        private string[] GetQuestionMas(string path)
-        {
-            string fileStr = File.ReadAllText(path);
-
-            fileStr = fileStr.Replace(path.Replace(".txt", "").Replace("Tests", "").Replace("\\", "") + "\n" + GetCountQuestions(path), "");
-            fileStr = fileStr.Substring(3);
-
-            string[] fileMas = fileStr.Split("\n\n\n");
-            return fileMas;
         }
     }
 }

@@ -13,7 +13,7 @@
     <!--Ресурсы-->
     <UserControl.Resources>
         <selectors:StaticSelector x:Key="TypeSelector"/>
-        <convectors:NameTestConvector x:Key="NameConvector"/>
+        <convectors:NameTestConverter x:Key="NameConvector"/>
 
         <DataTemplate x:Key="TextQuestionTemplate">
 
@@ -47,7 +47,7 @@
                         </StackPanel>
 
                         <StackPanel Visibility="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor},
-                            Path=DataContext.HidenObject}" Grid.Row="2"  Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left">
+                            Path=DataContext.ResultVisibility}" Grid.Row="2"  Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left">
                             <TextBlock Foreground="Red" Text="{Binding ListAnswer[0].Text,StringFormat='Правильный овет: \{0\}'}"  Height="20" Width="200" />
                         </StackPanel>
 
@@ -158,7 +158,7 @@
         <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
             <StackPanel>
 
-                <TextBlock FontSize="20" Visibility="{Binding HidenObject}">
+                <TextBlock FontSize="20" Visibility="{Binding ResultVisibility}">
                     <Run Text="{Binding CountTrueQuestion}"/><Run Text="/"/><Run Text="{Binding CountQuestion}"/>
                 </TextBlock>
                 <ItemsControl  ItemsSource="{Binding Questions}" ItemTemplateSelector="{StaticResource TypeSelector}">

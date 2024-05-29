@@ -6,18 +6,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Shapes;
+using WPF_BKStudia.Infrastructure.Enums;
 using WPF_BKStudia.Infrastructure.Interfaces;
-using WPF_BKStudia.Infrastructure.Services.Enums;
 using WPF_BKStudia.Model;
 
 namespace WPF_BKStudia.Infrastructure.Services
 {
-    public class FileWriter: IFileWriterService
+    public class FileWriterService: IFileWriterService
     {
-        private void WriteFile(TestModel test, string path)
+        private void WriteFile(Test test, string path)
         {
             File.AppendAllText(path, test.Name);
-            File.AppendAllText(path, "\n" + test.Quanty.ToString());
+            File.AppendAllText(path, "\n" + test.QuestionCount.ToString());
 
             foreach (var question in test.QuestionCollection)
             {
@@ -29,7 +29,7 @@ namespace WPF_BKStudia.Infrastructure.Services
                 switch (question.Type)
                 {
                     case QuestionEnum.TextQuestion:
-                        if (question.ListAnswer[0].IsTrue)
+                        if (question.ListAnswer[0].IsCorrect)
                         {
                             if (question.ListAnswer[0].Text == "")
                                 File.AppendAllText(path, "\n ");
@@ -49,9 +49,9 @@ namespace WPF_BKStudia.Infrastructure.Services
                 }
             }
         }
-        public bool SaveFile(TestModel test)
+        public bool SaveFile(Test test)
         {
-            string path = "Tests" + "\\" + test.Name + ".txt";
+            string path = $"Tests\\{test.Name}.txt";
             if (!File.Exists(path))
             {
                 WriteFile(test, path);

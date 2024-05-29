@@ -5,20 +5,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
-using System.Windows.Markup;
-using WPF_BKStudia.Infrastructure.Services.Enums;
 
-namespace WPF_BKStudia.Infrastructure.Services.Convectors
+namespace WPF_BKStudia.Infrastructure.Converters
 {
-    public class QuestionEnumToIntConverter : IValueConverter
+    public class NameTestConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (int)value;
+            string newString = (string)value;
+            return newString.Replace(".txt", "").Replace("Tests", "").Replace("\\", "");
         }
+
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (QuestionEnum)value;
+            throw new NotImplementedException();
         }
     }
 }

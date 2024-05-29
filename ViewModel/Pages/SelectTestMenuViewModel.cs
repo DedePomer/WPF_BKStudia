@@ -1,30 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Shapes;
-using System.Xml.Linq;
 using WPF_BKStudia.Infrastructure.Commands;
 using WPF_BKStudia.Infrastructure.Interfaces;
-using WPF_BKStudia.Infrastructure.Navigation;
-using WPF_BKStudia.Infrastructure.Services;
 using WPF_BKStudia.Model;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace WPF_BKStudia.ViewModel.Pages
 {
-    internal class GetTesttedMenuViewModel: ViewModel.Base.ViewModel
+    internal class SelectTestMenuViewModel: ViewModel.Base.ViewModel
     {
         // Поля
         private string _path = "Tests";
         private int _testId = 0;
-        public ObservableCollection<TestModel> MyTests {  get; set; }
+        public ObservableCollection<Test> MyTests {  get; set; }
         private INavigationStoreService _navigationStoreService { get; set; }
         private IFileReaderService _fileReaderService { get; set; }
         private IFileWriterService _fileWriterService { get; set; }
@@ -49,7 +39,7 @@ namespace WPF_BKStudia.ViewModel.Pages
         private void OnNavigateTakeTestPageViewModelCommandExecuted(object p)
         {
             _navigationStoreService.Param = p;
-            _navigationStoreService.CurrentViewModel = new TakeTestPageViewModel(_navigationStoreService, _fileReaderService, _fileWriterService);    
+            _navigationStoreService.CurrentViewModel = new TestingViewModel(_navigationStoreService, _fileReaderService, _fileWriterService);    
         }
 
         //Функциональные команды
@@ -57,7 +47,7 @@ namespace WPF_BKStudia.ViewModel.Pages
         private bool CanChoiseTestCommandExecuted(object p) => true;
         private void OnChoiseTestCommandExecuted(object p)
         {
-            TestModel test = p as TestModel;
+            Test test = p as Test;
             NavigateTakeTestPageViewModelCommand.Execute(test);       
         }
 
@@ -65,12 +55,12 @@ namespace WPF_BKStudia.ViewModel.Pages
         private bool CanRemoveTestCommandExecuted(object p) => true;
         private void OnRemoveTestCommandExecuted(object p)
         {
-            TestModel test = p as TestModel;
+            Test test = p as Test;
             if (File.Exists(test.Name))
             { 
                 File.Delete(test.Name);
                 MyTests.Remove(test);
-                foreach (TestModel t in MyTests)
+                foreach (Test t in MyTests)
                 {
                     if (t.Id > test.Id)
                     {
@@ -82,12 +72,12 @@ namespace WPF_BKStudia.ViewModel.Pages
         }
 
         //Конструктор
-        public GetTesttedMenuViewModel(INavigationStoreService navigationStoreService, IFileReaderService fileReaderService, IFileWriterService fileWriterService)
+        public SelectTestMenuViewModel(INavigationStoreService navigationStoreService, IFileReaderService fileReaderService, IFileWriterService fileWriterService)
         {
             _navigationStoreService = navigationStoreService;
             _fileReaderService = fileReaderService;
             _fileWriterService = fileWriterService;
-            MyTests = new ObservableCollection<TestModel>();
+            MyTests = new ObservableCollection<Test>();
             FillTestsList();
 
             NavigateMenuPageViewModelCommand = new LamdaCommand(OnNavigateMenuPageViewModelCommandExecuted, CanNavigateMenuPageViewModelCommandExecuted);
@@ -105,13 +95,13 @@ namespace WPF_BKStudia.ViewModel.Pages
             {
                 for (int i = 0; i < OurTests.Count; i++)
                 {
-                    if (IsTest(OurTests[i]))
+                    if (IsTestFile(OurTests[i]))
                     {
-                        MyTests.Add(new TestModel()
+                        MyTests.Add(new Test()
                         {
                             Id = _testId + 1,
                             Name = OurTests[i],
-                            Quanty = _fileReaderService.GetCountQuestions(OurTests[i])
+                            QuestionCount = _fileReaderService.GetCountQuestions(OurTests[i])
                         });                       
                         _testId++;
                     }
@@ -123,7 +113,7 @@ namespace WPF_BKStudia.ViewModel.Pages
             }
         }
 
-        public bool IsTest(string path)
+        public bool IsTestFile(string path)
         {
             string nameOfTest = path.Replace("\\", "").Replace("Tests", "").Replace(".txt", "");
             if (File.ReadLines(path).First() == nameOfTest)

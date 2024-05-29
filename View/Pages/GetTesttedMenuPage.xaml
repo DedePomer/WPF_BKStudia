@@ -12,7 +12,7 @@
     <!--Ресурсы-->
     
     <UserControl.Resources>
-        <conv:NameTestConvector x:Key="TestConvector"/>
+        <conv:NameTestConverter x:Key="TestConvector"/>
 
         <!--Шаблон ItemTemplate-->
 

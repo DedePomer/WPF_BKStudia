@@ -7,17 +7,17 @@ using WPF_BKStudia.Infrastructure.Interfaces;
 using WPF_BKStudia.ViewModel.Base;
 
 
-namespace WPF_BKStudia.Infrastructure.Navigation
+namespace WPF_BKStudia.Infrastructure.Services
 {
-    internal class NavigationStore: INavigationStoreService
+    internal class NavigationStoreService : INavigationStoreService
     {
         //?
         public event Action CurrentViewModelChanged;
 
         //Здесь хранится текущаяя ViewModel
         private ViewModel.Base.ViewModel? _currentViewModel;
-        public ViewModel.Base.ViewModel? CurrentViewModel 
-        {             
+        public ViewModel.Base.ViewModel? CurrentViewModel
+        {
             get => _currentViewModel;
             set
             {

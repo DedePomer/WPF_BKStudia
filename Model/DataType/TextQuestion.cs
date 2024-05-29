@@ -1,23 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.IO.Packaging;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media;
+using WPF_BKStudia.Infrastructure.Enums;
 using WPF_BKStudia.Infrastructure.Interfaces;
-using WPF_BKStudia.Infrastructure.Services.Enums;
 using WPF_BKStudia.Model.Abstaracts;
-using WPF_BKStudia.ViewModel.Pages;
 
 namespace WPF_BKStudia.Model.DataType
 {
     //Номер, тектс вопроса, тип вопроса, список ответов, Цвет вопроса
 
-    public class TextQuestion : AbstractINotifyProperty,  INotifyPropertyChanged, IQuestionAnswer
+    public class TextQuestion : AbstractNotifyModel,  INotifyPropertyChanged, IQuestionAnswer
     {
         //Приватные поля
         private int _id;

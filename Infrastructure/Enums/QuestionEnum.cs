@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WPF_BKStudia.Infrastructure.Services.Enums
+namespace WPF_BKStudia.Infrastructure.Enums
 {
     public enum QuestionEnum
     {

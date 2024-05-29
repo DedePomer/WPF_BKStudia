@@ -3,8 +3,8 @@ using System.Data;
 using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using WPF_BKStudia.Infrastructure.Interfaces;
-using WPF_BKStudia.Infrastructure.Navigation;
 using WPF_BKStudia.Infrastructure.Services;
+using WPF_BKStudia.ViewModel.Pages;
 using WPF_BKStudia.ViewModel.Windows;
 
 namespace WPF_BKStudia
@@ -27,9 +27,11 @@ namespace WPF_BKStudia
             services.AddSingleton<MainWindow>();
             services.AddSingleton<MainWindowViewModel>();
 
-            services.AddSingleton<IFileReaderService, FileReader>();
-            services.AddSingleton<IFileWriterService, FileWriter>();
-            services.AddSingleton<INavigationStoreService, NavigationStore>();
+            services.AddSingleton<IFileReaderService, FileReaderService>();
+            services.AddSingleton<IFileWriterService, FileWriterService>();
+            services.AddSingleton<INavigationStoreService, NavigationStoreService>();
+
+            services.AddTransient<MenuPageViewModel>();
         }
 
         public void AppStartup(object sender, StartupEventArgs e)

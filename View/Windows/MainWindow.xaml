@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_BKStudia"
         
-        xmlns:vmm="clr-namespace:WPF_BKStudia.ViewModel.Windows"
+
         xmlns:vmp="clr-namespace:WPF_BKStudia.ViewModel.Pages"
         xmlns:vp="clr-namespace:WPF_BKStudia.View.Pages"
         
@@ -23,11 +23,11 @@
                 <vp:CreateTestPage/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type vmp:TakeTestPageViewModel}">
+            <DataTemplate DataType="{x:Type vmp:TestingViewModel}">
                 <vp:TakeTestPage/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type vmp:GetTesttedMenuViewModel}">
+            <DataTemplate DataType="{x:Type vmp:SelectTestMenuViewModel}">
                 <vp:GetTesttedMenuPage/>
             </DataTemplate>
 

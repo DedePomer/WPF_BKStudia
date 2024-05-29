@@ -10,10 +10,9 @@ using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using WPF_BKStudia.Infrastructure.Commands;
+using WPF_BKStudia.Infrastructure.Enums;
 using WPF_BKStudia.Infrastructure.Interfaces;
-using WPF_BKStudia.Infrastructure.Navigation;
 using WPF_BKStudia.Infrastructure.Services;
-using WPF_BKStudia.Infrastructure.Services.Enums;
 using WPF_BKStudia.Model;
 using WPF_BKStudia.Model.DataType;
 
@@ -24,9 +23,9 @@ namespace WPF_BKStudia.ViewModel.Pages
     internal class CreateTestViewModel: ViewModel.Base.ViewModel
     {
         //Поля
+        private readonly SolidColorBrush _aquaColor = new SolidColorBrush(Colors.LightBlue);
         private int _questionId = 0;
-        private SolidColorBrush _aquaColor = new SolidColorBrush(Colors.LightBlue);
-        public Model.TestModel CurrentQuestion { get; set; }
+        public Model.Test CurrentTest { get; set; }
         private INavigationStoreService _navigationStoreService { get; set; }
         private IFileReaderService _fileReaderService { get; set; }
         private IFileWriterService _fileWriterService { get; set; }
@@ -52,7 +51,7 @@ namespace WPF_BKStudia.ViewModel.Pages
         private bool CanCAddQuestionExecuted(object p) => true;
         private void OnCAddQuestionExecuted(object p)
         {
-            CurrentQuestion.QuestionCollection.Add(new TextQuestion
+            CurrentTest.QuestionCollection.Add(new TextQuestion
             {
                 QuestionColor = _aquaColor,
                 Id = _questionId + 1,
@@ -63,7 +62,7 @@ namespace WPF_BKStudia.ViewModel.Pages
                 { 
                     Id = 1, 
                     Text="",
-                    IsTrue = true
+                    IsCorrect = true
                 } 
                 }
             });
@@ -74,10 +73,10 @@ namespace WPF_BKStudia.ViewModel.Pages
         private bool CanSaveTestCommandExecuted(object p) => true;
         private void OnSaveTestCommandExecuted(object p)
         {
-            if (FieldsNotNULL())
+            if (CheckFieldsNotNull())
             {
-                CurrentQuestion.Quanty = _questionId;
-                if (_fileWriterService.SaveFile(CurrentQuestion))
+                CurrentTest.QuestionCount = _questionId;
+                if (_fileWriterService.SaveFile(CurrentTest))
                 {
                     MessageBox.Show("Тест сохранён", "Information", MessageBoxButton.OK);
                     NavigateMenuPageViewModelCommand.Execute(1);
@@ -94,8 +93,8 @@ namespace WPF_BKStudia.ViewModel.Pages
             _navigationStoreService = navigationStoreService;
             _fileReaderService = fileReaderService;
             _fileWriterService = fileWriterService;
-            CurrentQuestion = new Model.TestModel();
-            CurrentQuestion.QuestionCollection = new ObservableCollection<TextQuestion>();
+            CurrentTest = new Model.Test();
+            CurrentTest.QuestionCollection = new ObservableCollection<TextQuestion>();
 
             NavigateMenuPageViewModelCommand = new LamdaCommand(OnNavigateMenuPageViewModelCommandExecuted, CanNavigateMenuPageViewModelCommandExecuted);
 
@@ -107,25 +106,25 @@ namespace WPF_BKStudia.ViewModel.Pages
         //Сдвигает значение Id, после удаления элемента коллекции
         private void RemoveCheck(TextQuestion question)
         { 
-            if (CurrentQuestion.QuestionCollection != null)
+            if (CurrentTest.QuestionCollection != null)
             {
-                foreach (TextQuestion q in CurrentQuestion.QuestionCollection)
+                foreach (TextQuestion q in CurrentTest.QuestionCollection)
                 {
                     if (q.Id > question.Id)
                     {
                         q.Id -= 1;
                     }
                 }
-                CurrentQuestion.QuestionCollection.Remove(question);
+                CurrentTest.QuestionCollection.Remove(question);
                 _questionId--;
                 OnPropertyChanged();
             }
         }
 
         //Проверка полей
-        private bool FieldsNotNULL()
+        private bool CheckFieldsNotNull()
         {
-            string nameOfTest = CurrentQuestion.Name;
+            string nameOfTest = CurrentTest.Name;
             if (!string.IsNullOrEmpty(nameOfTest) && nameOfTest.Count(x => x == ' ') < nameOfTest.Length)
             {
                 //Проверка на программные символы

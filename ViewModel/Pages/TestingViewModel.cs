@@ -1,25 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using WPF_BKStudia.Infrastructure.Commands;
 using WPF_BKStudia.Infrastructure.Interfaces;
-using WPF_BKStudia.Infrastructure.Navigation;
-using WPF_BKStudia.Infrastructure.Services;
 using WPF_BKStudia.Model;
 using WPF_BKStudia.Model.DataType;
-using WPF_BKStudia.Infrastructure.Services.Enums;
-using System.Windows.Controls;
-using System.Security.Cryptography;
+using WPF_BKStudia.Infrastructure.Enums;
 
 namespace WPF_BKStudia.ViewModel.Pages
 {
-    internal class TakeTestPageViewModel: ViewModel.Base.ViewModel
+    internal class TestingViewModel: ViewModel.Base.ViewModel
     {
         // Поля
         private INavigationStoreService _navigationStoreService { get; set; }
@@ -39,11 +30,11 @@ namespace WPF_BKStudia.ViewModel.Pages
             }
             set
             {
-                Set<int>(ref _countTrueQuestion, value);
+                Set(ref _countTrueQuestion, value);
             }
         }
         public int CountQuestion { get; set; }
-        public Visibility HidenObject 
+        public Visibility ResultVisibility 
         {
             get
             { 
@@ -51,7 +42,7 @@ namespace WPF_BKStudia.ViewModel.Pages
             }
             set
             {
-                Set<Visibility>(ref _hidenObject, value);
+                Set(ref _hidenObject, value);
             }
         }
         public bool EnableObject
@@ -65,14 +56,14 @@ namespace WPF_BKStudia.ViewModel.Pages
                 Set<bool>(ref _enableObject, value);
             }
         }
-        public TestModel MyModel { get; set; }
+        public Test TestModel { get; set; }
 
         //Навигационные команды
         public ICommand NavigateGetTesttedMenuViewModelCommand { get; }
         private bool CanNavigateGetTesttedMenuViewModelCommandExecuted(object p) => true;
         private void OnNavigateGetTesttedMenuViewModelCommandExecuted(object p)
         {
-            _navigationStoreService.CurrentViewModel = new GetTesttedMenuViewModel(_navigationStoreService, _fileReaderService, _fileWriterService);
+            _navigationStoreService.CurrentViewModel = new SelectTestMenuViewModel(_navigationStoreService, _fileReaderService, _fileWriterService);
         }
 
         //Функциональные команды
@@ -80,7 +71,7 @@ namespace WPF_BKStudia.ViewModel.Pages
         private bool CanTakeResultCommandExecuted(object p) => true;
         private void OnTakeResultCommandExecuted(object p)
         {
-            HidenObject = Visibility.Visible;
+            ResultVisibility = Visibility.Visible;
             EnableObject = false;
             CountTrueQuestion = 0;
             foreach (TextQuestion question in Questions)
@@ -108,17 +99,17 @@ namespace WPF_BKStudia.ViewModel.Pages
 
 
 
-        public TakeTestPageViewModel(INavigationStoreService navigationStoreService, IFileReaderService fileReaderService, IFileWriterService fileWriterService) 
+        public TestingViewModel(INavigationStoreService navigationStoreService, IFileReaderService fileReaderService, IFileWriterService fileWriterService) 
         {
             _navigationStoreService = navigationStoreService;
             _fileReaderService = fileReaderService;
             _fileWriterService = fileWriterService;           
 
-            MyModel = _navigationStoreService.Param as TestModel;
-            Questions = _fileReaderService.GetQuestionCollection(MyModel.Name);
-            HidenObject = Visibility.Collapsed;
+            TestModel = _navigationStoreService.Param as Test;
+            Questions = _fileReaderService.GetQuestionCollection(TestModel.Name);
+            ResultVisibility = Visibility.Collapsed;
             EnableObject = true;
-            CountQuestion = fileReaderService.GetCountQuestions(MyModel.Name);
+            CountQuestion = fileReaderService.GetCountQuestions(TestModel.Name);
 
             NavigateGetTesttedMenuViewModelCommand = new LamdaCommand(OnNavigateGetTesttedMenuViewModelCommandExecuted, CanNavigateGetTesttedMenuViewModelCommandExecuted);
 

@@ -3,17 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:WPF_BKStudia.View.Pages"
+
+             xmlns:test="clr-namespace:WPF_BKStudia.Infrastructure.Testdirectory"
+             xmlns:enums="clr-namespace:WPF_BKStudia.Infrastructure.Services"
              
-             xmlns:sys="clr-namespace:System;assembly=mscorlib"
-             xmlns:ts="clr-namespace:WPF_BKStudia.Infrastructure.Services"
-             xmlns:conv="clr-namespace:WPF_BKStudia.Infrastructure.Services.Convectors"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" x:Name="UC">
 
     <!--Ресурсы-->
     <UserControl.Resources>
-        <conv:QuestionEnumToIntConverter x:Key="QuestionConvecter"/>
+        <test:Test1 x:Key="bb"/>
+        <enums:FileReaderService x:Key="nn"/>
 
 
         <!--Шаблон текстового вопроса-->
@@ -67,7 +67,7 @@
                         <Control Grid.Row="2" Grid.Column="0" x:Name="ChangingControl" Focusable="False" Template="{StaticResource TextQuestionTemplate}" />
 
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Top"  Grid.Row="0" Grid.Column="1">
-                            <ComboBox Width="220" SelectedIndex="{Binding Type, Converter={StaticResource QuestionConvecter}}">
+                            <ComboBox Width="220" SelectedIndex="{Binding Type, Converter={StaticResource QuestionConverter}}">
                                 <ComboBoxItem x:Name="TextComboBoxItem">Текстовый вопрос</ComboBoxItem>
                                 <ComboBoxItem x:Name="SingleComboBoxItem">Вопрос с одиночным выбором</ComboBoxItem>
                                 <ComboBoxItem x:Name="MultiComboBoxItem">Вопрос с множественным выбором</ComboBoxItem>
