@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using WPF_BKStudia.Infrastructure.Enums;
-using WPF_BKStudia.Infrastructure.Interfaces;
 using WPF_BKStudia.Model.DataType;
 
 namespace WPF_BKStudia.Infrastructure.Selectors
+
 {
     internal class StaticSelector : DataTemplateSelector
     {

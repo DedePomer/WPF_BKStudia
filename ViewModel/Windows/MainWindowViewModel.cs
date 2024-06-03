@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 using WPF_BKStudia.Infrastructure.Interfaces;
-using WPF_BKStudia.Infrastructure.Navigation;
 using WPF_BKStudia.ViewModel.Pages;
 
 
@@ -27,7 +21,7 @@ namespace WPF_BKStudia.ViewModel.Windows
             _fileReaderService = fileReaderService;
             _fileWriterService = fileWriterService;
 
-            if (!Directory.Exists(TestsDirectoryPath)) 
+            if (!Directory.Exists(TestsDirectoryPath))
                 Directory.CreateDirectory(TestsDirectoryPath);
 
             _navigationStoreService.CurrentViewModel = new MenuPageViewModel(_navigationStoreService, _fileReaderService, _fileWriterService);

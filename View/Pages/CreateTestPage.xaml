@@ -4,17 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 
-             xmlns:test="clr-namespace:WPF_BKStudia.Infrastructure.Testdirectory"
-             xmlns:enums="clr-namespace:WPF_BKStudia.Infrastructure.Services"
+             xmlns:converters="clr-namespace:WPF_BKStudia.Infrastructure.Converters"
              
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" x:Name="UC">
+             d:DesignHeight="450" d:DesignWidth="800">
 
     <!--Ресурсы-->
     <UserControl.Resources>
-        <test:Test1 x:Key="bb"/>
-        <enums:FileReaderService x:Key="nn"/>
-
+        <converters:NameTestConverter x:Key="QuestionConverter"/>
 
         <!--Шаблон текстового вопроса-->
         <ControlTemplate x:Key="TextQuestionTemplate">
