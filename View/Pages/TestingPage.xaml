@@ -14,10 +14,11 @@
     <UserControl.Resources>
         <selectors:StaticSelector x:Key="TypeSelector"/>
         <convectors:NameTestConverter x:Key="NameConvector"/>
+        <convectors:TextQuestionToColorConverter x:Key="ColorConverter"/>
 
         <DataTemplate x:Key="TextQuestionTemplate">
 
-            <StackPanel  Margin="20 20" Orientation="Vertical" Background="{Binding QuestionColor}">
+            <StackPanel  Margin="20 20" Orientation="Vertical" Background="{Binding ListAnswer[0].IsCorrect, Converter={StaticResource ColorConverter}}">
                 
                 <Border BorderBrush="Black" Margin="10 10">
                     <Grid>
@@ -42,8 +43,8 @@
 
                         <StackPanel Grid.Row="1"  Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Left">
                             <TextBlock Text="Ответ: "/>
-                            <TextBox IsEnabled="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor},
-                            Path=DataContext.EnableObject}"  Text="{Binding Answer[0].Text, Mode=TwoWay}" Height="20" Width="350" TextAlignment="Left"/>
+                            <!--<TextBox IsEnabled="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor},
+                            Path=DataContext.EnableObject}"  Text="{Binding Answer[0].Text, Mode=TwoWay}" Height="20" Width="350" TextAlignment="Left"/>-->
                         </StackPanel>
 
                         <StackPanel Visibility="{Binding RelativeSource={RelativeSource AncestorType=UserControl, Mode=FindAncestor},

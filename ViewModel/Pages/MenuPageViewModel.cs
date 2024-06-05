@@ -6,7 +6,7 @@ using WPF_BKStudia.Infrastructure.Interfaces;
 
 namespace WPF_BKStudia.ViewModel.Pages
 {
-    internal class MenuPageViewModel: Base.ViewModel
+    internal class MenuPageViewModel : Base.ViewModel
     {
         //Поля
         private const string TestsPath = "Tests";
@@ -19,7 +19,7 @@ namespace WPF_BKStudia.ViewModel.Pages
         private bool CanNavigateGetTesttedMenuCommandExecuted(object p) => true;
         private void OnNavigateGetTesttedMenuCommandExecuted(object p)
         {
-            IsDirectoryNotNull();            
+            IsDirectoryNotNull();
         }
 
         public ICommand NavigateCreateTestCommand { get; }
@@ -30,25 +30,25 @@ namespace WPF_BKStudia.ViewModel.Pages
         }
 
         //Функциональные команды
-        public ICommand CloseAppCommand { get;  }
+        public ICommand CloseAppCommand { get; }
         private bool CanCloseAppExecuted(object p) => true;
         private void OnCloseAppExecuted(object p)
-        { 
+        {
             Application.Current.Shutdown();
         }
 
 
 
-        public MenuPageViewModel(INavigationStoreService navigationStoreService, IFileReaderService fileReaderService, IFileWriterService fileWriterService)  
+        public MenuPageViewModel(INavigationStoreService navigationStoreService, IFileReaderService fileReaderService, IFileWriterService fileWriterService)
         {
             _navigationStoreService = navigationStoreService;
             _fileReaderService = fileReaderService;
             _fileWriterService = fileWriterService;
 
-            NavigateGetTesttedMenuCommand = new LamdaCommand(OnNavigateGetTesttedMenuCommandExecuted, CanNavigateGetTesttedMenuCommandExecuted); 
+            NavigateGetTesttedMenuCommand = new LamdaCommand(OnNavigateGetTesttedMenuCommandExecuted, CanNavigateGetTesttedMenuCommandExecuted);
             NavigateCreateTestCommand = new LamdaCommand(OnNavigateCreateTestCommandExecuted, CanNavigateCreateTestCommandExecuted);
 
-            CloseAppCommand = new LamdaCommand(OnCloseAppExecuted, CanCloseAppExecuted);          
+            CloseAppCommand = new LamdaCommand(OnCloseAppExecuted, CanCloseAppExecuted);
         }
 
         //Проверяет пуста ли пака Tests
@@ -63,7 +63,7 @@ namespace WPF_BKStudia.ViewModel.Pages
                         NavigateCreateTestCommand.Execute(1);
                         break;
                     case MessageBoxResult.No:
-                    default:                        
+                    default:
                         break;
                 }
             }

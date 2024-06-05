@@ -9,12 +9,12 @@ using WPF_BKStudia.Model;
 
 namespace WPF_BKStudia.ViewModel.Pages
 {
-    internal class SelectTestMenuViewModel: ViewModel.Base.ViewModel
+    internal class SelectTestMenuViewModel : ViewModel.Base.ViewModel
     {
         // Поля
         private string _path = "Tests";
         private int _testId = 0;
-        public ObservableCollection<Test> Tests {  get; set; }
+        public ObservableCollection<Test> Tests { get; set; }
         private INavigationStoreService _navigationStoreService { get; set; }
         private IFileReaderService _fileReaderService { get; set; }
         private IFileWriterService _fileWriterService { get; set; }
@@ -39,7 +39,7 @@ namespace WPF_BKStudia.ViewModel.Pages
         private void OnNavigateTakeTestPageViewModelCommandExecuted(object p)
         {
             _navigationStoreService.Param = p;
-            _navigationStoreService.CurrentViewModel = new TestingViewModel(_navigationStoreService, _fileReaderService, _fileWriterService);    
+            _navigationStoreService.CurrentViewModel = new TestingViewModel(_navigationStoreService, _fileReaderService, _fileWriterService);
         }
 
         //Функциональные команды
@@ -48,7 +48,7 @@ namespace WPF_BKStudia.ViewModel.Pages
         private void OnChoiseTestCommandExecuted(object p)
         {
             Test test = p as Test;
-            NavigateTakeTestPageViewModelCommand.Execute(test);       
+            NavigateTakeTestPageViewModelCommand.Execute(test);
         }
 
         public ICommand RemoveTestCommand { get; }
@@ -57,7 +57,7 @@ namespace WPF_BKStudia.ViewModel.Pages
         {
             Test test = p as Test;
             if (File.Exists(test.Name))
-            { 
+            {
                 File.Delete(test.Name);
                 Tests.Remove(test);
                 foreach (Test Test in Tests)
@@ -102,12 +102,12 @@ namespace WPF_BKStudia.ViewModel.Pages
                             Id = _testId + 1,
                             Name = TestsList[i],
                             QuestionCount = _fileReaderService.GetCountQuestions(TestsList[i])
-                        });                       
+                        });
                         _testId++;
                     }
                 }
             }
-            else 
+            else
             {
                 MessageBox.Show("Как ты сюда зашёл ?", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             }
@@ -124,5 +124,5 @@ namespace WPF_BKStudia.ViewModel.Pages
         }
     }
 
-    
+
 }
