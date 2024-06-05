@@ -14,7 +14,6 @@ namespace WPF_BKStudia.Model.DataType
         //Приватные поля
         private int _id;
         private QuestionEnum _type;
-        private ObservableCollection<Answer>? _answer;
 
         //Свойства
         public int Id 
