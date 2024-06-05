@@ -116,18 +116,5 @@ namespace WPF_BKStudia.ViewModel.Pages
             TakeResultCommand = new LamdaCommand(OnTakeResultCommandExecuted, CanTakeResultCommandExecuted);
         }
 
-        //Проверяет ответ текстового вопроса с множеством правильных ответов
-        private bool IsTrueStringQuestion(string firstStr, string secondStr)
-        {
-            string[] secondStrMas = secondStr.Split('$');
-            for (int i = 0; i < secondStrMas.Length; i++)
-            {
-                if (secondStrMas[i] == firstStr)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
     }
 }

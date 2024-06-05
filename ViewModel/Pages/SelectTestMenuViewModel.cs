@@ -90,18 +90,18 @@ namespace WPF_BKStudia.ViewModel.Pages
 
         private void FillTestsList()
         {
-            List<string> OurTests = Directory.GetFileSystemEntries(_path).ToList();
-            if (OurTests.Count != 0)
+            List<string> TestsList = Directory.GetFileSystemEntries(_path).ToList();
+            if (TestsList.Count != 0)
             {
-                for (int i = 0; i < OurTests.Count; i++)
+                for (int i = 0; i < TestsList.Count; i++)
                 {
-                    if (IsTestFile(OurTests[i]))
+                    if (IsTestFile(TestsList[i]))
                     {
                         Tests.Add(new Test()
                         {
                             Id = _testId + 1,
-                            Name = OurTests[i],
-                            QuestionCount = _fileReaderService.GetCountQuestions(OurTests[i])
+                            Name = TestsList[i],
+                            QuestionCount = _fileReaderService.GetCountQuestions(TestsList[i])
                         });                       
                         _testId++;
                     }
