@@ -9,7 +9,7 @@ namespace WPF_BKStudia.Model.DataType
 {
     //Номер, тектс вопроса, тип вопроса, список ответов, Цвет вопроса
 
-    public class TextQuestion : AbstractNotifyModel,  INotifyPropertyChanged, IQuestionAnswer
+    public class TextQuestion : AbstractNotifyModel, IQuestionAnswer
     {
         //Приватные поля
         private int _id;
