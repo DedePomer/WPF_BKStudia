@@ -14,7 +14,7 @@ namespace WPF_BKStudia.ViewModel.Pages
         // Поля
         private string _path = "Tests";
         private int _testId = 0;
-        public ObservableCollection<Test> MyTests {  get; set; }
+        public ObservableCollection<Test> Tests {  get; set; }
         private INavigationStoreService _navigationStoreService { get; set; }
         private IFileReaderService _fileReaderService { get; set; }
         private IFileWriterService _fileWriterService { get; set; }
@@ -59,12 +59,12 @@ namespace WPF_BKStudia.ViewModel.Pages
             if (File.Exists(test.Name))
             { 
                 File.Delete(test.Name);
-                MyTests.Remove(test);
-                foreach (Test t in MyTests)
+                Tests.Remove(test);
+                foreach (Test Test in Tests)
                 {
-                    if (t.Id > test.Id)
+                    if (Test.Id > Test.Id)
                     {
-                        t.Id--;
+                        Test.Id--;
                     }
                 }
                 _testId--;
@@ -77,7 +77,7 @@ namespace WPF_BKStudia.ViewModel.Pages
             _navigationStoreService = navigationStoreService;
             _fileReaderService = fileReaderService;
             _fileWriterService = fileWriterService;
-            MyTests = new ObservableCollection<Test>();
+            Tests = new ObservableCollection<Test>();
             FillTestsList();
 
             NavigateMenuPageViewModelCommand = new LamdaCommand(OnNavigateMenuPageViewModelCommandExecuted, CanNavigateMenuPageViewModelCommandExecuted);
@@ -97,7 +97,7 @@ namespace WPF_BKStudia.ViewModel.Pages
                 {
                     if (IsTestFile(OurTests[i]))
                     {
-                        MyTests.Add(new Test()
+                        Tests.Add(new Test()
                         {
                             Id = _testId + 1,
                             Name = OurTests[i],

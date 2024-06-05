@@ -32,9 +32,7 @@ namespace WPF_BKStudia.Infrastructure.Services
                     Id = Int32.Parse(questionData[0]),
                     Type = (QuestionEnum)Int32.Parse(questionData[1]),
                     Text = questionData[2],
-                    Answer = new ObservableCollection<Answer>(),
                     ListAnswer = new ObservableCollection<Answer>(),
-                    QuestionColor  = new SolidColorBrush(Colors.LightBlue)
                 });
 
                 var currentQuestion = questions[i - 1];
@@ -45,10 +43,6 @@ namespace WPF_BKStudia.Infrastructure.Services
                         {
                             Text = questionData[3],
                             IsCorrect = true
-                        });
-                        currentQuestion.Answer.Add(new Answer()
-                        {
-                            Text = string.Empty
                         });
                         break;
                     case QuestionEnum.SingleChoiceQuestion:

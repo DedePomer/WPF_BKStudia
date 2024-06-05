@@ -23,7 +23,6 @@ namespace WPF_BKStudia.ViewModel.Pages
     internal class CreateTestViewModel: ViewModel.Base.ViewModel
     {
         //Поля
-        private readonly SolidColorBrush _aquaColor = new SolidColorBrush(Colors.LightBlue);
         private int _questionId = 0;
         public Model.Test CurrentTest { get; set; }
         private INavigationStoreService _navigationStoreService { get; set; }
@@ -53,7 +52,6 @@ namespace WPF_BKStudia.ViewModel.Pages
         {
             CurrentTest.QuestionCollection.Add(new TextQuestion
             {
-                QuestionColor = _aquaColor,
                 Id = _questionId + 1,
                 Text = "",
                 Type = QuestionEnum.TextQuestion,

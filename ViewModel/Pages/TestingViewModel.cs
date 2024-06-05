@@ -71,30 +71,30 @@ namespace WPF_BKStudia.ViewModel.Pages
         private bool CanTakeResultCommandExecuted(object p) => true;
         private void OnTakeResultCommandExecuted(object p)
         {
-            ResultVisibility = Visibility.Visible;
-            EnableObject = false;
-            CountTrueQuestion = 0;
-            foreach (TextQuestion question in Questions)
-            {
-                switch (question.Type) 
-                {
-                    case QuestionEnum.TextQuestion:
-                        if (IsTrueStringQuestion(question.Answer[0].Text, question.ListAnswer[0].Text))
-                        {
-                            question.QuestionColor = new SolidColorBrush(Colors.LightSeaGreen);
-                            CountTrueQuestion++;
-                        }
-                        else
-                        {
-                            question.QuestionColor = new SolidColorBrush(Colors.DarkRed);
-                        }
-                        break;
-                    case QuestionEnum.SingleChoiceQuestion:
-                        break;
-                    case QuestionEnum.MultiChoiceQuestion:
-                        break;
-                }
-            }
+            //ResultVisibility = Visibility.Visible;
+            //EnableObject = false;
+            //CountTrueQuestion = 0;
+            //foreach (TextQuestion question in Questions)
+            //{
+            //    switch (question.Type) 
+            //    {
+            //        case QuestionEnum.TextQuestion:
+            //            if (IsTrueStringQuestion(question.Answer[0].Text, question.ListAnswer[0].Text))
+            //            {
+            //                question.QuestionColor = new SolidColorBrush(Colors.LightSeaGreen);
+            //                CountTrueQuestion++;
+            //            }
+            //            else
+            //            {
+            //                question.QuestionColor = new SolidColorBrush(Colors.DarkRed);
+            //            }
+            //            break;
+            //        case QuestionEnum.SingleChoiceQuestion:
+            //            break;
+            //        case QuestionEnum.MultiChoiceQuestion:
+            //            break;
+            //    }
+            //}
         }
 
 

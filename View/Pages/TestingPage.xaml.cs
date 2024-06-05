@@ -18,9 +18,9 @@ namespace WPF_BKStudia.View.Pages
     /// <summary>
     /// Логика взаимодействия для TakeTestPage.xaml
     /// </summary>
-    public partial class TakeTestPage : UserControl
+    public partial class TestingPage : UserControl
     {
-        public TakeTestPage()
+        public TestingPage()
         {
             InitializeComponent();
         }
