@@ -48,7 +48,7 @@ namespace WPF_BKStudia.Infrastructure.Services
         public int GetCountQuestions(string path)
         {
             List<string> fileStr = File.ReadLines(path).ToList();
-            return int.Parse(fileStr[1]);
+            return int.Parse(fileStr[2]);
         }
         public ObservableCollection<TextQuestion>? GetQuestionCollection(string path)
         {

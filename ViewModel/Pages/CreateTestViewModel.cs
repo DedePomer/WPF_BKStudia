@@ -24,7 +24,7 @@ namespace WPF_BKStudia.ViewModel.Pages
     {
         //Поля
         private int _questionId = 0;
-        public Model.Test CurrentTest { get; set; }
+        public Model.Test Test { get; set; }
         public bool AnswerVisibilityCheck{ get; set; } 
         private INavigationStoreService _navigationStoreService { get; set; }
         private IFileReaderService _fileReaderService { get; set; }
@@ -51,7 +51,7 @@ namespace WPF_BKStudia.ViewModel.Pages
         private bool CanCAddQuestionExecuted(object p) => true;
         private void OnCAddQuestionExecuted(object p)
         {
-            CurrentTest.QuestionCollection.Add(new TextQuestion
+            Test.QuestionCollection.Add(new TextQuestion
             {
                 Id = _questionId + 1,
                 Text = "",
@@ -74,8 +74,8 @@ namespace WPF_BKStudia.ViewModel.Pages
         {
             if (CheckFieldsNotNull())
             {
-                CurrentTest.QuestionCount = _questionId;
-                if (_fileWriterService.SaveFile(CurrentTest))
+                Test.QuestionCount = _questionId;
+                if (_fileWriterService.SaveFile(Test, AnswerVisibilityCheck))
                 {
                     MessageBox.Show("Тест сохранён", "Information", MessageBoxButton.OK);
                     NavigateMenuPageViewModelCommand.Execute(1);
@@ -92,8 +92,8 @@ namespace WPF_BKStudia.ViewModel.Pages
             _navigationStoreService = navigationStoreService;
             _fileReaderService = fileReaderService;
             _fileWriterService = fileWriterService;
-            CurrentTest = new Model.Test();
-            CurrentTest.QuestionCollection = new ObservableCollection<TextQuestion>();
+            Test = new Model.Test();
+            Test.QuestionCollection = new ObservableCollection<TextQuestion>();
 
             NavigateMenuPageViewModelCommand = new LamdaCommand(OnNavigateMenuPageViewModelCommandExecuted, CanNavigateMenuPageViewModelCommandExecuted);
 
@@ -105,16 +105,16 @@ namespace WPF_BKStudia.ViewModel.Pages
         //Сдвигает значение Id, после удаления элемента коллекции
         private void RemoveCheck(TextQuestion question)
         { 
-            if (CurrentTest.QuestionCollection != null)
+            if (Test.QuestionCollection != null)
             {
-                foreach (TextQuestion q in CurrentTest.QuestionCollection)
+                foreach (TextQuestion q in Test.QuestionCollection)
                 {
                     if (q.Id > question.Id)
                     {
                         q.Id -= 1;
                     }
                 }
-                CurrentTest.QuestionCollection.Remove(question);
+                Test.QuestionCollection.Remove(question);
                 _questionId--;
                 OnPropertyChanged();
             }
@@ -123,7 +123,7 @@ namespace WPF_BKStudia.ViewModel.Pages
         //Проверка полей
         private bool CheckFieldsNotNull()
         {
-            string nameOfTest = CurrentTest.Name;
+            string nameOfTest = Test.Name;
             if (!string.IsNullOrEmpty(nameOfTest) && nameOfTest.Count(x => x == ' ') < nameOfTest.Length)
             {
                 //Проверка на программные символы

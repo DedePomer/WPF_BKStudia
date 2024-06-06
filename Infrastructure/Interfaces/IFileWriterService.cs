@@ -9,6 +9,6 @@ namespace WPF_BKStudia.Infrastructure.Interfaces
 {
     public interface IFileWriterService
     {
-        bool SaveFile(Test test);
+        bool SaveFile(Test test, bool answerVisibilityChek);
     }
 }

@@ -13,10 +13,15 @@ namespace WPF_BKStudia.Infrastructure.Services
         private const string SecindDataSplitter = "\n";
 
 
-        private void WriteFile(Test test, string path)
+        private void WriteFile(Test test, string path, bool answerVisibilityCheck)
         {
             using (StreamWriter writer = new StreamWriter(path, true))
             {
+                if (answerVisibilityCheck)
+                    writer.Write(1);
+                else 
+                    writer.Write(0);
+
                 writer.Write(test.Name);
                 writer.Write("\n" + test.QuestionCount);
 
@@ -52,12 +57,12 @@ namespace WPF_BKStudia.Infrastructure.Services
             }
         }
 
-        public bool SaveFile(Test test)
+        public bool SaveFile(Test test,bool answerVisibilityCheck)
         {
             string path = $"Tests\\{test.Name}.txt";
             if (!File.Exists(path))
             {
-                WriteFile(test, path);
+                WriteFile(test, path, answerVisibilityCheck);
                 return true;
             }
             else
@@ -67,7 +72,7 @@ namespace WPF_BKStudia.Infrastructure.Services
                 if (result == MessageBoxResult.Yes)
                 {
                     File.Delete(path);
-                    WriteFile(test, path);
+                    WriteFile(test, path, answerVisibilityCheck);
                     return true;
                 }
                 return false;
