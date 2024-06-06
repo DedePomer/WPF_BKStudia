@@ -1,7 +1,6 @@
 ﻿
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Windows.Media;
 using WPF_BKStudia.Infrastructure.Enums;
 using WPF_BKStudia.Infrastructure.Interfaces;
 using WPF_BKStudia.Model.DataType;
@@ -65,4 +64,4 @@ namespace WPF_BKStudia.Infrastructure.Services
     }
 }
 
-       
+

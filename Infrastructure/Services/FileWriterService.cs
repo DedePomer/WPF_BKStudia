@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 using System.Windows;
-using System.Windows.Shapes;
 using WPF_BKStudia.Infrastructure.Enums;
 using WPF_BKStudia.Infrastructure.Interfaces;
 using WPF_BKStudia.Model;
@@ -13,7 +7,7 @@ using WPF_BKStudia.Model.DataType;
 
 namespace WPF_BKStudia.Infrastructure.Services
 {
-    public class FileWriterService: IFileWriterService
+    public class FileWriterService : IFileWriterService
     {
         private const string FirstDataSplitter = "\n\n\n";
         private const string SecindDataSplitter = "\n";
@@ -49,7 +43,7 @@ namespace WPF_BKStudia.Infrastructure.Services
                         case QuestionEnum.MultiChoiceQuestion:
 
                             break;
-                        default:                            
+                        default:
                             break;
                     }
                 }
@@ -66,7 +60,7 @@ namespace WPF_BKStudia.Infrastructure.Services
                 WriteFile(test, path);
                 return true;
             }
-            else 
+            else
             {
                 var result = MessageBox.Show("Файл с таким именем существует. Если нажмёте \"Да\", то файл перезапишется. Если нажмёте \"Нет\" вернётесь к созданию теста",
                         "Save error", MessageBoxButton.YesNo, MessageBoxImage.Error);
