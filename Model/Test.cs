@@ -5,7 +5,7 @@ using WPF_BKStudia.Model.DataType;
 
 namespace WPF_BKStudia.Model
 {
-    public class Test : AbstractNotifyModel, INotifyPropertyChanged
+    public class Test : AbstractNotifyModel
     {
         //Модель где "содержаться" название теста и коллекция вопросов
         private int? _id;
