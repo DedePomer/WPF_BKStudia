@@ -9,44 +9,52 @@ using System.Windows.Shapes;
 using WPF_BKStudia.Infrastructure.Enums;
 using WPF_BKStudia.Infrastructure.Interfaces;
 using WPF_BKStudia.Model;
+using WPF_BKStudia.Model.DataType;
 
 namespace WPF_BKStudia.Infrastructure.Services
 {
     public class FileWriterService: IFileWriterService
     {
+        private const string FirstDataSplitter = "\n\n\n";
+        private const string SecindDataSplitter = "\n";
+
+
         private void WriteFile(Test test, string path)
         {
-            File.AppendAllText(path, test.Name);
-            File.AppendAllText(path, "\n" + test.QuestionCount.ToString());
-
-            foreach (var question in test.QuestionCollection)
+            using (StreamWriter writer = new StreamWriter(path, true))
             {
-                File.AppendAllText(path, "\n\n");
-                File.AppendAllText(path, "\n" + question.Id.ToString());
-                File.AppendAllText(path, "\n" + (int)question.Type);
-                File.AppendAllText(path, "\n" + question.Text.ToString());
+                writer.Write(test.Name);
+                writer.Write("\n" + test.QuestionCount);
 
-                switch (question.Type)
+                foreach (TextQuestion question in test.QuestionCollection)
                 {
-                    case QuestionEnum.TextQuestion:
-                        if (question.ListAnswer[0].IsCorrect)
-                        {
-                            if (question.ListAnswer[0].Text == "")
-                                File.AppendAllText(path, "\n ");
-                            else
-                                File.AppendAllText(path, "\n" + question.ListAnswer[0].Text.ToString());
-                        }
-                        break;
-                    case QuestionEnum.SingleChoiceQuestion:
+                    writer.Write(FirstDataSplitter + question.Id);
+                    writer.Write(SecindDataSplitter + (int)question.Type);
+                    writer.Write(SecindDataSplitter + question.Text);
 
-                        break;
-                    case QuestionEnum.MultiChoiceQuestion:
+                    switch (question.Type)
+                    {
+                        case QuestionEnum.TextQuestion:
+                            if (question.ListAnswer[0].IsCorrect)
+                            {
+                                if (question.ListAnswer[0].Text == "")
+                                    writer.Write(SecindDataSplitter + " ");
+                                else
+                                    writer.Write(SecindDataSplitter + question.ListAnswer[0].Text);
+                            }
+                            break;
+                        case QuestionEnum.SingleChoiceQuestion:
 
-                        break;
-                    default:
-                        MessageBox.Show("Тип вопроса " + question.Id + " неопределён", "Save error", MessageBoxButton.OK, MessageBoxImage.Error);
-                        break;
+                            break;
+                        case QuestionEnum.MultiChoiceQuestion:
+
+                            break;
+                        default:                            
+                            break;
+                    }
                 }
+
+                writer.Close();
             }
         }
 
