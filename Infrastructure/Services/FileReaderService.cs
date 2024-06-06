@@ -50,11 +50,10 @@ namespace WPF_BKStudia.Infrastructure.Services
             List<string> fileStr = File.ReadLines(path).ToList();
             return int.Parse(fileStr[2]);
         }
-
         public bool GetAnswerVisibilityCheck(string path)
         {
             List<string> fileStr = File.ReadLines(path).ToList();
-            switch (int.Parse(fileStr[0]))
+            switch (int.Parse(fileStr[1]))
             {
                 case 1:
                     return true;

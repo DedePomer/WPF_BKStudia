@@ -16,14 +16,15 @@ namespace WPF_BKStudia.Infrastructure.Services
         private void WriteFile(Test test, string path, bool answerVisibilityCheck)
         {
             using (StreamWriter writer = new StreamWriter(path, true))
-            {
-                if (answerVisibilityCheck)
-                    writer.Write(1 + SecindDataSplitter);
-                else 
-                    writer.Write(0 + SecindDataSplitter);
-
+            {              
                 writer.Write(test.Name);
-                writer.Write("\n" + test.QuestionCount);
+
+                if (answerVisibilityCheck)
+                    writer.Write(SecindDataSplitter + 1);
+                else
+                    writer.Write(SecindDataSplitter + 0);
+
+                writer.Write(SecindDataSplitter +  test.QuestionCount);
 
                 foreach (TextQuestion question in test.QuestionCollection)
                 {
