@@ -119,6 +119,7 @@
             <Button Command="{Binding AddQuestionCommand}" Content="Добавить вопрос" Style="{StaticResource ButtonStyle}"/>
             <Button Command="{Binding SaveTestCommand}" Content="Сохранить" Style="{StaticResource ButtonStyle}"/>
             <Button Command="{Binding NavigateMenuPageViewModelCommand}" Content="Назад" Style="{StaticResource ButtonStyle}"/>
+            <CheckBox  Content="Показывать правильный ответ"/>
         </StackPanel>
 
         <!--Редактор вопросов-->
