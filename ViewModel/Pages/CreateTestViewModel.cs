@@ -25,6 +25,7 @@ namespace WPF_BKStudia.ViewModel.Pages
         //Поля
         private int _questionId = 0;
         public Model.Test CurrentTest { get; set; }
+        public bool AnswerVisibilityCheck{ get; set; } 
         private INavigationStoreService _navigationStoreService { get; set; }
         private IFileReaderService _fileReaderService { get; set; }
         private IFileWriterService _fileWriterService { get; set; }

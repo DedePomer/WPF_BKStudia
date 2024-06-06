@@ -24,8 +24,7 @@ namespace WPF_BKStudia.ViewModel.Windows
             if (!Directory.Exists(TestsDirectoryPath))
                 Directory.CreateDirectory(TestsDirectoryPath);
 
-            _navigationStoreService.CurrentViewModel = new MenuPageViewModel(_navigationStoreService, _fileReaderService, _fileWriterService);
-            //_navigationStoreService.CurrentViewModel = new SelectTestMenuViewModel(_navigationStoreService, _fileReaderService, _fileWriterService);
+            _navigationStoreService.CurrentViewModel = new CreateTestViewModel(_navigationStoreService, _fileReaderService, _fileWriterService);
 
             _navigationStoreService.CurrentViewModelChanged += () => OnCurrentViewChanged();
         }
