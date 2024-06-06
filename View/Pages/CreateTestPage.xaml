@@ -11,7 +11,7 @@
 
     <!--Ресурсы-->
     <UserControl.Resources>
-        <converters:NameTestConverter x:Key="QuestionConverter"/>
+        <converters:QuestionEnumToIntConverter x:Key="TypeConverter"/>
 
         <!--Шаблон текстового вопроса-->
         <ControlTemplate x:Key="TextQuestionTemplate">
@@ -64,7 +64,7 @@
                         <Control Grid.Row="2" Grid.Column="0" x:Name="ChangingControl" Focusable="False" Template="{StaticResource TextQuestionTemplate}" />
 
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Right" VerticalAlignment="Top"  Grid.Row="0" Grid.Column="1">
-                            <ComboBox Width="220" SelectedIndex="{Binding Type, Converter={StaticResource QuestionConverter}}">
+                            <ComboBox Width="220" SelectedIndex="{Binding Type, Converter={StaticResource TypeConverter}}">
                                 <ComboBoxItem x:Name="TextComboBoxItem">Текстовый вопрос</ComboBoxItem>
                                 <ComboBoxItem x:Name="SingleComboBoxItem">Вопрос с одиночным выбором</ComboBoxItem>
                                 <ComboBoxItem x:Name="MultiComboBoxItem">Вопрос с множественным выбором</ComboBoxItem>
@@ -115,11 +115,11 @@
 
         <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" >
             <Label Margin="10"  Content="Название теста"/>
-            <TextBox Text="{Binding CurrentQuestion.Name, Mode=TwoWay}"/>
+            <TextBox Text="{Binding Test.Name, Mode=TwoWay}"/>
             <Button Command="{Binding AddQuestionCommand}" Content="Добавить вопрос" Style="{StaticResource ButtonStyle}"/>
             <Button Command="{Binding SaveTestCommand}" Content="Сохранить" Style="{StaticResource ButtonStyle}"/>
             <Button Command="{Binding NavigateMenuPageViewModelCommand}" Content="Назад" Style="{StaticResource ButtonStyle}"/>
-            <CheckBox IsChecked="{Binding AnswerVisibilityIsCheked}"  Content="Показывать правильный ответ"/>
+            <CheckBox IsChecked="{Binding AnswerVisibilityCheck}"  Content="Показывать правильный ответ"/>
         </StackPanel>
 
         <!--Редактор вопросов-->

@@ -50,6 +50,20 @@ namespace WPF_BKStudia.Infrastructure.Services
             List<string> fileStr = File.ReadLines(path).ToList();
             return int.Parse(fileStr[2]);
         }
+
+        public bool GetAnswerVisibilityCheck(string path)
+        {
+            List<string> fileStr = File.ReadLines(path).ToList();
+            switch (int.Parse(fileStr[0]))
+            {
+                case 1:
+                    return true;
+                case 2:
+                    return false;
+                default: 
+                    return false;
+            };
+        }
         public ObservableCollection<TextQuestion>? GetQuestionCollection(string path)
         {
             string[] fileLines = File.ReadAllText(path).Split(FileDataSplitter);

@@ -5,7 +5,8 @@ namespace WPF_BKStudia.Infrastructure.Interfaces
 {
     public interface IFileReaderService
     {
-        int GetCountQuestions(string path);
+        public int GetCountQuestions(string path);
+        public bool GetAnswerVisibilityCheck(string path);
         public ObservableCollection<TextQuestion> GetQuestionCollection(string path);
     }
 }
