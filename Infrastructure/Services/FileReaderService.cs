@@ -13,7 +13,6 @@ namespace WPF_BKStudia.Infrastructure.Services
         private const string FileDataSplitter = "\n\n\n";
         private const string QuestionDataSplitter = "\n";
 
-        private const int CountUnansweredQuestion = 2;
         private const int FirstQuestionLineNumber = 1;
 
         private TextQuestion ReadFile(string[] questionData)
@@ -84,10 +83,7 @@ namespace WPF_BKStudia.Infrastructure.Services
             for (int i = FirstQuestionLineNumber; i < fileLines.Length; i++)
             {
                 string[] questionData;
-                for (int y = 0; y < CountUnansweredQuestion; y++)
-                {
-                    questionData = fileLines[i].Split(QuestionDataSplitter);
-                }               
+                questionData = fileLines[i].Split(QuestionDataSplitter).Take(3);               
                 questions.Add(ReadFile(questionData));
             }
             return questions;
