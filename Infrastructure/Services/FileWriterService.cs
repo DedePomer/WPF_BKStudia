@@ -57,7 +57,6 @@ namespace WPF_BKStudia.Infrastructure.Services
                 writer.Close();
             }
         }
-
         public bool SaveFile(Test test,bool answerVisibilityCheck)
         {
             string path = $"Tests\\{test.Name}.txt";
