@@ -12,6 +12,8 @@ namespace WPF_BKStudia.Infrastructure.Services
     {
         private const string FileDataSplitter = "\n\n\n";
         private const string QuestionDataSplitter = "\n";
+
+        private const int CountUnansweredQuestion = 2;
         private const int FirstQuestionLineNumber = 1;
 
         private TextQuestion ReadFile(string[] questionData)
@@ -63,13 +65,29 @@ namespace WPF_BKStudia.Infrastructure.Services
                     return false;
             };
         }
-        public ObservableCollection<TextQuestion>? GetQuestionCollection(string path)
+        public ObservableCollection<TextQuestion>? GetAnsweredQuestionCollection(string path)
         {
             string[] fileLines = File.ReadAllText(path).Split(FileDataSplitter);
             ObservableCollection<TextQuestion>? questions = new ObservableCollection<TextQuestion>();
             for (int i = FirstQuestionLineNumber; i < fileLines.Length; i++)
             {
                 string[] questionData = fileLines[i].Split(QuestionDataSplitter);
+                questions.Add(ReadFile(questionData));
+            }
+            return questions;
+        }
+
+        public ObservableCollection<TextQuestion> GetUnansweredQuestionCollection(string path)
+        {
+            string[] fileLines = File.ReadAllText(path).Split(FileDataSplitter);
+            ObservableCollection<TextQuestion>? questions = new ObservableCollection<TextQuestion>();
+            for (int i = FirstQuestionLineNumber; i < fileLines.Length; i++)
+            {
+                string[] questionData;
+                for (int y = 0; y < CountUnansweredQuestion; y++)
+                {
+                    questionData = fileLines[i].Split(QuestionDataSplitter);
+                }               
                 questions.Add(ReadFile(questionData));
             }
             return questions;

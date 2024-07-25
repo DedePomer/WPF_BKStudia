@@ -19,7 +19,8 @@ namespace WPF_BKStudia.ViewModel.Pages
         private bool _enableObject;
         private int _countTrueQuestion;
 
-        public ObservableCollection<TextQuestion> Questions { get; set; }
+        public ObservableCollection<TextQuestion> UnansweredQuestions { get; set; }
+        public ObservableCollection<TextQuestion> AnsweredQuestions { get; set; }
         public int CountTrueQuestion
         {
             get
@@ -104,7 +105,7 @@ namespace WPF_BKStudia.ViewModel.Pages
             _fileWriterService = fileWriterService;
 
             TestModel = _navigationStoreService.Param as Test;
-            Questions = _fileReaderService.GetQuestionCollection(TestModel.Name);
+            AnsweredQuestions = _fileReaderService.GetAnsweredQuestionCollection(TestModel.Name);
             ResultVisibility = Visibility.Collapsed;
             EnableObject = true;
             CountQuestion = fileReaderService.GetCountQuestions(TestModel.Name);

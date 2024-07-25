@@ -12,4 +12,4 @@
 Ответ на вопрос типа TextQuestion: Ответ1$Ответ2$...
 Ответ на вопрос типа SingleChoiceQuestion: Первым записывается верный ответ, а дальше все остальные с верным
 
-Ответ на вопрос типа MultiChoiceQuestion:  Первым записываются верные ответы, а дальше как в SingleChoiceQuestion
+Ответ на вопрос типа MultiChoiceQuestion:  Первым записываются верные ответы c '[]', а дальше как в SingleChoiceQuestion

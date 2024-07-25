@@ -7,6 +7,7 @@ namespace WPF_BKStudia.Infrastructure.Interfaces
     {
         public int GetCountQuestions(string path);
         public bool GetAnswerVisibilityCheck(string path);
-        public ObservableCollection<TextQuestion> GetQuestionCollection(string path);
+        public ObservableCollection<TextQuestion> GetAnsweredQuestionCollection(string path);
+        public ObservableCollection<TextQuestion> GetUnansweredQuestionCollection(string path);
     }
 }
